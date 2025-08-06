@@ -1,0 +1,7 @@
+{
+  "name": "projetoEntregador",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
