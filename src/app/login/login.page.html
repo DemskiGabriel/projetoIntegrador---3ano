@@ -18,18 +18,18 @@
   
     <ion-card-content>
       <ion-item>
-        <ion-input label="E-mail" label-placement="floating" placeholder=""></ion-input>
+        <ion-input label="E-mail" label-placement="floating" placeholder="" [(ngModel)]="login"></ion-input>
       </ion-item>
 
       
      <ion-item>
-        <ion-input label="Senha" label-placement="floating" placeholder=""></ion-input>
+        <ion-input label="Senha" label-placement="floating" placeholder="" [(ngModel)]="senha"></ion-input>
      </ion-item>
 
     </ion-card-content>
   </ion-card>
 
-  <ion-button expand="block" id="present-alert">Entrar</ion-button>
+  <ion-button expand="block" id="present-alert" (click)="logar()" >Entrar</ion-button>
   <ion-alert
   trigger="present-alert"
   header="Erro de login"
