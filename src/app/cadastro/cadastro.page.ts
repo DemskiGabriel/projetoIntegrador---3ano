@@ -52,26 +52,32 @@ import {
 })
 export class CadastroPage implements OnInit {
 
-  nome: string = '';
-  email: string = '';
-  senha: string = '';
-  confirmarSenha: string = '';
-  dataNascimento: string = '';
-  sexo: string = '';
+  public nome: string = '';
+  public email: string = '';
+  public senha: string = '';
+  public confirmarSenha: string = '';
+  public dataNascimento: string = '';
+  public sexo: string = '';
 
-  constructor() { }
+  constructor(
+    public rs:RequisicaoService
+  ) { }
 
-  ngOnInit() { }
-
-  cadastrar() {
-    console.log('Dados do cadastro:', {
-      nome: this.nome,
-      email: this.email,
-      senha: this.senha,
-      confirmarSenha: this.confirmarSenha,
-      dataNascimento: this.dataNascimento,
-      sexo: this.sexo
-    });
+  ngOnInit() { 
   }
 
-}
+  cadastrar() {
+    const fd = new FormData();
+    fd.append('controller', 'cadastro');
+    fd.append('nome', this.nome);
+    fd.append('email', this.email);
+    fd.append('senha', this.senha);
+    fd.append('confirmarSenha',this.confirmarSenha);
+    fd.append('dataNascimento', this.dataNascimento);
+    fd.append('sexo', this.sexo)
+
+    
+    };
+  }
+
+
