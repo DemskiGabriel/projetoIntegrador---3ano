@@ -18,7 +18,8 @@ import {
   IonDatetime,
   IonSelect,
   IonSelectOption,
-  IonButton
+  IonButton,
+  IonAlert
 } from '@ionic/angular/standalone';
 
 @Component({
@@ -45,7 +46,8 @@ import {
     IonSelectOption,
     IonButton,
     CommonModule,
-    FormsModule
+    FormsModule,
+    IonAlert
   ]
 })
 export class CadastroPage implements OnInit {
