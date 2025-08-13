@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RequisicaoService } from '../service/requisicao.service';
+
 import {
   IonContent,
   IonHeader,
@@ -19,15 +21,18 @@ import {
   IonSelect,
   IonSelectOption,
   IonButton,
-  IonAlert
-} from '@ionic/angular/standalone';
+  IonAlert,
+  IonText
+  } from '@ionic/angular/standalone';
+
+
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [
+  imports: [ 
     IonContent,
     IonHeader,
     IonTitle,
@@ -47,17 +52,18 @@ import {
     IonButton,
     CommonModule,
     FormsModule,
-    IonAlert
+    IonAlert,
+    IonText
   ]
 })
 export class CadastroPage implements OnInit {
-
   public nome: string = '';
   public email: string = '';
   public senha: string = '';
-  public confirmarSenha: string = '';
   public dataNascimento: string = '';
   public genero: string = '';
+
+  public confirmarSenha: string = '';
 
   constructor(
     public rs:RequisicaoService
@@ -69,15 +75,13 @@ export class CadastroPage implements OnInit {
   cadastrar() {
     const fd = new FormData();
     fd.append('controller', 'cadastro');
-    fd.append('nome', this.nome);
+    fd.append('username', this.nome);
     fd.append('email', this.email);
-    fd.append('senha', this.senha);
-    fd.append('confirmarSenha',this.confirmarSenha);
-    fd.append('dataNascimento', this.dataNascimento);
-    fd.append('genero', this.genero)
+    fd.append('password', this.senha);
+    fd.append('birthday', this.dataNascimento);
+    fd.append('gender', this.genero);
 
-    
+    this.rs.post(fd)
+    .subscribe();
     };
   }
-
-
