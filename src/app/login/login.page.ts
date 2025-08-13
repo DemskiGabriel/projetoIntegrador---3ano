@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonAlert  } from '@ionic/angular/standalone';
+import { AlertController } from '@ionic/angular';
 import { AutenticacaoService } from '../service/autenticacao.service';
 
 @Component({
@@ -15,24 +16,39 @@ export class LoginPage implements OnInit {
   public login:string = '';
   public senha:string = '';
 
-  constructor(
+  constructor(private alertController: AlertController,
     public autenticacao_service:AutenticacaoService
-  ) { }
+    ) { }
 
   ngOnInit() {
   }
 
-  logar(){
+ async logar(){
     let login = this.login;
     let senha = this.senha;
 
     this.autenticacao_service
     .logar(login,senha)
     .subscribe(
-      (_res:any) => {
-        
-      }
-    )
-  }
+      (res:any) => {
 
+      }
+    );
+  
+
+    if (!this.login || !this.senha) {
+      const alert = await this.alertController.create({
+        header: 'Atenção',
+        message: 'Por favor, preencha todos os campos!',
+        buttons: ['OK']
+      });
+
+      await alert.present();
+      return;
+  }
+  
+  }
+ 
+
+  
 }
