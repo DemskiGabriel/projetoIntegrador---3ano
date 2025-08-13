@@ -57,7 +57,7 @@ export class CadastroPage implements OnInit {
   public senha: string = '';
   public confirmarSenha: string = '';
   public dataNascimento: string = '';
-  public sexo: string = '';
+  public genero: string = '';
 
   constructor(
     public rs:RequisicaoService
@@ -74,7 +74,7 @@ export class CadastroPage implements OnInit {
     fd.append('senha', this.senha);
     fd.append('confirmarSenha',this.confirmarSenha);
     fd.append('dataNascimento', this.dataNascimento);
-    fd.append('sexo', this.sexo)
+    fd.append('genero', this.genero)
 
     
     };
