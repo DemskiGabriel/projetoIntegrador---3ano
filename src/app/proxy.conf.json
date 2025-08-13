@@ -1,6 +1,6 @@
 {
-    "/projetoIntegrador/*":{
-        "target": "http://localhost/miles/index.php",
+    "/requisicao":{
+        "target": "http://localhost/projetoIntegrador/index.php",
         "secure": false,
         "changeOrigin": true,
         "logLevel": "debug"

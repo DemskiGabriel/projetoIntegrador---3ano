@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { RequisicaoService } from '../service/requisicao.service';
+
 import {
   IonContent,
   IonHeader,
@@ -21,6 +23,7 @@ import {
   IonButton,
   IonAlert
 } from '@ionic/angular/standalone';
+
 
 @Component({
   selector: 'app-cadastro',
