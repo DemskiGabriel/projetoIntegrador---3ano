@@ -1,0 +1,8 @@
+{
+    "/requisicao":{
+        "target": "http://localhost/projetoIntegrador/index.php",
+        "secure": false,
+        "changeOrigin": true,
+        "logLevel": "debug"
+    }
+}
