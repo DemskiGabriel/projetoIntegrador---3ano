@@ -13,6 +13,10 @@ export const routes: Routes = [
     pathMatch: 'full',
   },
   {
+    path: 'cadastro',
+    loadComponent: () => import('./cadastro/cadastro.page').then( m => m.CadastroPage)
+  },
+  {
     path: 'login',
     loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
   },

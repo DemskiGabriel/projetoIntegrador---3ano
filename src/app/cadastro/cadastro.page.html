@@ -1,0 +1,68 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Cadastrar</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Cadastro de Usuário</ion-card-title>
+      <ion-card-subtitle>Preencha seus dados abaixo</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-list lines="full">
+
+
+        <ion-item>
+          <ion-label [(ngModel)]="nome" position="floating label">Nome</ion-label>
+          <ion-input type="text" placeholder="Digite seu nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label [(ngModel)]="email" position="floating label">E-mail</ion-label>
+          <ion-input type="email" placeholder="Digite seu e-mail"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label [(ngModel)]="senha" position="floating label">Senha</ion-label>
+          <ion-input type="password" placeholder="Digite sua senha"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label [(ngModel)]="confirmarSenha" position="floating label">Confirmar Senha</ion-label>
+          <ion-input type="password" placeholder="Confirme sua senha"></ion-input>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label [(ngModel)]="dataNascimento">Data de Nascimento</ion-label>
+          <ion-datetime presentation="date" placeholder="Selecione a data"></ion-datetime>
+        </ion-item>
+
+
+        <ion-item>
+          <ion-label [(ngModel)]="genero">Gênero</ion-label>
+          <ion-select placeholder="Selecione">
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="feminino">Feminino</ion-select-option>
+            <ion-select-option value="masculino">Outro'</ion-select-option>
+          </ion-select>
+        </ion-item>
+
+      </ion-list>
+
+
+      <ion-button id="present-alert" expand="block" color="primary" class="ion-margin-top">
+        Cadastrar
+      </ion-button>
+
+      <ion-alert trigger="present-alert" header="Alerta" 
+        message="Preencha os campos necessários."></ion-alert>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>
