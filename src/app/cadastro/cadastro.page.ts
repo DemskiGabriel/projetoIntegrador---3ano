@@ -22,7 +22,7 @@ import {
   IonSelectOption,
   IonButton,
   IonAlert
-} from '@ionic/angular/standalone';
+  } from '@ionic/angular/standalone';
 
 
 @Component({
@@ -30,7 +30,7 @@ import {
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [
+  imports: [ 
     IonContent,
     IonHeader,
     IonTitle,
@@ -54,13 +54,13 @@ import {
   ]
 })
 export class CadastroPage implements OnInit {
-
   public nome: string = '';
   public email: string = '';
   public senha: string = '';
-  public confirmarSenha: string = '';
   public dataNascimento: string = '';
   public genero: string = '';
+
+  public confirmarSenha: string = '';
 
   constructor(
     public rs:RequisicaoService
@@ -72,14 +72,14 @@ export class CadastroPage implements OnInit {
   cadastrar() {
     const fd = new FormData();
     fd.append('controller', 'cadastro');
-    fd.append('nome', this.nome);
+    fd.append('username', this.nome);
     fd.append('email', this.email);
-    fd.append('senha', this.senha);
-    fd.append('confirmarSenha',this.confirmarSenha);
-    fd.append('dataNascimento', this.dataNascimento);
-    fd.append('genero', this.genero)
+    fd.append('password', this.senha);
+    fd.append('birthday', this.dataNascimento);
+    fd.append('gender', this.genero);
 
-    
+    this.rs.post(fd)
+    .subscribe();
     };
   }
 
