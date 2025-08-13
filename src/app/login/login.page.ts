@@ -30,7 +30,15 @@ export class LoginPage implements OnInit {
     this.autenticacao_service
     .logar(login,senha)
     .subscribe(
-      (res:any) => {
+      (_res:any) => {
+
+        if (_res.status == 'sucess'){
+
+          sessionStorage.setItem('token',_res.token)
+
+        }else{
+
+          }
 
       }
     );
@@ -46,7 +54,7 @@ export class LoginPage implements OnInit {
       await alert.present();
       return;
   }
-  
+
   }
  
 
