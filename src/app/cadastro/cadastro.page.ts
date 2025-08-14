@@ -21,9 +21,9 @@ import {
   IonSelect,
   IonSelectOption,
   IonButton,
-  IonAlert,
-  IonText
-  } from '@ionic/angular/standalone';
+  IonText,
+  IonImg
+} from '@ionic/angular/standalone';
 
 
 
@@ -32,7 +32,7 @@ import {
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [ 
+  imports: [
     IonContent,
     IonHeader,
     IonTitle,
@@ -52,8 +52,8 @@ import {
     IonButton,
     CommonModule,
     FormsModule,
-    IonAlert,
-    IonText
+    IonText,
+    IonImg
   ]
 })
 export class CadastroPage implements OnInit {
@@ -62,14 +62,28 @@ export class CadastroPage implements OnInit {
   public senha: string = '';
   public dataNascimento: string = '';
   public genero: string = '';
-
   public confirmarSenha: string = '';
 
   constructor(
-    public rs:RequisicaoService
+    public rs: RequisicaoService
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+  }
+
+  formatarData(event: any) {
+    let valor = event.detail.value;
+    if (!valor) return;
+
+    valor = valor.replace(/\D/g, '');
+
+    if (valor.length > 2 && valor.length <= 4) {
+      valor = valor.replace(/(\d{2})(\d+)/, '$1/$2');
+    } else if (valor.length > 4) {
+      valor = valor.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3');
+    }
+
+    event.target.value = valor;
   }
 
   cadastrar() {
@@ -81,7 +95,6 @@ export class CadastroPage implements OnInit {
     fd.append('birthday', this.dataNascimento);
     fd.append('gender', this.genero);
 
-    this.rs.post(fd)
-    .subscribe();
-    };
+    this.rs.post(fd).subscribe();
   }
+}

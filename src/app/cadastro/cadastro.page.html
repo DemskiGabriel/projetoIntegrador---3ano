@@ -5,58 +5,60 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
+
+  <ion-img src="https://docs-demo.ionic.io/assets/design projeto.png" alt="Logo do bagulho"></ion-img>
+
   <ion-card>
-    <ion-card-header>
-      <ion-card-title>Cadastro de Usuário</ion-card-title>
-      <ion-card-subtitle>Preencha seus dados abaixo</ion-card-subtitle>
-    </ion-card-header>
 
-    <ion-card-content>
-      <ion-list lines="full">
+    <ion-card-content>  
 
-        <!-- Campo Nome -->
-        <ion-item>
-          <ion-input type="text" placeholder="Digite seu nome" [(ngModel)]="nome" name="nome"></ion-input>
-        </ion-item>
+  <ion-list>
+      <!-- Campo Nome -->
+      <ion-item>
+        <ion-input type="text" placeholder="Digite seu nome" [(ngModel)]="nome" name="nome"></ion-input>
+      </ion-item>
 
-        <!-- Campo E-mail -->
-        <ion-item>
-          <ion-input type="email" placeholder="Digite seu e-mail" [(ngModel)]="email" name="email"></ion-input>
-        </ion-item>
+      <!-- Campo E-mail -->
+      <ion-item>
+        <ion-input type="email" placeholder="Digite seu e-mail" [(ngModel)]="email" name="email"></ion-input>
+      </ion-item>
 
-        <!-- Campo Senha -->
-        <ion-item>
-          <ion-input type="password" placeholder="Digite sua senha" [(ngModel)]="senha" name="senha"></ion-input>
-        </ion-item>
+      <!-- Campo Senha -->
+      <ion-item>
+        <ion-input type="password" placeholder="Digite sua senha" [(ngModel)]="senha" name="senha"></ion-input>
+      </ion-item>
 
-        <!-- Campo Confirmar Senha -->
-        <ion-item>
-          <ion-input type="password" placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
-        </ion-item>
+      <!-- Campo Confirmar Senha -->
+      <ion-item>
+        <ion-input type="password" placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha"
+          name="confirmarSenha"></ion-input>
+      </ion-item>
 
-        <!-- Campo Data de Nascimento -->
-        <ion-item>
-          <ion-label position="floating">Data de Nascimento</ion-label> <br>
-          <ion-datetime presentation="date" placeholder="Selecione a data" [(ngModel)]="dataNascimento" name="dataNascimento"></ion-datetime>
-        </ion-item>
+      <!-- Campo Data de Nascimento -->
+      <ion-item>
+        <ion-label position="floating">Data de nascimento</ion-label>
+        <ion-input type="text" placeholder="__/__/____" [(ngModel)]="dataNascimento" name="dataNascimento"
+          maxlength="10" (ionInput)="formatarData($event)">
+        </ion-input>
+      </ion-item>
 
-        <!-- Campo Gênero -->
-        <ion-item>
-          <ion-label position="floating">Gênero</ion-label> <br>
-          <ion-select placeholder="Selecione" [(ngModel)]="genero" name="genero">
-            <ion-select-option value="masculino">Masculino</ion-select-option>
-            <ion-select-option value="feminino">Feminino</ion-select-option>
-            <ion-select-option value="outro">Outro</ion-select-option>
-          </ion-select>
-        </ion-item>
 
-      </ion-list>
-
-      <ion-button expand="block" color="primary" class="ion-margin-top" (click)="cadastrar()">
-        Cadastrar
-      </ion-button>
-      <ion-text color="primary" routerLink="/login"><sub>Já tem conta? Faça o Login</sub></ion-text>
+      <!-- Campo Gênero -->
+      <ion-item>
+        <ion-label position="floating">Gênero</ion-label> </br>
+        <ion-select [(ngModel)]="genero" name="genero">
+          <ion-select-option value="masculino">Masculino</ion-select-option>
+          <ion-select-option value="feminino">Feminino</ion-select-option>
+          <ion-select-option value="outro">Outro</ion-select-option>
+        </ion-select>
+      </ion-item>
+  </ion-list>
 
     </ion-card-content>
+    <ion-button expand="block" class="ion-margin-top" (click)="cadastrar()">
+      Cadastrar
+    </ion-button>
+
+    <a href="/login">Já tem uma conta? Faça o Login.</a>
   </ion-card>
 </ion-content>
