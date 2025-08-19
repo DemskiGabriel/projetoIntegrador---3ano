@@ -9,20 +9,16 @@ import {
   IonTitle,
   IonToolbar,
   IonCard,
-  IonCardHeader,
-  IonCardTitle,
-  IonCardSubtitle,
   IonCardContent,
   IonList,
   IonItem,
   IonLabel,
   IonInput,
-  IonDatetime,
   IonSelect,
   IonSelectOption,
   IonButton,
-  IonAlert
-  } from '@ionic/angular/standalone';
+  IonImg
+} from '@ionic/angular/standalone';
 
 
 @Component({
@@ -30,27 +26,23 @@ import {
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [ 
+  imports: [IonImg,  
     IonContent,
     IonHeader,
     IonTitle,
     IonToolbar,
     IonCard,
-    IonCardHeader,
-    IonCardTitle,
-    IonCardSubtitle,
     IonCardContent,
     IonList,
     IonItem,
     IonLabel,
     IonInput,
-    IonDatetime,
     IonSelect,
     IonSelectOption,
     IonButton,
     CommonModule,
     FormsModule,
-    IonAlert
+    IonImg
   ]
 })
 export class CadastroPage implements OnInit {
@@ -63,10 +55,25 @@ export class CadastroPage implements OnInit {
   public confirmarSenha: string = '';
 
   constructor(
-    public rs:RequisicaoService
+    public rs: RequisicaoService
   ) { }
 
-  ngOnInit() { 
+  ngOnInit() {
+  }
+
+  formatarData(event: any) {
+    let valor = event.detail.value;
+    if (!valor) return;
+
+    valor = valor.replace(/\D/g, '');
+
+    if (valor.length > 2 && valor.length <= 4) {
+      valor = valor.replace(/(\d{2})(\d+)/, '$1/$2');
+    } else if (valor.length > 4) {
+      valor = valor.replace(/(\d{2})(\d{2})(\d+)/, '$1/$2/$3');
+    }
+
+    event.target.value = valor;
   }
 
   cadastrar() {
@@ -78,9 +85,6 @@ export class CadastroPage implements OnInit {
     fd.append('birthday', this.dataNascimento);
     fd.append('gender', this.genero);
 
-    this.rs.post(fd)
-    .subscribe();
-    };
+    this.rs.post(fd).subscribe();
   }
-
-
+}
