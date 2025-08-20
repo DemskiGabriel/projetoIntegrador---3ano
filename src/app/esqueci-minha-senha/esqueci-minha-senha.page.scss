@@ -1,9 +1,12 @@
 ion-card {
     background-color: #a7abc8;
+    color: black;
+    margin-top: 200px;
 }
 
 a {
     color: #8e68e6;
+    margin-left: 135px;
 }
 
 ion-button {
@@ -13,4 +16,13 @@ ion-button {
 
 ion-content {
     --background: linear-gradient(to bottom,#ece8ec, #b5b6e3);;
+}
+
+ion-card-subtitle{
+    color: rgb(82, 81, 81);
+}
+
+ion-card-title{ 
+    margin-left: 60px;
+    color: black;
 }
