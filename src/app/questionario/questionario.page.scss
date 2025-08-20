@@ -1,0 +1,83 @@
+ion-header {
+    --background: #a7abc8;
+    ion-toolbar {
+      --background: transparent;
+      --border-color: transparent;
+      ion-title {
+        color: black;
+      }
+    }
+  }
+  
+  ion-content {
+    --background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
+  }
+  
+  .header-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    ion-img {
+      max-width: 550px;
+      margin-top: -90px;
+    }
+  }
+  
+  ion-card {
+    --background: #a7abc8;
+    margin: auto;
+    margin-top: -40px;
+    border-radius: 20px;
+    padding: 20px;
+    width: 300px;
+    box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  }
+  
+  ion-card-content {
+    --background: #a7abc8;
+    border-radius: 20px;
+    padding: 16px;
+  }
+  
+  // Estilos para o grupo de perguntas
+  .question-group {
+    margin-bottom: 16px;
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
+      color: black;
+      margin-bottom: 8px;
+    }
+  }
+  
+  // Estilo para a linha separadora
+  .separator {
+    border: 0;
+    border-top: 1px dotted #666; /* Linha pontilhada */
+    margin: 16px 0;
+  }
+  
+  ion-item {
+    --background: #a7abc8;
+    --border-color: transparent; // Remove a linha padrao do item
+    --inner-padding-end: 0; // Remove padding extra
+    --padding-start: 0; // Remove padding extra
+    margin: 0;
+  }
+  
+  ion-checkbox {
+    --background: #fff;
+    --background-checked: #a7abc8;
+    --border-radius: 50%; /* Faz o checkbox ser redondo, se o Ionic permitir */
+    --border-color: #666;
+    --border-color-checked: #666;
+    --checkmark-color: #fff;
+  }
+  
+  ion-button {
+    --background: black;
+    --color: #fff;
+    --border-radius: 10px; // Adiciona um pouco de arredondamento
+  }

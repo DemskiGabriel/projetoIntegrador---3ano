@@ -1,0 +1,50 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title size="small">Queremos conhecer você melhor!</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="header-content">
+    <ion-img src="assets/imagens/logomassa.png" alt="Logo do PomoCat"></ion-img>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <div class="question-group">
+        <h3>Em quais horários você costuma estar mais disponível durante o dia?</h3>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">Manhã (06h – 12h)</ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">Tarde (12h – 18h)</ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">Noite (18h – 00h)</ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">Madrugada (00h – 06h)</ion-checkbox>
+        </ion-item>
+      </div>
+
+      <hr class="separator">
+
+      <div class="question-group">
+        <h3>Quanto tempo livre você costuma ter por dia para cuidar de si mesmo?</h3>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">De 10 a 30 minutos</ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">De 30 a 60 minutos</ion-checkbox>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-checkbox slot="start" justify="space-between">Mais de 1 hora</ion-checkbox>
+        </ion-item>
+      </div>
+    </ion-card-content>
+
+    <ion-button expand="block" class="ion-margin-top">
+      Próximo
+    </ion-button>
+  </ion-card>
+</ion-content>
