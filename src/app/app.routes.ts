@@ -19,17 +19,15 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
-  },  {
+  },
+  {
     path: 'esqueci-minha-senha',
     loadComponent: () => import('./esqueci-minha-senha/esqueci-minha-senha.page').then( m => m.EsqueciMinhaSenhaPage)
   },
-  {
-    path: 'esqueci-minha-senha-2',
-    loadComponent: () => import('./esqueci-minha-senha-2/esqueci-minha-senha-2.page').then( m => m.EsqueciMinhaSenha2Page)
-  },
+
   {
     path: 'esqueci-2',
     loadComponent: () => import('./esqueci-2/esqueci-2.page').then( m => m.Esqueci2Page)
   },
-
+  
 ];
