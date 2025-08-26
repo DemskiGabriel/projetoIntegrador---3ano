@@ -28,6 +28,10 @@ export const routes: Routes = [
   {
     path: 'esqueci-2',
     loadComponent: () => import('./esqueci-2/esqueci-2.page').then( m => m.Esqueci2Page)
+  },  {
+    path: 'esqueci-3',
+    loadComponent: () => import('./esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
   },
+
   
 ];

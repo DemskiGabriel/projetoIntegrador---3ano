@@ -8,9 +8,9 @@
   
     <ion-card-content>
 
-      <ion-input label="E-mail" label-placement="floating" fill="outline" ></ion-input>
+      <ion-input label="E-mail" label-placement="floating" fill="outline" [(ngModel)]="email"></ion-input>
 
-      <ion-button routerLink="/esqueci-2"  expand="block">Proximo</ion-button></ion-card-content>
+      <ion-button routerLink="/esqueci-2"  (click)="proximo()" id="present-alert" expand="block">Proximo</ion-button></ion-card-content>
       <a href="/login"> Cancelar </a>
 
   </ion-card>
