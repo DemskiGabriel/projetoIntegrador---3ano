@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonChip, IonCardContent, IonCard } from '@ionic/angular/standalone';
+import { IonContent, IonChip } from '@ionic/angular/standalone';
 
 @Component({
   selector: 'app-feed',
   templateUrl: './feed.page.html',
   styleUrls: ['./feed.page.scss'],
   standalone: true,
-  imports: [IonCard, IonCardContent, IonChip, IonContent, CommonModule, FormsModule]
+  imports: [IonChip, IonContent, CommonModule, FormsModule ]
 })
 export class FeedPage implements OnInit {
 
