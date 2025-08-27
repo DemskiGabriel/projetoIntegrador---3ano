@@ -68,7 +68,7 @@ ion-header {
   }
   
   ion-checkbox {
-    --background: #fff;
+    --background: black;
     --background-checked: #a7abc8;
     --border-radius: 50%; /* Faz o checkbox ser redondo, se o Ionic permitir */
     --border-color: #666;
@@ -77,7 +77,20 @@ ion-header {
   }
   
   ion-button {
-    --background: black;
-    --color: #fff;
+    --background: #8e95c5
+    ;
+    --color: black;
     --border-radius: 10px; // Adiciona um pouco de arredondamento
   }
+
+  ion-card-content {
+    --background: #d6d7f5;
+    border-radius: 20px;
+    padding: 16px;
+    
+    position: relative; 
+    overflow: hidden; 
+    height: auto; 
+    min-height: 100px; 
+  }
+  

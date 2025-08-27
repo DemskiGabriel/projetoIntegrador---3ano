@@ -11,6 +11,12 @@ ion-toolbar {
   }
 }
 
+h1{
+  text-align: center;
+  color: #000;
+  margin-top: -1%;
+}
+
 ion-content {
   --background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
 }
@@ -76,7 +82,7 @@ ion-input, ion-select {
 }
 
 ion-button {
-  --background: #ece8ec;
+  --background: #8e95c5;
   --color: black;
 }
 
