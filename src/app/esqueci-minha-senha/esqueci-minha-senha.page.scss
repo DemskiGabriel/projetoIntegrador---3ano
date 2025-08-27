@@ -7,7 +7,9 @@ ion-card {
 a {
     color: #8e68e6;
     margin-left: 135px;
-}
+    display: inline-block; /* precisa ser inline-block ou block */
+    transform: translateY(-8px); /* sobe 20px */
+  }
 
 ion-button {
     --background: #8e95c5;

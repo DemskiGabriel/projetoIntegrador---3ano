@@ -10,8 +10,8 @@
 
       <ion-input label="E-mail" label-placement="floating" fill="outline" [(ngModel)]="email"></ion-input>
 
-      <ion-button routerLink="/esqueci-2"  (click)="proximo()" id="present-alert" expand="block">Proximo</ion-button></ion-card-content>
-      <a href="/login"> Cancelar </a>
+      <ion-button (click)="proximo()" id="present-alert" expand="block">Proximo</ion-button></ion-card-content>
+      <a routerLink="/login"  > Cancelar </a>
 
   </ion-card>
   <ion-img src="assets/imagens/pomocat.jpg"></ion-img>
