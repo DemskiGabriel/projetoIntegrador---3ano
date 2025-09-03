@@ -5,6 +5,7 @@ import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, Io
 import { Router, RouterLink } from '@angular/router';
 import { AutenticacaoService } from '../service/autenticacao.service';
 import { AlertController } from '@ionic/angular';
+import { RequisicaoService } from '../service/requisicao.service';
 
 @Component({
   selector: 'app-esqueci-minha-senha',
@@ -15,44 +16,48 @@ import { AlertController } from '@ionic/angular';
 })
 export class EsqueciMinhaSenhaPage implements OnInit {
   public email:string = '';
+  public erroCamposVazios:string = ''
+  public erroEmailNaoExiste:string = ''
 
   constructor(private alertController: AlertController,
     public autenticacao_service:AutenticacaoService,
+    public rs:RequisicaoService,
     private router: Router) { }
 
   ngOnInit() {
   }
 
-  async proximo() {
-    // Validação primeiro
-    if (!this.email) {
-      const alert = await this.alertController.create({
-        header: 'Atenção',
-        message: 'Por favor, preencha todos os campos!',
-        buttons: ['OK']
-      });
-  
-      await alert.present();
-      return; // <- Aqui garante que NÃO vai executar nada abaixo
-    }
-  
-    // Se o email tiver valor, só aí chama o serviço
-    this.autenticacao_service
-      .proximo(this.email)
-      .subscribe(async (_res: any) => {
-        if (_res.status === 'sucess') {
-          sessionStorage.setItem('token', _res.token);
-          this.router.navigate(['/esqueci-2']);
-          // se quiser redirecionar, faz aqui com Router.navigate
-        } else {
-          const alert = await this.alertController.create({
-            header: 'Erro',
-            message: 'Email não encontrado!',
-            buttons: ['OK']
-          });
-          await alert.present();
-        }
-      });
-  }
+  proximo() {
+    this.erroCamposVazios = '';
+    this.erroEmailNaoExiste = '';
 
+    if (!this.email) {
+        this.presentAlert('Erro', 'Por favor, preencha o campo de e-mail para continuar.');
+        return;
+    }
+
+    const fd = new FormData();
+    fd.append('controller', 'proximo');
+    fd.append('email', this.email);
+
+    this.rs.post(fd).subscribe(
+        (response: any) => {
+            console.log('a', response);
+            this.router.navigate(['/esqueci-2']);
+        },
+        (error: any) => {
+            console.error('Erro ao cadastrar:', error);
+        }
+    );
+}
+
+async presentAlert(header: string, message: string) {
+    const alert = await this.alertController.create({
+        header: header,
+        message: message,
+        buttons: ['OK']
+    });
+
+    await alert.present();
+}
 }
