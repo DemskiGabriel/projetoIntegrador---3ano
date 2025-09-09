@@ -16,6 +16,19 @@ export class AutenticacaoService {
     fd.append('email', email);
     fd.append('password', password);
 
+    
+
+    return this.rs
+    .post(fd);
+  }
+
+  proximo(email:string){
+    const fd = new FormData();
+    fd.append('controller', 'proximo');
+    fd.append('email', email);
+
+    
+
     return this.rs
     .post(fd);
   }
