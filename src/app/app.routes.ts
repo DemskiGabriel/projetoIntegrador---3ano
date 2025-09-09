@@ -11,6 +11,17 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
+
+  },
+  {
+    path: 'questionario',
+    loadComponent: () => import('./questionario/questionario.page').then( m => m.QuestionarioPage)
+  },
+  {
+    path: 'semmissao',
+    loadComponent: () => import('./semmissao/semmissao.page').then( m => m.SemmissaoPage)
+  },
+
   },
   {
     path: 'esqueci-minha-senha',

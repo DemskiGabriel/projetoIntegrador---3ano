@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { RequisicaoService } from '../service/requisicao.service';
+import { Router } from '@angular/router';
 
 import {
   IonContent,
-  IonHeader,
-  IonTitle,
-  IonToolbar,
   IonCard,
   IonCardContent,
   IonList,
@@ -17,20 +15,18 @@ import {
   IonSelect,
   IonSelectOption,
   IonButton,
-  IonImg
+  IonImg,
+  IonText
 } from '@ionic/angular/standalone';
-
 
 @Component({
   selector: 'app-cadastro',
   templateUrl: './cadastro.page.html',
   styleUrls: ['./cadastro.page.scss'],
   standalone: true,
-  imports: [IonImg,  
+  imports: [
+    IonImg,
     IonContent,
-    IonHeader,
-    IonTitle,
-    IonToolbar,
     IonCard,
     IonCardContent,
     IonList,
@@ -40,9 +36,9 @@ import {
     IonSelect,
     IonSelectOption,
     IonButton,
+    IonText,
     CommonModule,
     FormsModule,
-    IonImg
   ]
 })
 export class CadastroPage implements OnInit {
@@ -54,8 +50,12 @@ export class CadastroPage implements OnInit {
 
   public confirmarSenha: string = '';
 
+  public erroCamposVazios: string = '';
+  public erroSenhasNaoCoincidem: string = '';
+
   constructor(
-    public rs: RequisicaoService
+    public rs: RequisicaoService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -77,6 +77,20 @@ export class CadastroPage implements OnInit {
   }
 
   cadastrar() {
+    this.erroCamposVazios = '';
+    this.erroSenhasNaoCoincidem = '';
+    
+
+    if (!this.nome || !this.email || !this.senha || !this.confirmarSenha || !this.dataNascimento || !this.genero) {
+      this.erroCamposVazios = 'Todos os campos devem ser preenchidos.';
+      return; 
+    }
+    
+    if (this.senha !== this.confirmarSenha) {
+      this.erroSenhasNaoCoincidem = 'As senhas não coincidem.';
+      return;
+    }
+    
     const fd = new FormData();
     fd.append('controller', 'cadastro');
     fd.append('username', this.nome);
@@ -85,6 +99,14 @@ export class CadastroPage implements OnInit {
     fd.append('birthday', this.dataNascimento);
     fd.append('gender', this.genero);
 
-    this.rs.post(fd).subscribe();
+    this.rs.post(fd).subscribe(
+      (response: any) => {
+        console.log('Cadastro bem-sucedido!', response);
+        this.router.navigate(['/questionario']);
+      },
+      (error: any) => {
+        console.error('Erro ao cadastrar:', error);
+      }
+    );
   }
 }

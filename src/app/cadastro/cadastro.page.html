@@ -1,62 +1,55 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Cadastrar</ion-title>
-  </ion-toolbar>
-</ion-header>
-
 <ion-content [fullscreen]="true">
-
-  <ion-img src="https://docs-demo.ionic.io/assets/design projeto.png" alt="Logo do bagulho"></ion-img>
+  <div class="header-content">
+    <ion-img src="assets/imagens/logomassa.png" alt="Logo do bagulho"></ion-img>
+  </div>
 
   <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <h1>Cadastro</h1>
+        <ion-item>
+          <ion-input type="text" placeholder="Digite seu nome" [(ngModel)]="nome" name="nome"></ion-input>
+        </ion-item>
 
-    <ion-card-content>  
+        <ion-item>
+          <ion-input type="email" placeholder="Digite seu e-mail" [(ngModel)]="email" name="email"></ion-input>
+        </ion-item>
 
-  <ion-list>
-      <!-- Campo Nome -->
-      <ion-item>
-        <ion-input type="text" placeholder="Digite seu nome" [(ngModel)]="nome" name="nome"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Digite sua senha" [(ngModel)]="senha" name="senha"></ion-input>
+        </ion-item>
 
-      <!-- Campo E-mail -->
-      <ion-item>
-        <ion-input type="email" placeholder="Digite seu e-mail" [(ngModel)]="email" name="email"></ion-input>
-      </ion-item>
+        <ion-item>
+          <ion-input type="password" placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
+        </ion-item>
 
-      <!-- Campo Senha -->
-      <ion-item>
-        <ion-input type="password" placeholder="Digite sua senha" [(ngModel)]="senha" name="senha"></ion-input>
-      </ion-item>
+        <ion-text color="danger" *ngIf="erroSenhasNaoCoincidem">
+          <p>{{ erroSenhasNaoCoincidem }}</p>
+        </ion-text>
 
-      <!-- Campo Confirmar Senha -->
-      <ion-item>
-        <ion-input type="password" placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha"
-          name="confirmarSenha"></ion-input>
-      </ion-item>
-
-      <!-- Campo Data de Nascimento -->
-      <ion-item>
-        <ion-label position="floating">Data de nascimento</ion-label>
-        <ion-input type="text" placeholder="__/__/____" [(ngModel)]="dataNascimento" name="dataNascimento"
-          maxlength="10" (ionInput)="formatarData($event)">
-        </ion-input>
-      </ion-item>
-
-
-
-      <!-- Campo Gênero -->
-      <ion-item>
-        <ion-label position="floating">Gênero</ion-label> <br>
-        <ion-select [(ngModel)]="genero" name="genero">
-          <ion-select-option value="masculino">Masculino</ion-select-option>
-          <ion-select-option value="feminino">Feminino</ion-select-option>
-          <ion-select-option value="outro">Outro</ion-select-option>
-        </ion-select>
-      </ion-item>
-    </ion-list>
-
+        <ion-item>
+          <ion-label position="fixed">Data de nascimento</ion-label>
+          <ion-input type="text" placeholder="__/__/____" [(ngModel)]="dataNascimento" name="dataNascimento"
+            maxlength="10" (ionInput)="formatarData($event)">
+          </ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="fixed">Gênero</ion-label>
+          <ion-select [(ngModel)]="genero" name="genero">
+            <ion-select-option value="masculino">Masculino</ion-select-option>
+            <ion-select-option value="feminino">Feminino</ion-select-option>
+            <ion-select-option value="outro">Outro</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
     </ion-card-content>
-    <ion-button expand="block" class="ion-margin-top" (click)="cadastrar()">
+
+    <ion-text color="danger" *ngIf="erroCamposVazios">
+      <p>{{ erroCamposVazios }}</p>
+    </ion-text>
+
+    <ion-button  expand="block" class="ion-margin-top" (click)="cadastrar()">
       Cadastrar
     </ion-button>
 
