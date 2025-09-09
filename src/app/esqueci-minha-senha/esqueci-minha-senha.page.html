@@ -1,0 +1,19 @@
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title>Esqueci minha senha</ion-card-title>
+      <ion-card-subtitle>Para redefinir sua senha, precisamos do e-mail cadastrado na sua conta e lhe enviaremos um código  </ion-card-subtitle>
+    </ion-card-header>
+  
+    <ion-card-content>
+
+      <ion-input label="E-mail" label-placement="floating" fill="outline"  [(ngModel)]="email"></ion-input>
+
+      <ion-button (click)="proximo()" id="present-alert" expand="block">Proximo</ion-button></ion-card-content>
+      <a routerLink="/login"  > Cancelar </a>
+
+  </ion-card>
+  <ion-img src="assets/imagens/pomocat.jpg"></ion-img>
+
+
