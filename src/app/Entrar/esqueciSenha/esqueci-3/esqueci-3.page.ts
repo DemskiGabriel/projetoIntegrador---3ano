@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonButton, IonImg, IonCardSubtitle } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
-import { AutenticacaoService } from '../../service/autenticacao.service';
+import { AutenticacaoService } from '../../../service/autenticacao.service';
 import { AlertController } from '@ionic/angular';
 
 @Component({

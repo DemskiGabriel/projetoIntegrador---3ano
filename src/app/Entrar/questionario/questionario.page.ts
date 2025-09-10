@@ -4,9 +4,6 @@ import { FormsModule } from '@angular/forms';
 import { trigger, transition, style, animate } from '@angular/animations'; 
 
 import {
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonContent,
   IonImg,
   IonCard,
@@ -16,6 +13,8 @@ import {
   IonButton,
   IonText
 } from '@ionic/angular/standalone';
+import { Router } from '@angular/router';
+import { RequisicaoService } from 'src/app/service/requisicao.service';
 
 @Component({
   selector: 'app-questionario',
@@ -23,9 +22,6 @@ import {
   styleUrls: ['./questionario.page.scss'],
   standalone: true,
   imports: [
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonContent,
     IonImg,
     IonCard,
@@ -51,59 +47,65 @@ import {
   ]
 })
 export class QuestionarioPage implements OnInit {
-
   // Variável para controlar o passo atual do questionário
   public currentStep: number = 1;
 
   // Variáveis para armazenar as respostas
-  public horariosAnswer: string | null = null;
-  public tempoLivreAnswer: string | null = null;
-  public tempoCelularAnswer: string | null = null;
-  public diasSemanaAnswer: string | null = null;
-  public pausasLivresAnswer: string | null = null;
+  public horariosAnswer:string = '';
+  public tempoLivreAnswer:string = '';
+  public tempoCelularAnswer:string = '';
+  public diasSemanaAnswer:string = '';
+  public pausasLivresAnswer:string = '';
 
   // Variável para a mensagem de erro
   public errorMessage: string = '';
 
   // Estrutura de dados para as opções de cada pergunta
   public horariosOptions = [
-    { label: 'Manhã (06h – 12h)', value: 'manha' },
-    { label: 'Tarde (12h – 18h)', value: 'tarde' },
-    { label: 'Noite (18h – 00h)', value: 'noite' },
-    { label: 'Madrugada (00h – 06h)', value: 'madrugada' }
+    { label: 'Manhã (06h – 12h)', value: 'morning' },
+    { label: 'Tarde (12h – 18h)', value: 'afternoon' },
+    { label: 'Noite (18h – 00h)', value: 'evening' },
+    { label: 'Madrugada (00h – 06h)', value: 'night' }
   ];
-
   public tempoLivreOptions = [
-    { label: 'De 10 a 30 minutos', value: '10-30min' },
-    { label: 'De 30 a 60 minutos', value: '30-60min' },
+    { label: 'De 10 a 30 minutos', value: '10_30min' },
+    { label: 'De 30 a 60 minutos', value: '30_60min' },
     { label: 'Mais de 1 hora', value: 'maisde1h' }
   ];
-
   public tempoCelularOptions = [
     { label: 'Menos de 1 hora', value: 'menosde1h' },
-    { label: '1 a 3 horas', value: '1-3h' },
-    { label: '3 a 5 horas', value: '3-5h' },
+    { label: '1 a 3 horas', value: '1_3h' },
+    { label: '3 a 5 horas', value: '3_5h' },
     { label: 'Mais de 5 horas', value: 'maisde5h' }
   ];
-  
   public diasSemanaOptions = [
     { label: 'Dias úteis', value: 'uteis' },
-    { label: 'Fins de semana', value: 'finsdesemana' },
-    { label: 'Todos os dias', value: 'todosdias' },
-    { label: 'Depende da semana', value: 'depende' }
+    { label: 'Fins de semana', value: 'finsDeSemana' },
+    { label: 'Todos os dias', value: 'todosDias' }
   ];
-  
   public pausasLivresOptions = [
     { label: 'Nenhuma', value: 'nenhuma' },
-    { label: '1 a 2 pausas', value: '1-2pausas' },
-    { label: '3 a 4 pausas', value: '3-4pausas' },
-    { label: 'Mais de 4 pausas', value: 'maisde4pausas' }
+    { label: '1 a 2 pausas', value: '1_2' },
+    { label: '3 a 4 pausas', value: '3_4' },
+    { label: 'Mais de 4 pausas', value: 'maisde4' }
   ];
 
-  constructor() { }
+  public userId:string = localStorage.getItem('userId') || '';
+
+  constructor(
+    private router: Router,
+    public rs: RequisicaoService
+  ) { }
 
   ngOnInit() {
-  }
+    console.log(this.userId);
+    
+    if(this.userId == ''){
+      this.router.navigate(['/login']);
+    }
+
+    // localStorage.setItem('userId', '')
+  } 
 
   // Lógica para lidar com a mudança de checkbox para garantir uma única seleção por pergunta
   onCheckboxChange(questionId: string, value: string, event: any) {
@@ -130,19 +132,19 @@ export class QuestionarioPage implements OnInit {
        // Limpa a resposta se a opção for desmarcada
        switch (questionId) {
         case 'horarios':
-          this.horariosAnswer = null;
+          this.horariosAnswer = '';
           break;
         case 'tempoLivre':
-          this.tempoLivreAnswer = null;
+          this.tempoLivreAnswer = '';
           break;
         case 'tempoCelular':
-          this.tempoCelularAnswer = null;
+          this.tempoCelularAnswer = '';
           break;
         case 'diasSemana':
-          this.diasSemanaAnswer = null;
+          this.diasSemanaAnswer = '';
           break;
         case 'pausasLivres':
-          this.pausasLivresAnswer = null;
+          this.pausasLivresAnswer = '';
           break;
       }
     }
@@ -175,6 +177,25 @@ export class QuestionarioPage implements OnInit {
           diasSemana: this.diasSemanaAnswer,
           pausasLivres: this.pausasLivresAnswer
         });
+
+        const fd = new FormData();
+        fd.append('controller', 'questionario');
+        fd.append('usuario_id', this.userId);
+        fd.append('daytime', this.horariosAnswer);
+        fd.append('freetime', this.tempoLivreAnswer);
+        fd.append('screentime', this.tempoCelularAnswer);
+        fd.append('weekdays', this.diasSemanaAnswer);
+        fd.append('freetimeCount', this.pausasLivresAnswer);
+
+        this.rs.post(fd).subscribe(
+          (response: any) => {
+            console.log('Cadastro de Questionario bem-sucedido!', response);
+            this.router.navigate(['/tabs/feed']);
+          },
+          (error: any) => {
+             console.error('Erro ao cadastrar:', error);
+        }
+    );
         // Aqui você pode enviar os dados para um serviço ou API
       } else {
         this.errorMessage = 'Por favor, responda a última pergunta para finalizar.';

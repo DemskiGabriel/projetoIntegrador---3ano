@@ -3,9 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonButton, IonImg, IonCardSubtitle } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
-import { AutenticacaoService } from '../../service/autenticacao.service';
+import { AutenticacaoService } from '../../../service/autenticacao.service';
 import { AlertController } from '@ionic/angular';
-import { RequisicaoService } from '../../service/requisicao.service';
+import { RequisicaoService } from '../../../service/requisicao.service';
 
 @Component({
   selector: 'app-esqueci-minha-senha',

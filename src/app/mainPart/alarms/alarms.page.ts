@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonItem, IonIcon, IonImg, IonAvatar, IonNote, IonLabel, IonProgressBar, IonToggle } from '@ionic/angular/standalone';
-import { RealtimeDatabaseService } from '../firebase/realtime-database';
+import { IonContent, IonItem, IonAvatar, IonNote, IonLabel, IonToggle } from '@ionic/angular/standalone';
+import { RealtimeDatabaseService } from '../../firebase/realtime-database';
 
 
 
@@ -11,7 +11,7 @@ import { RealtimeDatabaseService } from '../firebase/realtime-database';
   templateUrl: './alarms.page.html',
   styleUrls: ['./alarms.page.scss'],
   standalone: true,
-  imports: [IonToggle, IonProgressBar, IonLabel, IonNote, IonAvatar,  IonItem, IonCard, IonContent, CommonModule, FormsModule]
+  imports: [IonToggle, IonLabel, IonNote, IonAvatar,  IonItem, IonContent, CommonModule, FormsModule]
 })
 export class AlarmsPage implements OnInit {
   public dados:Array<any> = [];

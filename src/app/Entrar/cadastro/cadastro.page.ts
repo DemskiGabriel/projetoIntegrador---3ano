@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RequisicaoService } from '../service/requisicao.service';
+import { RequisicaoService } from '../../service/requisicao.service';
 import { Router } from '@angular/router';
 
 import {
@@ -76,7 +76,7 @@ export class CadastroPage implements OnInit {
     event.target.value = valor;
   }
 
-  
+
   cadastrar() {
     this.erroCamposVazios = '';
     this.erroSenhasNaoCoincidem = '';
@@ -91,6 +91,13 @@ export class CadastroPage implements OnInit {
       this.erroSenhasNaoCoincidem = 'As senhas não coincidem.';
       return;
     }
+
+    const partes = this.dataNascimento.split('/');
+    let dataFormatada = '';
+    if (partes.length === 3) {
+      const [dia, mes, ano] = partes;
+      dataFormatada = `${ano}-${mes}-${dia}`;
+    }
     
 
     const fd = new FormData();
@@ -98,12 +105,13 @@ export class CadastroPage implements OnInit {
     fd.append('username', this.nome);
     fd.append('email', this.email);
     fd.append('password', this.senha);
-    fd.append('birthday', this.dataNascimento);
+    fd.append('birthday', dataFormatada);
     fd.append('gender', this.genero);
 
     this.rs.post(fd).subscribe(
       (response: any) => {
         console.log('Cadastro bem-sucedido!', response);
+        localStorage.setItem('userId', response);
         this.router.navigate(['/questionario']);
       },
       (error: any) => {
