@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { AutenticacaoService } from '../service/autenticacao.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -18,8 +18,10 @@ export class LoginPage implements OnInit {
   public login:string = '';
   public senha:string = '';
 
-  constructor(private alertController: AlertController,
-    public autenticacao_service:AutenticacaoService
+  constructor(
+    private alertController: AlertController,
+    public autenticacao_service:AutenticacaoService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -33,13 +35,14 @@ export class LoginPage implements OnInit {
     .logar(login,senha)
     .subscribe(
       (_res:any) => {
-
-        if (_res.status == 'sucess'){
-
+        if (_res.status == 'success'){
           sessionStorage.setItem('token',_res.token)
+          console.log("Login feito com sucesso");
 
+          // homepage
+          this.router.navigate(['/tabs/feed']);
         }else{
-
+          
           }
 
       }

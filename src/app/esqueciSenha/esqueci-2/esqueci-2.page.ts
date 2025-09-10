@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonInputOtp, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg, IonCardSubtitle } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardHeader, IonInputOtp, IonCardTitle, IonCardContent, IonButton, IonImg, IonCardSubtitle } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
-import { AutenticacaoService } from '../service/autenticacao.service';
+import { AutenticacaoService } from '../../service/autenticacao.service';
 import { AlertController } from '@ionic/angular';
-import { RequisicaoService } from '../service/requisicao.service';
+import { RequisicaoService } from '../../service/requisicao.service';
 
 @Component({
   selector: 'app-esqueci-2',
   templateUrl: './esqueci-2.page.html',
   styleUrls: ['./esqueci-2.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, RouterLink, IonTitle, IonToolbar, IonImg, IonInputOtp, IonCard, IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, IonCardSubtitle, CommonModule, FormsModule]
+  imports: [IonContent, RouterLink, IonImg, IonInputOtp, IonCard, IonCardHeader, IonCardTitle,  IonCardContent, IonButton, IonCardSubtitle, CommonModule, FormsModule]
 })
 export class Esqueci2Page implements OnInit {
   public codigo:string = '';

@@ -76,6 +76,7 @@ export class CadastroPage implements OnInit {
     event.target.value = valor;
   }
 
+  
   cadastrar() {
     this.erroCamposVazios = '';
     this.erroSenhasNaoCoincidem = '';
@@ -91,6 +92,7 @@ export class CadastroPage implements OnInit {
       return;
     }
     
+
     const fd = new FormData();
     fd.append('controller', 'cadastro');
     fd.append('username', this.nome);

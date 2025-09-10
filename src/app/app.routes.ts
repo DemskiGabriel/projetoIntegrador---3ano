@@ -3,48 +3,44 @@ import { authGuard } from './auth/auth.guard';
 import { TabsPage } from './tabs/tabs.page';
 
 export const routes: Routes = [
-  
+  // Cadastro
   {
     path: 'cadastro',
     loadComponent: () => import('./cadastro/cadastro.page').then( m => m.CadastroPage)
   },
+  {
+    path: 'questionario',
+    loadComponent: () => import('./questionario/questionario.page').then( m => m.QuestionarioPage)
+  },
+
+  
+  //Login 
   {
     path: 'login',
     loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
 
   },
   {
-    path: 'questionario',
-    loadComponent: () => import('./questionario/questionario.page').then( m => m.QuestionarioPage)
+    path: '',
+    redirectTo: 'login',
+    pathMatch: 'full',
   },
-  {
-    path: 'semmissao',
-    loadComponent: () => import('./semmissao/semmissao.page').then( m => m.SemmissaoPage)
-  },
-
-  },
+  // Esqueci Minha Senha
   {
     path: 'esqueci-minha-senha',
-    loadComponent: () => import('./esqueci-minha-senha/esqueci-minha-senha.page').then( m => m.EsqueciMinhaSenhaPage)
+    loadComponent: () => import('./esqueciSenha/esqueci-minha-senha/esqueci-minha-senha.page').then( m => m.EsqueciMinhaSenhaPage)
   },
-
   {
     path: 'esqueci-2',
-    loadComponent: () => import('./esqueci-2/esqueci-2.page').then( m => m.Esqueci2Page)
+    loadComponent: () => import('./esqueciSenha/esqueci-2/esqueci-2.page').then( m => m.Esqueci2Page)
   },
   {
     path: 'esqueci-3',
-    loadComponent: () => import('./esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
+    loadComponent: () => import('./esqueciSenha/esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
   },
 
-  
-  {
-    path: '',
-    redirectTo: 'tabs/',
-    pathMatch: 'full',
-    // canActivate: [authGuard]
-  },
 
+  // Pagina do Projeto
   {
     path: 'tabs',
     component: TabsPage,

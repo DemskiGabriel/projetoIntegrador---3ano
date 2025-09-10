@@ -8,19 +8,19 @@
       <ion-list>
         <h1>Cadastro</h1>
         <ion-item>
-          <ion-input type="text" placeholder="Digite seu nome" [(ngModel)]="nome" name="nome"></ion-input>
+          <ion-input type="text" label="Digite seu nome" label-placement="floating" [(ngModel)]="nome" name="nome"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="email" placeholder="Digite seu e-mail" [(ngModel)]="email" name="email"></ion-input>
+          <ion-input type="email" label="Digite seu e-mail" label-placement="floating" [(ngModel)]="email" name="email"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="password" placeholder="Digite sua senha" [(ngModel)]="senha" name="senha"></ion-input>
+          <ion-input type="password" label="Digite sua senha" label-placement="floating" [(ngModel)]="senha" name="senha"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="password" placeholder="Confirme sua senha" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
+          <ion-input type="password" label="Confirme sua senha" label-placement="floating" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
         </ion-item>
 
         <ion-text color="danger" *ngIf="erroSenhasNaoCoincidem">
@@ -39,7 +39,7 @@
           <ion-select [(ngModel)]="genero" name="genero">
             <ion-select-option value="masculino">Masculino</ion-select-option>
             <ion-select-option value="feminino">Feminino</ion-select-option>
-            <ion-select-option value="outro">Outro</ion-select-option>
+            <ion-select-option value="outro">Não Informar</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>

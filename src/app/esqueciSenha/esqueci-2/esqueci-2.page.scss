@@ -6,16 +6,12 @@ ion-card {
 
 a {
     color: #8e68e6;
-    margin-left: 135px;
+    margin-left: 10px;
 }
 
 ion-button {
     --background: #8e95c5;
     --background-hover: #9aa0cf;
-}
-
-ion-content {
-    --background: linear-gradient(to bottom,#ece8ec, #b5b6e3);;
 }
 
 ion-card-subtitle{
@@ -25,9 +21,4 @@ ion-card-subtitle{
 ion-card-title{ 
     margin-left: 60px;
     color: black;
-}
-
-cancelar {
-    color: #8e68e6;
-    margin-left: 1000px;
 }
