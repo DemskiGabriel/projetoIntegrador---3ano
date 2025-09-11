@@ -5,5 +5,37 @@
   </ion-text>  
   <ion-text color="secondary" align="center">
     <p><b>Crie mais, faça mais</b></p>
-  </ion-text>
+  </ion-text><br>
+  
+  <ion-card>
+    <ion-card-content>
+      <div *ngIf="!showDetailed">
+        <h3>Período da Tarefa</h3>
+        <p>Período selecionado: {{ rangeText }}</p>
+        
+        <ion-range
+          aria-label="Dual Knobs Range"
+          [dualKnobs]="true"
+          min="0"
+          max="1439"
+          [pin]="true"
+          [pin-formatter]="formatPinTime"
+          (ionInput)="onRangeChange($event)">
+        </ion-range>
+      </div>
+  
+      <div *ngIf="showDetailed" class="seletorTempo">
+        <ion-datetime presentation="time"></ion-datetime>
+        <p>A</p>
+        <ion-datetime presentation="time"></ion-datetime>
+      </div>
+  
+      <ion-button expand="block" fill="clear" (click)="toggleView()">
+        {{ showDetailed ? 'Voltar' : 'Configurar Período' }}
+      </ion-button>
+    </ion-card-content>
+
+    <ion-button fill="clear" color="danger" (click)="excluir()">Excluir</ion-button>
+    <ion-button fill="clear" (click)="salvar()">Salvar</ion-button>
+  </ion-card>
 </ion-content>
