@@ -1,0 +1,53 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Perfil</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button>
+        <ion-icon name="close-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding background">
+
+  <div class="profile-card">
+    <ion-avatar class="profile-avatar">
+      <img src="assets/icon/fotodeperfil.jpg" alt="avatar">
+    </ion-avatar>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">Usuário</ion-label>
+      <ion-input type="text" [(ngModel)]="nome"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" [(ngModel)]="email"></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">Data de Nascimento</ion-label>
+      <ion-datetime
+        presentation="date"
+        [(ngModel)]="dataNascimento">
+      </ion-datetime>
+    </ion-item>
+
+    <ion-button expand="block" class="alterar-senha">
+      Alterar senha
+    </ion-button>
+
+    <ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button>
+        <ion-icon name="pencil-outline"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+</ion-content>
