@@ -1,55 +1,48 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonText, IonCard, IonButton, IonCardContent, IonToolbar, IonButtons, IonGrid, IonRow, IonCol, IonDatetime, IonRange } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonAlert, IonPopover } from '@ionic/angular/standalone';
+import { PopoverController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-new-alarm',
   templateUrl: './new-alarm.page.html',
   styleUrls: ['./new-alarm.page.scss'],
   standalone: true,
-  imports: [IonRange, IonDatetime, IonCardContent, IonButton, IonCard, IonText, IonContent, CommonModule, FormsModule]
+  imports: [IonPopover, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent ]
 })
-export class NewAlarmPage implements OnInit {
-  showDetailed: boolean = false;
-  rangeText: string = '00:00 - 00:00';
+export class NewAlarmPage {
+  // ---------- Accordion Range & Datetime ----------
+  startTime = '06:30';
+  endTime = '18:30';
 
-  constructor() { }
-
-  ngOnInit() {
+  onStartTimeChange(ev: any) {
+    this.startTime = ev.detail.value.substring(11, 16);
+  }
+  onEndTimeChange(ev: any) {
+    this.endTime = ev.detail.value.substring(11, 16);
   }
 
-  toggleView() {
-    this.showDetailed = !this.showDetailed;
+
+  dias = ['D', 'S', 'T', 'Q', 'Q', 'S', 'S'];
+  selecionados: number[] = []; 
+
+  toggleDia(index: number) {
+    const i = this.selecionados.indexOf(index);
+    if (i > -1) {
+      this.selecionados.splice(i, 1);
+    } else {
+      this.selecionados.push(index);
+    }
   }
 
-  onRangeChange(event: any) {
-    const lowerValue = event.detail.value.lower;
-    const upperValue = event.detail.value.upper;
-    
-    // A função formatTime já existe no seu código, vamos reutilizá-la
-    const startTime = this.formatTime(lowerValue);
-    const endTime = this.formatTime(upperValue);
-
-    this.rangeText = `${startTime} - ${endTime}`;
+  // ---------- Salvar / Excluir ----------
+  salvar() {
+    // lógica de salvar aqui
   }
 
-  // Nova função para formatar o valor do pino
-  formatPinTime = (value: number) => {
-    const hours = Math.floor(value / 60).toString().padStart(2, '0');
-    const minutes = (value % 60).toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
+  excluir() {
+    // lógica de excluir aqui
   }
-
-  // Função auxiliar que você já tem no seu código
-  formatTime(value: number) {
-    const hours = Math.floor(value / 60).toString().padStart(2, '0');
-    const minutes = (value % 60).toString().padStart(2, '0');
-    return `${hours}:${minutes}`;
-  }
-
-  salvar(){}
-
-  excluir(){}
-
 }

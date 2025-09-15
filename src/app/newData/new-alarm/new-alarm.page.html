@@ -1,41 +1,61 @@
 <ion-content [fullscreen]="true" class="ion-padding">
+  <br><br>
+  <!-- Horarios mais especificos -->
+  <div class="seletorTempo">
+    <ion-datetime 
+      presentation="time" 
+      [value]="'2025-01-01T' + startTime" 
+      (ionChange)="onStartTimeChange($event)">
+    </ion-datetime>
+    <p>A</p>
+    <ion-datetime 
+      presentation="time" 
+      [value]="'2025-01-01T' + endTime" 
+      (ionChange)="onEndTimeChange($event)">
+    </ion-datetime>
+  </div>
 
-  <ion-text color="primary" align="center">
-    <h1><b>Gerando Saúde</b></h1>
-  </ion-text>  
-  <ion-text color="secondary" align="center">
-    <p><b>Crie mais, faça mais</b></p>
-  </ion-text><br>
-  
   <ion-card>
-    <ion-card-content>
-      <div *ngIf="!showDetailed">
-        <h3>Período da Tarefa</h3>
-        <p>Período selecionado: {{ rangeText }}</p>
-        
-        <ion-range
-          aria-label="Dual Knobs Range"
-          [dualKnobs]="true"
-          min="0"
-          max="1439"
-          [pin]="true"
-          [pin-formatter]="formatPinTime"
-          (ionInput)="onRangeChange($event)">
-        </ion-range>
-      </div>
-  
-      <div *ngIf="showDetailed" class="seletorTempo">
-        <ion-datetime presentation="time"></ion-datetime>
-        <p>A</p>
-        <ion-datetime presentation="time"></ion-datetime>
-      </div>
-  
-      <ion-button expand="block" fill="clear" (click)="toggleView()">
-        {{ showDetailed ? 'Voltar' : 'Configurar Período' }}
+    <!-- Header -->
+    <br>
+    <div class="title">
+      <h5>Data</h5>
+      <ion-button shape="round" id="calendar">
+        <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
       </ion-button>
+    </div>
+    
+    <ion-card-content> 
+      <ion-buttons class="weekdays">
+        <ion-button 
+          shape="round"
+          *ngFor="let dia of dias; let i = index"
+          (click)="toggleDia(i)"
+          [class.selected]="selecionados.includes(i)">
+          {{ dia }}
+        </ion-button>
+      </ion-buttons>
+    
+      <!-- Nome Do Alarme-->
+      <ion-item>
+        <ion-input placeholder="Nome do alarme"></ion-input>
+      </ion-item>
+      <!-- Vezes Por Dia -->
+      <ion-item>
+        <ion-input placeholder="Vezes por dia"></ion-input>
+      </ion-item>
     </ion-card-content>
 
-    <ion-button fill="clear" color="danger" (click)="excluir()">Excluir</ion-button>
-    <ion-button fill="clear" (click)="salvar()">Salvar</ion-button>
-  </ion-card>
+    <ion-button fill="clear" color="danger" (click)="excluir()" class="save">Excluir</ion-button>
+    <ion-button fill="clear" (click)="salvar()" class="save">Salvar</ion-button>
+  </ion-card>  
 </ion-content>
+
+
+<ion-popover trigger="calendar" triggerAction="click">
+  <ng-template>
+    <ion-content class="ion-padding">
+      <ion-datetime id="datetime"></ion-datetime>
+    </ion-content>
+  </ng-template>
+</ion-popover>

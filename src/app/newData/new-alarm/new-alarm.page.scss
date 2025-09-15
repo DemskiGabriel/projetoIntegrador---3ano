@@ -1,12 +1,55 @@
-ion-button{
-    width: 48.8%;
-}
-
 .seletorTempo{
     display: flex;
     justify-content: space-around;
 }
-
 .seletorTempo p{
-    margin-top: 27%;
+    margin-top: 10.7vh;
 }
+ion-datetime {
+    --background: rgba(0);
+    --background-rgb: 237, 233, 233;
+    --wheel-highlight-background: rgb(218, 216, 255);
+  }
+ion-datetime::part(wheel-item active) {
+    color: rgb(142, 104, 230);
+  }
+
+.title{
+    display: flex;
+    justify-content: space-between;
+
+    margin-left: 5vw;
+    margin-right: 3vw;
+}
+.title ion-button{
+    --background: rgba(0);
+ 
+}
+.title ion-button ion-icon{
+    color: rgb(115, 115, 115);
+}
+
+.weekdays{
+    justify-content: space-around;
+}
+.weekdays ion-button {
+    width: 40px;
+    height: 40px;
+
+    border: 2px solid transparent; /* base */
+    border-radius: 50%;
+}
+.weekdays ion-button.selected{
+    color: rgba(142, 104, 230);
+    border-color: rgb(142, 104, 230);
+}
+
+// Botão para salvar e deletar
+.save{
+    width: 48.5%;
+}
+
+ion-card{
+    border-radius: 20px;
+}
+
