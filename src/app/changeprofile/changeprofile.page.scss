@@ -1,14 +1,16 @@
 .background {
-  --background: linear-gradient(to bottom, #d8d8f0, #f5f5f5);
+  --background: linear-gradient(to bottom, #a7abc8, #ede9e9);
 }
 
 .profile-card {
   background: #c4c6e7;
-  border-radius: 16px;
+  border-radius: 26px;
   padding: 20px;
-  margin: 20px;
+  margin-top: 200px;
   text-align: center;
   position: relative;
+  justify-content: center;
+  
 }
 
 .profile-avatar {
@@ -21,24 +23,30 @@
   --background: transparent;
   --highlight-color-focused: #5c5c9e;
   margin-top: 10px;
+  margin-bottom: 10px;
+  position: center;
   border-radius: 10px;
-  --border-radius: 10px;
 }
 
 .alterar-senha {
   margin-top: 20px;
   border-radius: 20px;
-  background-color: #5c5c9e;
+  background-color: #8181bb;
   color: #fff;
-}
-
-.footer {
-  --background: #b3b2b8;
-  display: flex;
-  justify-content: space-around;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  align-self: left;
 }
 
 ion-icon {
   font-size: 24px;
-  color: #2e2e4d;
+  color: #bebedd;
 }
+
+ion-datetime{
+  color: #a7a7db;
+}
+
+ion-fab{
+  color: #9393b1;
+}
+

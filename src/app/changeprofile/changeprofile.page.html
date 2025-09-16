@@ -1,18 +1,4 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>Perfil</ion-title>
-  </ion-toolbar>
-</ion-header>
 
-<ion-header>
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-button>
-        <ion-icon name="close-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
 
 <ion-content class="ion-padding background">
 
@@ -23,29 +9,32 @@
 
     <ion-item class="input-item">
       <ion-label position="floating">Usuário</ion-label>
-      <ion-input type="text" [(ngModel)]="nome"></ion-input>
+      <ion-input type="text" ></ion-input>
     </ion-item>
 
     <ion-item class="input-item">
       <ion-label position="floating">E-mail</ion-label>
-      <ion-input type="email" [(ngModel)]="email"></ion-input>
+      <ion-input type="email" ></ion-input>
     </ion-item>
 
     <ion-item class="input-item">
       <ion-label position="floating">Data de Nascimento</ion-label>
-      <ion-datetime
-        presentation="date"
-        [(ngModel)]="dataNascimento">
-      </ion-datetime>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="datetime"></ion-datetime>
+  </ng-template>
+</ion-modal>
     </ion-item>
 
-    <ion-button expand="block" class="alterar-senha">
+    <ion-button class="alterar-senha" color="black">
       Alterar senha
     </ion-button>
 
-    <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button>
-        <ion-icon name="pencil-outline"></ion-icon>
+<ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button color="dark">
+        <ion-icon name="pencil-outline" src="assets/icon/lápis.png"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>
