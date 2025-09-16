@@ -1,29 +1,52 @@
 
-<ion-card> <ion-icon name="contact"></ion-icon></ion-card>
 
-<ion-img src=".src/assets/imagens/estrela.jpg"></ion-img>
+<ion-tabs class="ion-padding">
 
-<ion-list>
+  <ion-card> 
+    
+    <ion-img src="assets/imagens/pessoa.png" class="pessoa"></ion-img>
+  
+    <h3>nome</h3>
+  </ion-card>
 
-<h2>Rank</h2>
+  <ion-img src="assets/imagens/estrela.jpg" class="estrela"></ion-img>
 
-  <ion-item style="--background: #a7abc8;">
-    <ion-label>Nome</ion-label>
-  </ion-item>
+  <ion-list>
 
-  <ion-item style="--background: #a7abc8;">
-    <ion-label>Nome</ion-label>
-  </ion-item>
+    <h2>Rank</h2>
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+    </ion-item>
+  <div>‎ </div>
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+    </ion-item>
+  <div>‎ </div>
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+    </ion-item>
+  <div>‎ </div>
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+    </ion-item>
+  <div>‎ </div>
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+    </ion-item>
+  </ion-list>
 
-  <ion-item style="--background: #a7abc8;">
-    <ion-label>Nome</ion-label>
-  </ion-item>
-
-  <ion-item style="--background: #a7abc8;">
-    <ion-label>Nome</ion-label>
-  </ion-item>
-
-  <ion-item style="--background: #a7abc8;">
-    <ion-label>Nome</ion-label>
-  </ion-item>
-</ion-list>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="feed">
+      <ion-icon name="home-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="alarms">
+      <ion-icon name="alarm-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="quests">
+      <ion-icon name="newspaper-outline"></ion-icon>
+    </ion-tab-button>
+    <ion-tab-button tab="user">
+      <ion-icon name="person-circle-outline"></ion-icon>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

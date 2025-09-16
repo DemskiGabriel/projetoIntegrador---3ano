@@ -1,15 +1,16 @@
 ion-list {
     background-color: #d4d7ef;
     color: black;
-    margin-top: 200px;
+    width: 330px;
+    margin-top: 250px;
+    position: fixed ;
+    border-radius: 20px;
 }
 
-a {
-    color: #8e68e6;
-    margin-left: 135px;
-    display: inline-block; /* precisa ser inline-block ou block */
-    transform: translateY(-8px); /* sobe 20px */
-  }
+ion-item {
+    border-radius: 20px;
+}
+
 
 ion-button {
     --background: #8e95c5;
@@ -20,19 +21,49 @@ ion-content {
     --background: linear-gradient(to bottom,#ece8ec, #b5b6e3);;
 }
 
-ion-card-subtitle{
-    color: rgb(82, 81, 81);
-}
-
-ion-card-title{ 
-    margin-left: 60px;
-    color: black;
-}
 
 h2{
     margin-left: 145px;
 }
 
-ion-icon{
-    height: 400px;
+ion-card {
+   
+    margin-left: 70px;
+    margin-bottom:300px;
+    height: 150px;
+    width: 200px;
+    position:fixed;
 }
+
+
+.estrela {
+    height: 80px;
+    margin-left: 100px;
+    margin-bottom: 45px;
+    margin-top: 160px;
+    position: fixed;
+}
+
+.pessoa {
+
+    height: 40px;
+
+}
+
+ion-tab-bar {
+    --background: rgba(0, 0, 0, 0.3);
+    border-radius: 15px;
+  }
+  
+  ion-tabs{
+    background: #ede9e9;
+    position: fixed;
+  }
+  
+  ion-tab-button ion-icon{
+    color: #a7abc8;
+  }
+  
+  ion-tab-button.tab-selected ion-icon{
+    color: #0077ff;
+  }
