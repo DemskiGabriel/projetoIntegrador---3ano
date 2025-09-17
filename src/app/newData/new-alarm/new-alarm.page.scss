@@ -1,6 +1,9 @@
 .seletorTempo{
     display: flex;
     justify-content: space-around;
+
+    margin-top: 10%;
+    margin-bottom: 10%;
 }
 .seletorTempo p{
     margin-top: 10.7vh;
@@ -10,7 +13,10 @@ ion-datetime {
     --background-rgb: 237, 233, 233;
     --wheel-highlight-background: rgb(218, 216, 255);
   }
-ion-datetime::part(wheel-item active) {
+.seletorTempo ion-datetime{
+    width: 40%;
+}
+.seletorTempo ion-datetime::part(wheel-item active) {
     color: rgb(142, 104, 230);
   }
 
@@ -46,10 +52,18 @@ ion-datetime::part(wheel-item active) {
 
 // Botão para salvar e deletar
 .save{
-    width: 48.5%;
+    width: 47.5%;
 }
 
 ion-card{
     border-radius: 20px;
 }
 
+
+ion-modal{
+    --border-radius: 20px;
+}
+
+.toggle{
+    border: 0px;
+}

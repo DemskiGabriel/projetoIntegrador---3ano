@@ -18,7 +18,6 @@ export const routes: Routes = [
   {
     path: 'login',
     loadComponent: () => import('./Entrar/login/login.page').then( m => m.LoginPage)
-
   },
   {
     path: '',
@@ -70,5 +69,9 @@ export const routes: Routes = [
     path: 'new-alarm',
     loadComponent: () => import('./newData/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   },
+  {
+    path: 'new-alarm/:id',
+    loadComponent: () => import('./newData/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+  }
 
 ];
