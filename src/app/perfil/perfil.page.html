@@ -7,29 +7,55 @@
     <ion-img src="assets/imagens/pessoa.png" class="pessoa"></ion-img>
   
     <h3>nome</h3>
+
+    <ion-fab>
+      <ion-fab-button>
+        <ion-icon name="add"></ion-icon>
+        <ion-img src="assets/imagens/caneta.png"></ion-img>
+      </ion-fab-button>
+    </ion-fab>
+    
   </ion-card>
 
-  <ion-img src="assets/imagens/estrela.jpg" class="estrela"></ion-img>
+  <div class="estrela-container">
+    <img class="estrela" src="assets/imagens/estrela.jpg" alt="Estrela de Rank">
+    <div class="texto-estrela">10000</div>
+  </div>
 
   <ion-list>
 
+    <div class="rank-container">
     <h2>Rank</h2>
+    <ion-img src="assets/imagens/grupo.png" class="grupo"></ion-img>
+    </div>
+
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+      <ion-img src="assets/imagens/troféuOuro.png" class="ouro"></ion-img>
+    </ion-item>
+
+  <div>‎ </div>
+
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+      <ion-img src="assets/imagens/troféuPrata.png" class="prata"></ion-img>
+    </ion-item>
+
+  <div>‎ </div>
+
+    <ion-item style="--background: #a7abc8;">
+      <ion-label>Nome</ion-label>
+      <ion-img src="assets/imagens/troféuBronze.png" class="bronze"></ion-img>
+    </ion-item>
+
+  <div>‎ </div>
+
     <ion-item style="--background: #a7abc8;">
       <ion-label>Nome</ion-label>
     </ion-item>
+
   <div>‎ </div>
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-  <div>‎ </div>
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-  <div>‎ </div>
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-  <div>‎ </div>
+
     <ion-item style="--background: #a7abc8;">
       <ion-label>Nome</ion-label>
     </ion-item>
@@ -39,14 +65,18 @@
     <ion-tab-button tab="feed">
       <ion-icon name="home-outline"></ion-icon>
     </ion-tab-button>
+
     <ion-tab-button tab="alarms">
       <ion-icon name="alarm-outline"></ion-icon>
     </ion-tab-button>
+
     <ion-tab-button tab="quests">
       <ion-icon name="newspaper-outline"></ion-icon>
     </ion-tab-button>
+
     <ion-tab-button tab="user">
       <ion-icon name="person-circle-outline"></ion-icon>
     </ion-tab-button>
+
   </ion-tab-bar>
 </ion-tabs>
