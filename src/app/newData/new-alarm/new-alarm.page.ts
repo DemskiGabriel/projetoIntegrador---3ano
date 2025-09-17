@@ -1,10 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonModal, IonToggle } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonModal, IonToggle, IonFab, IonFabButton } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { RealtimeDatabaseService } from 'src/app/firebase/realtime-database';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -12,9 +12,11 @@ import { Router } from '@angular/router';
   templateUrl: './new-alarm.page.html',
   styleUrls: ['./new-alarm.page.scss'],
   standalone: true,
-  imports: [ IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent ]
+  imports: [IonFabButton, IonFab,  IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent, RouterLink ]
 })
 export class NewAlarmPage {
+  public idVerificacao:string | null = null;
+
   public nomeAlarme:string = ''; 
   public vezesPorDia:number | null = null;
   public vibracao:boolean = true;
@@ -26,7 +28,13 @@ export class NewAlarmPage {
     public rt: RealtimeDatabaseService,
     private alertController: AlertController,
     private router: Router,
+    private route: ActivatedRoute
   ){}
+
+  ngOnInit() {
+    this.load();
+    this.idVerificacao = this.route.snapshot.paramMap.get('id'); 
+  }
 
   // ---------- Datetime ----------
   // Horario padrão que os seletores de tempo virão
@@ -53,13 +61,51 @@ export class NewAlarmPage {
   minDate: string = new Date().toISOString().split('T')[0];
   showCalendar = false;
 
-  // ---------- Salvar / Excluir ----------
-  public id:number = 0;
+  // ---------- Divisão De horarios ----------
+// calcula os horarios que deve ter os alarmes e então retorna o valor em uma array "horariosAoDia[]"
+public horariosAoDia: { hora: string, ativo: boolean }[] = [];
 
-  // Carrega caso o objeto já exista.
-  ngOnInit() {
-    this.load();
+gerarVezesAFazer() {
+  this.horariosAoDia = [];
+
+  const divisoes = this.vezesPorDia || 0;
+
+  const inicio = new Date(`2025-01-01T${this.dataSInicial}:00`);
+  const fim = new Date(`2025-01-01T${this.dataSFinal}:00`);
+
+  const diferencaTotal = fim.getTime() - inicio.getTime();
+
+  // calcula intervalo bruto
+  const intervalo = diferencaTotal / divisoes;
+
+  // mínimo de 10 minutos em ms
+  const intervaloMinimo = 10 * 60 * 1000;
+
+  if (intervalo < intervaloMinimo) {
+    console.warn(" Número de divisões é grande demais! Intervalo ficaria menor que 10 minutos.");
+    return false; // não gera nada
   }
+
+  for (let i = 0; i <= divisoes; i++) {
+    const novoHorario = new Date(inicio.getTime() + intervalo * i);
+
+    const horas = novoHorario.getHours().toString().padStart(2, '0');
+    const minutos = novoHorario.getMinutes().toString().padStart(2, '0');
+
+    this.horariosAoDia.push({
+      hora: `${horas}:${minutos}`,
+      ativo: true
+    });
+  }
+
+  console.log(this.horariosAoDia);
+  return true;
+}
+
+
+  // ---------- Salvar / Excluir ----------
+  // Carrega caso o objeto já exista.
+  public id:number = 0;
   load(){
     // Mudar o Caminho do Banco
     this.rt.query(`/new-alarm/${this.id}`, (snapshot:any) => {
@@ -88,27 +134,33 @@ export class NewAlarmPage {
 
     // Verifica se Data inicial é maior do que a final.
     if(this.dataSInicial >= this.dataSFinal){
+      this.presentAlertFalha();
       return false
     }
     // verifica se algum dos campos não foi preenchido
     if(this.nomeAlarme == '' || this.vezesPorDia == null){
+      this.presentAlertFalha();
       return false;
     }
     return true
   }
+
   salvar() {
-    if(this.verificacoes()){
+    if(this.verificacoes() && this.gerarVezesAFazer()){
       this.rt.add(`/criar-tarefa`,{
         nomeAlarme: this.nomeAlarme,
         vezesPorDia: this.vezesPorDia,
         vibracao: this.vibracao,
         somAlarme: this.somAlarme,
-        dias: this.dataAEnviar
+        dias: this.dataAEnviar,
+        alarmes: this.horariosAoDia,
+        horarioInicio: this.dataSInicial,
+        horarioFinal: this.dataSFinal
       }, this.id)
       .subscribe({
         next: (res:any) => {
           console.log(res);
-          this.presentAlert();
+          this.presentAlertSucesso();
         },
         error: (err) => {
           console.log('Falhou ', err);
@@ -117,7 +169,7 @@ export class NewAlarmPage {
     }
   }
   // Alerta quando o projeto é salvo
-  async presentAlert() {
+  async presentAlertSucesso() {
     const alert = await this.alertController.create({
       header: 'SALVO COM SUCESSO',
       message: 'Precione "OK" para continuar.',
@@ -131,9 +183,18 @@ export class NewAlarmPage {
     });
     await alert.present();
   }
+  async presentAlertFalha() {
+    const alert = await this.alertController.create({
+      header: 'FALHA AO SALVAR',
+      message: 'Favor preencha os campos corretamente os campos, para poder salvar. Precione "OK" para voltar.',
+      buttons: [{
+          text: 'OK',
+          role: 'confirm',
+        }],
+    });
+    await alert.present();
+  }
 
-  
-  
 
   async excluir() {
     const alert = await this.alertController.create({

@@ -2,8 +2,7 @@
     display: flex;
     justify-content: space-around;
 
-    margin-top: 10%;
-    margin-bottom: 10%;
+    margin-top: 20%;
 }
 .seletorTempo p{
     margin-top: 10.7vh;
@@ -50,11 +49,6 @@ ion-datetime {
     border-color: rgb(142, 104, 230);
 }
 
-// Botão para salvar e deletar
-.save{
-    width: 47.5%;
-}
-
 ion-card{
     border-radius: 20px;
 }
@@ -67,3 +61,21 @@ ion-modal{
 .toggle{
     border: 0px;
 }
+
+ion-fab{
+    margin-bottom: 8%;
+}
+
+.saveButtons{
+    display: flex;
+    justify-content: space-around;
+
+    margin-bottom: 3%;
+}
+
+.saveButtons ion-button{
+    width: 100%;
+
+    --border-radius: 3px;
+}
+

@@ -4,14 +4,12 @@
     <ion-datetime 
       presentation="time" 
       [(ngModel)]="dataSInicial"
-      [value]="'2025-01-01T'"
       >
     </ion-datetime>
     <p>A</p>
     <ion-datetime 
       presentation="time" 
       [(ngModel)]="dataSFinal"
-      [value]="'2025-01-01T'" 
       >
     </ion-datetime>
   </div><br>
@@ -55,10 +53,17 @@
         <ion-toggle [checked]="true" [(ngModel)]="somAlarme">Som do alarme</ion-toggle>
       </ion-item>
     </ion-card-content>
-    <ion-button fill="clear" color="danger" (click)="excluir()" class="save">Excluir</ion-button>|
-    <ion-button fill="clear" (click)="salvar()" class="save">Salvar</ion-button>
+    <ion-buttons class="saveButtons">
+      <ion-button fill="clear" *ngIf="idVerificacao;" color="danger" (click)="excluir()">Excluir</ion-button>
+      <ion-button fill="clear" color="primary" class="save" (click)="salvar()">Salvar</ion-button>
+    </ion-buttons>
   </ion-card> 
 
+  <ion-fab horizontal="center" vertical="bottom" slot="fixed">
+    <ion-fab-button routerLink="/tabs/alarms">
+      <ion-icon name="arrow-back-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
 
 <ion-modal

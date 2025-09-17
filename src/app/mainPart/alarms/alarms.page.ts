@@ -21,6 +21,7 @@ import {
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addOutline } from 'ionicons/icons';
+import { RouterLink } from '@angular/router';
 
 interface Alarm {
   title: string;
@@ -52,6 +53,7 @@ interface Alarm {
     IonFab,
     IonFabButton,
     IonIcon,
+    RouterLink
   ]
 })
 export class AlarmsPage implements OnInit {
