@@ -1,4 +1,9 @@
-
+<ion-toolbar  class="custom-toolbar">
+  <ion-buttons slot="start">
+    <ion-back-button default-href="#" text=" "></ion-back-button>
+  </ion-buttons>
+  <ion-title></ion-title>
+</ion-toolbar>
 
 <ion-content class="ion-padding background">
 
@@ -33,8 +38,8 @@
     </ion-button>
 
 <ion-fab vertical="bottom" horizontal="end">
-      <ion-fab-button color="dark">
-        <ion-icon name="pencil-outline" src="assets/icon/lápis.png"></ion-icon>
+      <ion-fab-button class="custom-fab">
+        <ion-icon src="assets/icon/lápis.png" class="fab-img"></ion-icon>
       </ion-fab-button>
     </ion-fab>
   </div>

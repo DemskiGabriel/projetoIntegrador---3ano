@@ -6,7 +6,7 @@
   background: #c4c6e7;
   border-radius: 26px;
   padding: 20px;
-  margin-top: 200px;
+  margin-top: 150px;
   text-align: center;
   position: relative;
   justify-content: center;
@@ -46,7 +46,18 @@ ion-datetime{
   color: #a7a7db;
 }
 
-ion-fab{
-  color: #9393b1;
+.custom-fab {
+  --background: #5c5c9e;
+}
+.fab-img {
+  --background: #ffffff;   /* fundo branco */
 }
 
+ion-back-button {
+  --color: #221c46;
+}
+.custom-toolbar {
+  --background: linear-gradient(to bottom, #d8d8f0, #a7a7db);
+  --border-width: 0; 
+  box-shadow: none;  
+}
