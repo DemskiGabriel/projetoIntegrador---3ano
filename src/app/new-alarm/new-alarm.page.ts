@@ -15,25 +15,32 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
   imports: [IonFabButton, IonFab,  IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent, RouterLink ]
 })
 export class NewAlarmPage {
-  public idVerificacao:string | null = null;
+  public id:number = 0;
 
   public nomeAlarme:string = ''; 
   public vezesPorDia:number | null = null;
+
   public vibracao:boolean = true;
   public somAlarme:boolean = true;
+
   public calendario:string[] = [];
   public dataAEnviar:string[] = [];
+  public tipoData:string = '';
+  
   
   constructor(
     public rt: RealtimeDatabaseService,
     private alertController: AlertController,
     private router: Router,
-    private route: ActivatedRoute
-  ){}
+    private ar: ActivatedRoute
+  ){
+    this.ar.params.subscribe((param:any) => {
+      this.id = param.id;
+    })  
+  }
 
   ngOnInit() {
     this.load();
-    this.idVerificacao = this.route.snapshot.paramMap.get('id'); 
   }
 
   // ---------- Datetime ----------
@@ -62,75 +69,59 @@ export class NewAlarmPage {
   showCalendar = false;
 
   // ---------- Divisão De horarios ----------
-// calcula os horarios que deve ter os alarmes e então retorna o valor em uma array "horariosAoDia[]"
-public horariosAoDia: { hora: string, ativo: boolean }[] = [];
+  // calcula os horarios que deve ter os alarmes e então retorna o valor em uma array "horariosAoDia[]"
+  public horariosAoDia: { hora: string, ativo: boolean }[] = [];
 
-gerarVezesAFazer() {
-  this.horariosAoDia = [];
+  gerarVezesAFazer() {
+    this.horariosAoDia = [];
 
-  const divisoes = this.vezesPorDia || 0;
+    const divisoes = this.vezesPorDia || 0;
 
-  const inicio = new Date(`2025-01-01T${this.dataSInicial}:00`);
-  const fim = new Date(`2025-01-01T${this.dataSFinal}:00`);
+    const inicio = new Date(`2025-01-01T${this.dataSInicial}:00`);
+    const fim = new Date(`2025-01-01T${this.dataSFinal}:00`);
 
-  const diferencaTotal = fim.getTime() - inicio.getTime();
+    const diferencaTotal = fim.getTime() - inicio.getTime();
 
-  // calcula intervalo bruto
-  const intervalo = diferencaTotal / divisoes;
+    // calcula intervalo bruto
+    const intervalo = diferencaTotal / divisoes;
 
-  // mínimo de 10 minutos em ms
-  const intervaloMinimo = 10 * 60 * 1000;
+    // mínimo de 10 minutos em ms
+    const intervaloMinimo = 10 * 60 * 1000;
 
-  if (intervalo < intervaloMinimo) {
-    console.warn(" Número de divisões é grande demais! Intervalo ficaria menor que 10 minutos.");
-    return false; // não gera nada
-  }
-
-  for (let i = 0; i <= divisoes; i++) {
-    const novoHorario = new Date(inicio.getTime() + intervalo * i);
-
-    const horas = novoHorario.getHours().toString().padStart(2, '0');
-    const minutos = novoHorario.getMinutes().toString().padStart(2, '0');
-
-    this.horariosAoDia.push({
-      hora: `${horas}:${minutos}`,
-      ativo: true
-    });
-  }
-
-  console.log(this.horariosAoDia);
-  return true;
-}
-
-
-  // ---------- Salvar / Excluir ----------
-  // Carrega caso o objeto já exista.
-  public id:number = 0;
-  load(){
-    // Mudar o Caminho do Banco
-    this.rt.query(`/new-alarm/${this.id}`, (snapshot:any) => {
-      const dados = Object(snapshot.val())
-      this.nomeAlarme = dados.nomeAlarme;
-      this.vezesPorDia = dados.vezesPorDia;
-      this.vibracao = dados.vibracao;
-      this.somAlarme = dados.somAlarme;
-      // Falta adicionar os que falam o periodo de tempo
-    })
-  }
-
-  verificacoes(){
-    // Caso a data não tenha sido definida define ela para '-1' que significara hoje.
-    if(this.calendario.length == 0 && this.diasSelecionados.length == 0){
-      this.dataAEnviar = ['-1'];
+    if (intervalo < intervaloMinimo) {
+      console.warn(" Número de divisões é grande demais! Intervalo ficaria menor que 10 minutos.");
+      return false; // não gera nada
     }
+
+    for (let i = 0; i < divisoes; i++) {
+      const novoHorario = new Date(inicio.getTime() + intervalo * i);
+
+      const horas = novoHorario.getHours().toString().padStart(2, '0');
+      const minutos = novoHorario.getMinutes().toString().padStart(2, '0');
+
+      this.horariosAoDia.push({
+        hora: `${horas}:${minutos}`,
+        ativo: true
+      });
+    }
+    return true;
+  }
+
+
+  // ---------- Salvar ----------
+  // faz as verificações necessarias para salvar o alarme
+  verificacoes(){
     // Caso calendario não tenha nenhum valor selecionado e dias selicionados tenha, então enviara diasSelecionados
     if(this.calendario.length == 0 && this.diasSelecionados.length > 0){
       this.dataAEnviar = this.diasSelecionados.map(String);
+      this.tipoData = 'dias';
     }
     // Caso calendario tenha algum valor e dias selecionados não, então enviara calendario
     if(this.calendario.length > 0 && this.diasSelecionados.length == 0){
       this.dataAEnviar = this.calendario;
+      this.tipoData = 'calendario';
     }
+
 
     // Verifica se Data inicial é maior do que a final.
     if(this.dataSInicial >= this.dataSFinal){
@@ -138,24 +129,32 @@ gerarVezesAFazer() {
       return false
     }
     // verifica se algum dos campos não foi preenchido
-    if(this.nomeAlarme == '' || this.vezesPorDia == null){
+    else if(this.nomeAlarme == '' || this.vezesPorDia == null){
       this.presentAlertFalha();
       return false;
     }
+    // Verifica se alguma data foi selecionada 
+    else if(this.tipoData == ''){
+      this.presentAlertFalha();
+      return false;
+    }
+
     return true
   }
-
+  // Salva o Alarme no banco de dados
   salvar() {
     if(this.verificacoes() && this.gerarVezesAFazer()){
-      this.rt.add(`/criar-tarefa`,{
+      this.rt.add(`/tarefa`,{
         nomeAlarme: this.nomeAlarme,
         vezesPorDia: this.vezesPorDia,
         vibracao: this.vibracao,
         somAlarme: this.somAlarme,
         dias: this.dataAEnviar,
+        tipoData: this.tipoData,
         alarmes: this.horariosAoDia,
         horarioInicio: this.dataSInicial,
-        horarioFinal: this.dataSFinal
+        horarioFinal: this.dataSFinal,
+        ativo: true
       }, this.id)
       .subscribe({
         next: (res:any) => {
@@ -183,6 +182,7 @@ gerarVezesAFazer() {
     });
     await alert.present();
   }
+  // Alerta quando a falha para salvar
   async presentAlertFalha() {
     const alert = await this.alertController.create({
       header: 'FALHA AO SALVAR',
@@ -195,7 +195,42 @@ gerarVezesAFazer() {
     await alert.present();
   }
 
+  // Configura o botão de Salvar o Calendario 
+  @ViewChild('datetime') datetime:any;
+  salvarCalendario() {
+    this.datetime.confirm();
+    this.showCalendar = false;
 
+    // Zera os valores do dia da semana quando um dia do calendario é clicado
+    this.diasSelecionados = [];
+  }
+  // Configura o botão de para Resetar o calendario
+  cancelCalendario() {
+    this.datetime.reset();
+    this.showCalendar = false;
+  }
+
+
+  // ---------- Load / Excluir ----------
+  // Carrega caso o objeto já exista.
+  load(){
+    this.rt.query(`/tarefa/${this.id}`, (snapshot:any) => {
+      const dados = Object(snapshot.val())      
+      console.log(dados);
+      this.nomeAlarme = dados.nomeAlarme;
+      this.vezesPorDia = dados.vezesPorDia;
+      this.vibracao = dados.vibracao;
+      this.somAlarme = dados.somAlarme;
+      this.dataAEnviar = dados.dias;
+      this.tipoData = dados.tipoData;
+      this.dataSInicial = dados.horarioInicio;
+      this.dataSFinal = dados.horarioFinal
+
+      this.configData(dados)
+    })
+  }
+
+  // Exclui o Alarme caso ele já exista
   async excluir() {
     const alert = await this.alertController.create({
       header: 'TEM CERTEZA QUE DESEJA DELETAR?',
@@ -209,8 +244,8 @@ gerarVezesAFazer() {
           text: 'DELETE',
           role: 'confirm',
           handler: () => {
-            // Mudar o Caminho do Banco
-            this.rt.remove(`/new-alarm/${this.id}`).then();
+            this.rt.remove(`/tarefa/${this.id}`).then();
+            this.router.navigate(['/tabs/alarms']);
           },
         },
       ],
@@ -218,17 +253,14 @@ gerarVezesAFazer() {
     await alert.present();
   }
 
-
-  @ViewChild('datetime') datetime:any;
-  salvarCalendario() {
-    this.datetime.confirm();
-    this.showCalendar = false;
-
-    // Zera os valores do dia da semana quando um dia do calendario é clicado
-    this.diasSelecionados = [];
-  }
-  cancelCalendario() {
-    this.datetime.reset();
-    this.showCalendar = false;
+  configData(dados: any){
+    // Caso forem enviados dias da semana para o banco de dados, convertera para os dias
+    if(dados.tipoData == 'dias'){
+      this.diasSelecionados = this.dataAEnviar.map(Number);
+    }
+    //Caso forem enviadas datas para o banco de dados convertera na datas 
+    else if(dados.tipoData == 'calendario'){
+      this.calendario = this.dataAEnviar;
+    }
   }
 }

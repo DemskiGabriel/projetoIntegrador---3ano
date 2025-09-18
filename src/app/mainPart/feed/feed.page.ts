@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { RouterLink } from '@angular/router';
 import {
   IonContent,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonImg,
   IonChip,
   IonText,
@@ -30,11 +26,7 @@ interface Task {
   imports: [
     CommonModule,
     FormsModule,
-    RouterLink,
     IonContent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonImg,
     IonChip,
     IonText,

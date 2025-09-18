@@ -59,19 +59,18 @@ export const routes: Routes = [
         // canActivate: [authGuard]
       },
       {
-        path: 'user',
-        loadComponent: () => import('./mainPart/user/user.page').then( m => m.UserPage)
+        path: 'perfil',
+        loadComponent: () => import('./mainPart/perfil/perfil.page').then( m => m.PerfilPage)
         // canActivate: [authGuard]
       },
     ]
   },
   {
     path: 'new-alarm',
-    loadComponent: () => import('./newData/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    loadComponent: () => import('./new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   },
   {
     path: 'new-alarm/:id',
-    loadComponent: () => import('./newData/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    loadComponent: () => import('./new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   }
-
 ];

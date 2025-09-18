@@ -3,14 +3,12 @@
   <div class="seletorTempo">
     <ion-datetime 
       presentation="time" 
-      [(ngModel)]="dataSInicial"
-      >
+      [(ngModel)]="dataSInicial">
     </ion-datetime>
     <p>A</p>
     <ion-datetime 
       presentation="time" 
-      [(ngModel)]="dataSFinal"
-      >
+      [(ngModel)]="dataSFinal">
     </ion-datetime>
   </div><br>
 
@@ -54,7 +52,7 @@
       </ion-item>
     </ion-card-content>
     <ion-buttons class="saveButtons">
-      <ion-button fill="clear" *ngIf="idVerificacao;" color="danger" (click)="excluir()">Excluir</ion-button>
+      <ion-button fill="clear" *ngIf="id;" color="danger" (click)="excluir()">Excluir</ion-button>
       <ion-button fill="clear" color="primary" class="save" (click)="salvar()">Salvar</ion-button>
     </ion-buttons>
   </ion-card> 
