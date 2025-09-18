@@ -37,6 +37,10 @@ export const routes: Routes = [
     path: 'esqueci-3',
     loadComponent: () => import('./Entrar/esqueciSenha/esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
   },
+  {
+    path: 'changeprofile',
+    loadComponent: () => import('./changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
+  },
 
 
   // Pagina do Projeto

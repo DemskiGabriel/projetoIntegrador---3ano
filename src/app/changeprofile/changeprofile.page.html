@@ -1,0 +1,47 @@
+<ion-toolbar  class="custom-toolbar">
+  <ion-buttons slot="start">
+    <ion-back-button default-href="#" text=" "></ion-back-button>
+  </ion-buttons>
+  <ion-title></ion-title>
+</ion-toolbar>
+
+<ion-content class="ion-padding background">
+
+  <div class="profile-card">
+    <ion-avatar class="profile-avatar">
+      <img src="assets/icon/fotodeperfil.jpg" alt="avatar">
+    </ion-avatar>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">Usuário</ion-label>
+      <ion-input type="text" ></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input type="email" ></ion-input>
+    </ion-item>
+
+    <ion-item class="input-item">
+      <ion-label position="floating">Data de Nascimento</ion-label>
+      <ion-datetime-button datetime="datetime"></ion-datetime-button>
+
+<ion-modal [keepContentsMounted]="true">
+  <ng-template>
+    <ion-datetime id="datetime"></ion-datetime>
+  </ng-template>
+</ion-modal>
+    </ion-item>
+
+    <ion-button class="alterar-senha" color="black">
+      Alterar senha
+    </ion-button>
+
+<ion-fab vertical="bottom" horizontal="end">
+      <ion-fab-button class="custom-fab">
+        <ion-icon src="assets/icon/lápis.png" class="fab-img"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
+  </div>
+
+</ion-content>
