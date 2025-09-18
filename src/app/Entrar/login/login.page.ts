@@ -1,23 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
-import { AutenticacaoService } from '../service/autenticacao.service';
+import { AutenticacaoService } from '../../service/autenticacao.service';
+import { Router, RouterLink } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar, IonCard, IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
+  imports: [IonContent, IonImg, IonCard, RouterLink,  IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
   public login:string = '';
   public senha:string = '';
 
-  constructor(private alertController: AlertController,
-    public autenticacao_service:AutenticacaoService
+  constructor(
+    private alertController: AlertController,
+    public autenticacao_service:AutenticacaoService,
+    private router: Router
     ) { }
 
   ngOnInit() {
@@ -31,13 +35,14 @@ export class LoginPage implements OnInit {
     .logar(login,senha)
     .subscribe(
       (_res:any) => {
-
-        if (_res.status == 'sucess'){
-
+        if (_res.status == 'success'){
           sessionStorage.setItem('token',_res.token)
+          console.log("Login feito com sucesso");
 
+          // homepage
+          this.router.navigate(['/tabs/feed']);
         }else{
-
+          
           }
 
       }

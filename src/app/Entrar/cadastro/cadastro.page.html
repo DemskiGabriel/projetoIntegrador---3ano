@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <div class="header-content">
+    <ion-img src="assets/imagens/logomassa.png" alt="Logo do bagulho"></ion-img>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+      <ion-list>
+        <h1>Cadastro</h1>
+        <ion-item>
+          <ion-input type="text" label="Digite seu nome" label-placement="floating" [(ngModel)]="nome" name="nome"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="email" label="Digite seu e-mail" label-placement="floating" [(ngModel)]="email" name="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" label="Digite sua senha" label-placement="floating" [(ngModel)]="senha" name="senha"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-input type="password" label="Confirme sua senha" label-placement="floating" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
+        </ion-item>
+
+        <ion-text color="danger" *ngIf="erroSenhasNaoCoincidem">
+          <p>{{ erroSenhasNaoCoincidem }}</p>
+        </ion-text>
+
+        <ion-item>
+          <ion-label position="fixed">Data de nascimento</ion-label>
+          <ion-input type="text" placeholder="__/__/____" [(ngModel)]="dataNascimento" name="dataNascimento"
+            maxlength="10" (ionInput)="formatarData($event)">
+          </ion-input>
+        </ion-item>
+        
+        <ion-item>
+          <ion-label position="fixed">Gênero</ion-label>
+          <ion-select [(ngModel)]="genero" name="genero">
+            <ion-select-option value="male">Masculino</ion-select-option>
+            <ion-select-option value="female">Feminino</ion-select-option>
+            <ion-select-option value="other">Não Informar</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+
+    <ion-text color="danger" *ngIf="erroCamposVazios">
+      <p>{{ erroCamposVazios }}</p>
+    </ion-text>
+
+    <ion-button  expand="block" class="ion-margin-top" (click)="cadastrar()">
+      Cadastrar
+    </ion-button>
+
+    <a href="/login">Já tem uma conta? Faça o Login.</a>
+  </ion-card>
+</ion-content>

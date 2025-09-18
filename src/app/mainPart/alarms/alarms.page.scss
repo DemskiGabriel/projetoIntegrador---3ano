@@ -1,0 +1,85 @@
+.alarms-background {
+    --background: #f7f7f7;
+  }
+  
+  .alarms-title {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .transparent-toolbar {
+    --background: transparent;
+    --border-width: 0;
+  }
+  
+  .alarms-list {
+    background: transparent;
+  }
+  
+  .alarm-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; // Espaça os elementos
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+    margin-bottom: 12px;
+    padding: 0 16px; // Adiciona padding horizontal
+    cursor: pointer;
+    
+    &:hover {
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+  }
+  
+  .alarm-item {
+    // Resetando estilos de padding e background para que o container
+    // possa controlar a aparência completa do item.
+    --background: transparent;
+    --padding-start: 0;
+    --inner-padding-end: 0;
+    width: auto; // Permite que ele se ajuste ao conteúdo
+    flex-grow: 1; // Ocupa o espaço restante
+  }
+  
+  .alarm-avatar {
+    background: #f0f4ff;
+    padding: 8px;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    img {
+      width: 32px;
+      height: 32px;
+    }
+  }
+  
+  .add-button {
+    --background: #5d6790;
+    --color: #fff;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  ion-fab-button {
+    --background: #5d6790;
+    --background-activated: #4a5477;
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  }
+  
+  .toggle-and-time {
+    display: flex;
+    align-items: center;
+  }
+  
+  .alarm-time {
+    margin-right: 12px; // Espaço entre o horário e o toggle
+  }
+  
+  ion-toggle {
+    z-index: 10; // Garante que o toggle seja clicável
+  }
+  

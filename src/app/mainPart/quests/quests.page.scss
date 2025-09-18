@@ -1,0 +1,50 @@
+.container {
+    flex-direction: column;
+  }
+  
+  .track {
+    width: 344px;
+    background: var(--ion-color-medium);
+    padding: 16px;
+  }
+  
+  ion-card {
+    width: 100px;
+    box-shadow: none;
+    margin: 0px;
+  }
+
+  .custom-background {
+    --background: #f7f7f7; 
+  }
+  
+  .content-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    height: 100%; 
+    text-align: center; 
+  }
+  
+  .main-text h1 {
+    font-family: 'Georgia', serif; 
+    font-style: italic;
+    font-size: 1.8em; 
+    color: #5d6790; 
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  
+  ion-img {
+    width: 200px; 
+    height: auto;
+    margin-bottom: 20px;
+  }
+  
+  .secondary-text h2 {
+    font-family: 'Georgia', serif; 
+    font-style: italic;
+    font-size: 1.5em; 
+    color: #a0a0a0; 
+  }

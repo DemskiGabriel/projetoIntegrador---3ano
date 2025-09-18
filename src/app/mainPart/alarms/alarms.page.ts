@@ -1,0 +1,109 @@
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+
+import { RealtimeDatabaseService } from '../../firebase/realtime-database';
+
+import {
+  IonContent,
+  IonHeader,
+  IonToolbar,
+  IonTitle,
+  IonList,
+  IonItem,
+  IonLabel,
+  IonNote,
+  IonToggle,
+  IonFab,
+  IonFabButton,
+  IonIcon } from '@ionic/angular/standalone';
+import { addIcons } from 'ionicons';
+import { addOutline } from 'ionicons/icons';
+import { RouterLink } from '@angular/router';
+
+
+@Component({
+  selector: 'app-alarms',
+  templateUrl: './alarms.page.html',
+  styleUrls: ['./alarms.page.scss'],
+  standalone: true,
+
+  imports: [
+    CommonModule,
+    FormsModule,
+    IonContent,
+    IonHeader,
+    IonToolbar,
+    IonTitle,
+    IonList,
+    IonItem,
+    IonLabel,
+    IonNote,
+    IonToggle,
+    IonFab,
+    IonFabButton,
+    IonIcon,
+    RouterLink
+  ]
+})
+
+
+export class AlarmsPage implements OnInit {
+  public dados: Array<any> = [];
+
+  constructor(
+    public rt: RealtimeDatabaseService,
+  ) {
+    addIcons({ addOutline });
+  }
+  ngOnInit() {}
+  ionViewWillEnter(){
+    this.load();
+  }
+
+  load() {
+    this.rt.query('/tarefa', (snapshot: any) => {
+      if (snapshot.val() !== null) {
+        this.dados = Object.entries(snapshot.val()).map(([key, item]: [string, any]) => {
+          item.id = key;
+          item.alarmes = Array.isArray(item.alarmes) ? item.alarmes : [];
+  
+          // 🔹 Usa a função separada
+          item.proximoAlarme = this.getProximoAlarme(item);
+  
+          return item;
+        }).filter((item: any) => item != null);
+      }else{
+        this.dados = [];
+      }
+    })
+  }
+
+  getProximoAlarme(item: any): string | null {
+    if (!item.alarmes || item.alarmes.length === 0) return null;
+  
+    const agora = new Date();
+  
+    // Procura o próximo horário ativo maior que agora
+    const proximo = item.alarmes.find((a: any) => {
+      if (!a.ativo) return false;
+      const [h, m] = a.hora.split(':').map(Number);
+      const horaAlarme = new Date();
+      horaAlarme.setHours(h, m, 0, 0);
+      return horaAlarme.getTime() > agora.getTime();
+    });
+  
+    return proximo ? proximo.hora : null;
+  }
+
+  toggleAlarm(index: number) {
+    if (this.dados[index].ativo) {
+      this.dados[index].ativo = false;
+    }
+  }
+
+
+  teste(){
+    console.log(this.dados)
+  }
+}
