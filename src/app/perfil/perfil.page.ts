@@ -4,9 +4,9 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonHeader, IonTitle, IonCard, IonIcon,IonTab, IonTabBar,IonFab, IonFabButton, IonTabs, IonTabButton, IonList, IonItem, IonToolbar,IonImg, IonLabel } from '@ionic/angular/standalone';
 import { defineCustomElements } from '@ionic/core/loader';
 import { Router, RouterLink } from '@angular/router';
+import { RequisicaoService } from '../service/requisicao.service';
 
 import { addIcons } from 'ionicons';
-import { logoIonic } from 'ionicons/icons';
 
 import '@ionic/core/css/core.css';
 
@@ -22,10 +22,12 @@ import '@ionic/core/css/typography.css';
   imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonList,RouterLink, IonTab, IonTabBar, IonTabs, IonFab, IonFabButton, IonTabButton, IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule]
 })
 export class PerfilPage implements OnInit {
+  public nome: any[] = [];
+  public usuario_logado: any; // Adicione esta variável
 
-  constructor() { }
+  constructor(private requisicaoService: RequisicaoService) { }
 
   ngOnInit() {
+    
   }
-
 }
