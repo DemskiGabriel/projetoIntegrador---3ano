@@ -16,18 +16,39 @@ export class AutenticacaoService {
     fd.append('email', email);
     fd.append('password', password);
 
-    
+    return this.rs
+    .post(fd);
+  }
+
+  //Chama as informações do usuario para a edição de perfil.
+  edicaoUsuario(id:string){
+    const fd = new FormData();
+    fd.append('controller', 'dadosUsuario')
+    fd.append('id', id);
 
     return this.rs
     .post(fd);
   }
 
+  // Faz update no usuario que esta na edição de perfil.
+  updateUsuario(id:string, nome:string, email:string, descricao:string, dataNascimento:string){
+    const fd = new FormData();
+    fd.append('controller', 'atualizarUsuario');
+    fd.append('id', id);
+    fd.append('nome', nome);
+    fd.append('email', email);
+    fd.append('descricao', descricao);
+    fd.append('dataNascimento', dataNascimento);
+
+    return this.rs
+    .post(fd);
+  }
+
+
   proximo(email:string){
     const fd = new FormData();
     fd.append('controller', 'proximo');
     fd.append('email', email);
-
-    
 
     return this.rs
     .post(fd);

@@ -39,7 +39,7 @@ export const routes: Routes = [
   },
   {
     path: 'changeprofile',
-    loadComponent: () => import('./changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
+    loadComponent: () => import('./data/changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
   },
 
 
@@ -71,10 +71,10 @@ export const routes: Routes = [
   },
   {
     path: 'new-alarm',
-    loadComponent: () => import('./new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   },
   {
     path: 'new-alarm/:id',
-    loadComponent: () => import('./new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   }
 ];

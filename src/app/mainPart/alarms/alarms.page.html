@@ -1,10 +1,5 @@
 <ion-content [fullscreen]="true" class="ion-padding alarms-background">
-  <ion-header class="ion-no-border">
-    <ion-toolbar class="transparent-toolbar">
-      <ion-title class="ion-text-center alarms-title">Alarmes</ion-title>
-    </ion-toolbar>
-  </ion-header>
-
+  <!-- Alarmes -->
   <ion-list class="alarms-list">
     <div *ngFor="let alarm of dados; let i = index" class="alarm-container">
       <ion-item class="alarm-item" [button]="true" routerLink="/new-alarm/{{alarm.id}}">
@@ -21,6 +16,7 @@
     </div>
   </ion-list>
 
+  <!-- Botão para Criar alarme -->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed" class="add-button">
     <ion-fab-button routerLink="/new-alarm">
       <ion-icon name="add-outline"></ion-icon>

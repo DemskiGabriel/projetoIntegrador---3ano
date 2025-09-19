@@ -36,15 +36,13 @@ export class LoginPage implements OnInit {
     .subscribe(
       (_res:any) => {
         if (_res.status == 'success'){
-          sessionStorage.setItem('token',_res.token)
+          sessionStorage.setItem('token', _res.token);
+          localStorage.setItem('userId', _res.id);
           console.log("Login feito com sucesso");
 
           // homepage
           this.router.navigate(['/tabs/feed']);
-        }else{
-          
-          }
-
+        }else{}
       }
     );
   
@@ -53,15 +51,11 @@ export class LoginPage implements OnInit {
       const alert = await this.alertController.create({
         header: 'Atenção',
         message: 'Por favor, preencha todos os campos!',
-        buttons: ['OK']
+        buttons: ['OK'] 
       });
 
       await alert.present();
       return;
+    }
   }
-
-  }
- 
-
-  
 }
