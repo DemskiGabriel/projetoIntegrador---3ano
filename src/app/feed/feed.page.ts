@@ -102,12 +102,12 @@ export class FeedPage implements OnInit {
 
     if (Math.abs(deltaX) > swipeThreshold) {
       if (deltaX > 0) {
-        // Deslize para a direita (ir para a tarefa anterior)
+        // Desliza para a direita 
         if (this.activeTaskIndex > 0) {
           this.activeTaskIndex--;
         }
       } else {
-        // Deslize para a esquerda (ir para a próxima tarefa)
+        // Desliza para a esquerda 
         if (this.activeTaskIndex < this.tasks.length - 1) {
           this.activeTaskIndex++;
         }

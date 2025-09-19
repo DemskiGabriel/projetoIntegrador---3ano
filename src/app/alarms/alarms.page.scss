@@ -1,85 +1,114 @@
 .alarms-background {
-    --background: #f7f7f7;
-  }
-  
-  .alarms-title {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .transparent-toolbar {
-    --background: transparent;
-    --border-width: 0;
-  }
-  
-  .alarms-list {
-    background: transparent;
-  }
-  
-  .alarm-container {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; // Espaça os elementos
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-    margin-bottom: 12px;
-    padding: 0 16px; // Adiciona padding horizontal
-    cursor: pointer;
-    
-    &:hover {
-      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-    }
-  }
-  
-  .alarm-item {
-    // Resetando estilos de padding e background para que o container
-    // possa controlar a aparência completa do item.
-    --background: transparent;
-    --padding-start: 0;
-    --inner-padding-end: 0;
-    width: auto; // Permite que ele se ajuste ao conteúdo
-    flex-grow: 1; // Ocupa o espaço restante
-  }
-  
-  .alarm-avatar {
-    background: #f0f4ff;
-    padding: 8px;
-    border-radius: 50%;
-    width: 48px;
-    height: 48px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  
-    img {
-      width: 32px;
-      height: 32px;
-    }
-  }
-  
-  .add-button {
-    --background: #5d6790;
-    --color: #fff;
-    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  ion-fab-button {
-    --background: #5d6790;
-    --background-activated: #4a5477;
-    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  }
-  
-  .toggle-and-time {
-    display: flex;
-    align-items: center;
-  }
-  
-  .alarm-time {
-    margin-right: 12px; // Espaço entre o horário e o toggle
-  }
-  
-  ion-toggle {
-    z-index: 10; // Garante que o toggle seja clicável
-  }
-  
+  --background: #f7f7f7;
+}
+
+.empty-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.main-text h1 {
+  font-family: 'Poppins';
+  font-size: 1.7rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #2e1b5b;
+  margin: 0;
+}
+
+.transparent-toolbar {
+  --background: transparent;
+  --ion-color-base: transparent !important;
+  --border-width: 0;
+}
+
+.alarms-title {
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+.alarms-list {
+  background: transparent;
+  padding: 0;
+}
+
+.alarm-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin-bottom: 16px;
+  overflow: visible;
+  padding: 0;
+}
+
+.alarm-item {
+  --background: transparent;
+  flex-grow: 1;
+  --padding-start: 16px;
+  --padding-end: 8px;
+  --inner-padding-end: 0;
+  --border-width: 0;
+}
+
+.alarm-avatar {
+  width: 48px;
+  height: 48px;
+  padding: 8px;
+  background: #bd8787;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.alarm-avatar img {
+  width: 24px;
+  height: 24px;
+}
+
+.alarm-item ion-label strong {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #2e1b5b;
+}
+
+.alarm-item ion-note {
+  font-size: 0.8rem;
+  color: #6d6d6d;
+}
+
+.toggle-and-time {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding-right: 16px;
+}
+
+.alarm-time {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #2e1b5b;
+}
+
+ion-toggle {
+  --handle-background: #ffffff;
+  --handle-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  --background: #dcdcdc;
+  --background-checked: #3f51b5;
+}
+
+.add-button {
+  top: 60%; 
+  transform: translateY(-50%);
+  --background:#6a1b9a;
+}
+.in-button{
+  top: 80%
+}

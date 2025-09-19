@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import {
@@ -15,10 +15,13 @@ import {
   IonFab,
   IonFabButton,
   IonIcon,
-  IonButtons
+  IonButtons,
+  IonButton,
+  IonText,
+  IonImg
 } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
-import { addOutline } from 'ionicons/icons';
+import { addOutline, albumsOutline } from 'ionicons/icons';
 
 interface Alarm {
   title: string;
@@ -48,10 +51,15 @@ interface Alarm {
     IonFab,
     IonFabButton,
     IonIcon,
-    IonButtons
+    IonButtons,
+    IonButton,
+    IonText,
+    IonImg
   ]
 })
 export class AlarmsPage implements OnInit {
+  public hasAlarms = signal<boolean>(false);
+
   public alarms: Alarm[] = [
     {
       title: 'Tomar Água',
@@ -68,10 +76,17 @@ export class AlarmsPage implements OnInit {
   ];
 
   constructor() {
-    addIcons({ addOutline });
+    addIcons({ addOutline, albumsOutline });
   }
 
-  ngOnInit() {}
+  ngOnInit() {
+    // Para ver o design, mudar o valor abaixo pra 'true'
+    this.hasAlarms.set(true);
+  }
+
+  toggleContent() {
+    this.hasAlarms.update(value => !value);
+  }
 
   toggleAlarm(index: number) {
     if (this.alarms[index]) {
