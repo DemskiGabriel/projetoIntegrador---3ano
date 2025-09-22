@@ -1,4 +1,4 @@
-<ion-content color="light">
+<ion-content color="light" class="pagina">
   <ion-list inset="true" class="principal" lines="none">
     <ion-item class="perfil">
       <ion-icon name="person" class="foto"></ion-icon>
@@ -6,16 +6,18 @@
       <ion-icon color="danger" slot="start" name="list-circle" size="large"></ion-icon>
       <ion-label label-placement ="floating" fill = "outline">{{perfil}}</ion-label>
 
+      
+        <ion-item class="pontos">
+          <ion-img src="assets/imagens/estrela.jpg" class="estrela"></ion-img>
+          <ion-label>{{pontos}}</ion-label>
+        </ion-item>
+
       <ion-button shape="round">
         <ion-icon slot="icon-only" name="create"></ion-icon>
       </ion-button>
+
     </ion-item>
 
-    <ion-list lines="none" >
-      <ion-item>
-        <ion-img src="assets/imagens/estrela.jpg" class="estrela"></ion-img>
-        <ion-label>{{pontos}}</ion-label>
-      </ion-item>
 
   </ion-list>
 
