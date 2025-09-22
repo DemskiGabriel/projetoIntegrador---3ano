@@ -2,7 +2,6 @@
   --background: #f7f7f7;
 }
 
-
 .empty-content-wrapper {
   display: flex;
   flex-direction: column;
@@ -46,92 +45,32 @@
   }
 }
 
+/* Novo estilo para cards no formato da segunda imagem */
 .quest-card {
   border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background: #fdf5f6;
-  padding: 0;
-  overflow: visible; /* Necessário para que a sobreposição funcione */
+  background: #e4bdbd;
+  padding: 12px;
+  color: #2e1b5b;
 }
 
-.card-header {
+.quest-header {
   display: flex;
+  justify-content: space-between;
   align-items: center;
-  gap: 16px;
-  padding: 16px;
-  background-color: #e4bdbd;
-  border-radius: 12px 12px 0 0;
-  position: relative;
-  z-index: 2; /* Para garantir que o header fique na frente */
-}
-
-.quest-avatar {
-  background: #bd8787;
-  padding: 8px;
-  border-radius: 50%;
-  min-width: 56px;
-  min-height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.quest-avatar ion-img {
-  width: 32px;
-  height: 32px;
-}
-
-.header-text {
-  display: flex;
-  flex-direction: column;
-}
-
-.quest-points {
-  font-size: 0.8rem;
   font-weight: bold;
-  color: #23255d;
-  margin: 0;
 }
 
 .quest-name h3 {
-  font-size: 1.2rem;
-  font-weight: bold;
-  color: #2e1b5b;
+  font-size: 1rem;
   margin: 0;
 }
 
-.card-body {
-  padding: 16px;
-  background: #fdf5f6;
-  border-radius: 0 0 12px 12px;
-  margin-top: -12px; /* Margem negativa para criar a sobreposição */
-  position: relative;
-  z-index: 1;
+.quest-points {
+  font-size: 0.9rem;
 }
 
-.quest-challenges {
-  p {
-    font-size: 0.9rem;
-    color: #6d6d6d;
-    margin: 0;
-  }
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 8px 0 0 0;
-  }
-  li {
-    font-size: 0.9rem;
-    color: #333;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  ion-checkbox {
-    --border-color: #bd8787;
-    --border-radius: 4px;
-    --background-checked: #bd8787;
-    --border-width: 2px;
-  }
+.quest-body {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  color: #2e1b5b;
 }

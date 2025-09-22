@@ -16,7 +16,6 @@ import { albumsOutline, checkmarkCircleOutline } from 'ionicons/icons';
 interface Quest {
   name: string;
   points: number;
-  image: string;
   challenges: string[];
 }
 
@@ -48,21 +47,15 @@ export class QuestsPage implements OnInit {
     {
       name: 'Beber Água',
       points: 50,
-      image: 'assets/imagens/copo.png',
       challenges: [
-        'Copo de água ao coidar',
-        'Copo de água antes de muçar',
-        'Copo de água antes de mimir'
+        'Copo de água ao coida, até o momento do sono. Beber todas as vezes que for á cozinha.'
       ]
     },
     {
       name: 'Missão de Corrida',
       points: 75,
-      image: 'assets/imagens/run.png',
       challenges: [
-        'Correr',
-        'Correr bastantinho',
-        'La corida'
+        'Correr até a academia, ida e volta. Subir as escadas do apartamento 2x.'
       ]
     }
   ];
