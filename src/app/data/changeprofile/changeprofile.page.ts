@@ -52,8 +52,19 @@ export class ChangeprofilePage implements OnInit {
     this.dataNascimento = `${dia}/${mes}/${ano}`;
   }
 
+  // Converte a data do formato DD/MM/YYYY para YYYY-MM-DD
+  converterDataParaBanco(data: string): string {
+  const partes = data.split('/');
+  if (partes.length !== 3) return data; // se não tiver formato esperado, retorna como está
+
+  const [dia, mes, ano] = partes;
+  return `${ano}-${mes.padStart(2, '0')}-${dia.padStart(2, '0')}`;
+  }
+
   // ---------- Troca de imagem ----------
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
+  
+  // foto de perfil experimental --TEMPORARIO--
   fotoPerfil: string = "assets/icon/fotodeperfil.jpg";
 
   selecionarImagem() {
@@ -70,13 +81,10 @@ export class ChangeprofilePage implements OnInit {
       reader.readAsDataURL(file);
     }
   }
-  
 
   // ---------- Load ----------
   // Pega os dados do banco de dados e os carrega na pagina.
   load(){
-    
-
     this.autenticacao_service
     .edicaoUsuario(this.id)
     .subscribe(
@@ -95,8 +103,11 @@ export class ChangeprofilePage implements OnInit {
 
   // ---------- Save ----------
   save(){
+    // Formata a data para ser salva no banco.
+    const dataFormatada = this.converterDataParaBanco(this.dataNascimento);
+
     this.autenticacao_service
-    .updateUsuario(this.id, this.nome, this.email, this.descricao, this.dataNascimento)
+    .updateUsuario(this.id, this.nome, this.email, this.descricao, dataFormatada)
     .subscribe(
       (_res:any) => {
         if (_res.status == 'success'){

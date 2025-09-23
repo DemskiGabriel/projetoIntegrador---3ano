@@ -6,9 +6,6 @@ import { RealtimeDatabaseService } from '../../firebase/realtime-database';
 
 import {
   IonContent,
-  IonHeader,
-  IonToolbar,
-  IonTitle,
   IonList,
   IonItem,
   IonLabel,
@@ -32,9 +29,6 @@ import { RouterLink } from '@angular/router';
     CommonModule,
     FormsModule,
     IonContent,
-    IonHeader,
-    IonToolbar,
-    IonTitle,
     IonList,
     IonItem,
     IonLabel,
@@ -68,9 +62,9 @@ export class AlarmsPage implements OnInit {
           item.id = key;
           item.alarmes = Array.isArray(item.alarmes) ? item.alarmes : [];
   
-          // 🔹 Usa a função separada
+          // faz com que a apareceça o horario mais proximo.
           item.proximoAlarme = this.getProximoAlarme(item);
-  
+
           return item;
         }).filter((item: any) => item != null);
       }else{
@@ -84,26 +78,20 @@ export class AlarmsPage implements OnInit {
   
     const agora = new Date();
   
-    // Procura o próximo horário ativo maior que agora
     const proximo = item.alarmes.find((a: any) => {
       if (!a.ativo) return false;
+  
       const [h, m] = a.hora.split(':').map(Number);
       const horaAlarme = new Date();
       horaAlarme.setHours(h, m, 0, 0);
+  
       return horaAlarme.getTime() > agora.getTime();
     });
   
     return proximo ? proximo.hora : null;
   }
-
+  
   toggleAlarm(index: number) {
-    if (this.dados[index].ativo) {
-      this.dados[index].ativo = false;
-    }
-  }
-
-
-  teste(){
-    console.log(this.dados)
+    this.dados[index].ativo = !this.dados[index].ativo;
   }
 }

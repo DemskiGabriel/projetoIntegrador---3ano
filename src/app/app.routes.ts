@@ -74,7 +74,7 @@ export const routes: Routes = [
     loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   },
   {
-    path: 'new-alarm/:id',
+    path: 'new-alarm/:idAlarme',
     loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
   }
 ];

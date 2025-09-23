@@ -1,5 +1,4 @@
 <ion-content [fullscreen]="true" class="ion-padding">
-  <!-- Horarios mais especificos -->
   <div class="seletorTempo">
     <ion-datetime 
       presentation="time" 
@@ -44,24 +43,33 @@
       </ion-item>
       <!-- Vibração -->
       <ion-item>
-        <ion-toggle [checked]="true" [(ngModel)]="vibracao">Vibração</ion-toggle>
+        <ion-toggle [(ngModel)]="vibracao">Vibração</ion-toggle>
       </ion-item>
       <!-- Som do Alarme -->
       <ion-item>
-        <ion-toggle [checked]="true" [(ngModel)]="somAlarme">Som do alarme</ion-toggle>
+        <ion-toggle [(ngModel)]="somAlarme">Som do alarme</ion-toggle>
+      </ion-item>
+      <!-- Modo Desafio -->
+      <ion-item>
+        <ion-toggle [(ngModel)]="desafioToggle">Modo Desafio</ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="desafioToggle">
+        <ion-textarea fill="outline" [autoGrow]="true" rows="3" maxlength="250" class="descricao" [(ngModel)]="descricaoDesafio" 
+        placeholder="De uma descrição da sua tarefa, para a criação dos desafios.">
+        Descrição
+        </ion-textarea>
       </ion-item>
     </ion-card-content>
+
     <ion-buttons class="saveButtons">
-      <ion-button fill="clear" *ngIf="id;" color="danger" (click)="excluir()">Excluir</ion-button>
+      <ion-button fill="clear" *ngIf="idAlarme;" color="danger" (click)="excluir()">Excluir</ion-button>
       <ion-button fill="clear" color="primary" class="save" (click)="salvar()">Salvar</ion-button>
     </ion-buttons>
   </ion-card> 
 
-  <ion-fab horizontal="center" vertical="bottom" slot="fixed">
-    <ion-fab-button routerLink="/tabs/alarms">
-      <ion-icon name="arrow-back-outline"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+  <ion-button routerLink="/tabs/alarms" shape="round">
+    <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+  </ion-button>
 </ion-content>
 
 <ion-modal

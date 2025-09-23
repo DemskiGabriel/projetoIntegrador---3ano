@@ -33,7 +33,9 @@ export class RealtimeDatabaseService {
         const url_full = `${url}/${url_indice}`;
         const ref = this.ref(url_full);
 
-        return set(ref, data);
+        await set(ref, data);
+
+        return url_indice;
       })()
     );
   }
