@@ -1,0 +1,118 @@
+/* Main page container for vertical alignment */
+.pagina {
+    --background: #ede9e9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .descricao {
+
+    font-style: italic;
+
+  }
+
+  /* Profile Card Styling */
+  .perfil-card {
+    background-color: #d4d7ef;
+    border-radius: 10px;
+  }
+  
+  .perfil-item {
+    --background: transparent;
+    --inner-padding-end: 0;
+  }
+  
+  .foto-perfil {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%; /* Make it round */
+    overflow: hidden;
+    align-items: center;
+  }
+  
+  .nome-perfil {
+    margin-left: 20px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .editar-btn {
+    width: 40px;
+    height: 40px;
+    --border-radius: 15px;
+    --background: #6870a0;
+  }
+  
+  .editar-btn ion-icon {
+    width: 24px;
+    height: 24px;
+  }
+  
+  /* Star and Points Styling */
+  .estrela-pontos-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+  
+  .estrela {
+    height: 100px;
+    width: 1000px;
+  }
+  
+  .pontos {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 1px;
+  }
+  
+  /* Rank List Styling */
+  .lista-rank {
+    background-color: #d4d7ef;
+    border-radius: 20px;
+    padding: 10px;
+  }
+  
+  .rank-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: bold;
+    font-size: 24px;
+  }
+  
+  .rank-header ion-label {
+    margin-right: 10px;
+  }
+  
+  .grupo-icon {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .rank-item {
+    --background: #a7abc8;
+    --border-radius: 10px;
+    margin-bottom: 5px;
+    color: #000;
+  }
+  
+  .rank-item ion-label {
+    font-weight: bold;
+  }
+  
+  .trofeu {
+    height: 40px;
+    width: 40px;
+  }
+
+  .rank {
+
+    color: #000;
+
+  }

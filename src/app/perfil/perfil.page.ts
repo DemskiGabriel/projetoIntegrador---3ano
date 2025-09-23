@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonHeader, IonTitle, IonCard, IonButton, IonIcon,IonTab, IonTabBar,IonFab, IonFabButton, IonTabs, IonTabButton, IonList, IonItem, IonToolbar,IonImg, IonLabel } from '@ionic/angular/standalone';
+import { IonContent, IonHeader, IonTitle, IonCard,IonText, IonButton, IonIcon,IonTab, IonTabBar,IonFab, IonFabButton, IonTabs, IonTabButton, IonList, IonItem, IonToolbar,IonImg, IonLabel } from '@ionic/angular/standalone';
 import { defineCustomElements } from '@ionic/core/loader';
 import { Router, RouterLink } from '@angular/router';
 import { RequisicaoService } from '../service/requisicao.service';
@@ -19,11 +19,12 @@ import '@ionic/core/css/typography.css';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonButton, IonList, RouterLink, IonTab, IonTabBar, IonTabs, IonFab, IonFabButton, IonTabButton, IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule]
+  imports: [IonContent, IonHeader, IonTitle, IonToolbar,IonButton,IonText, IonList, RouterLink, IonTab, IonTabBar, IonTabs, IonFab, IonFabButton, IonTabButton, IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule]
 })
 export class PerfilPage implements OnInit {
   public perfil: string = 'perfil';
   public pontos: string = '1000'
+  public amigos: string = 'amigos'
 
   constructor(private requisicaoService: RequisicaoService) { }
 
