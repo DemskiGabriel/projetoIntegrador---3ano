@@ -2,7 +2,13 @@
   <ion-card class="perfil-card">
       <ion-item lines="none" class="perfil-item">
           <ion-img src="assets/imagens/pessoa.png" class="foto-perfil"></ion-img>
-          <ion-label class="nome-perfil">{{perfil}}</ion-label>
+          
+          <ion-label 
+          class="nome-perfil" 
+          [class.nome-completo]="nomeExpandido"
+          (click)="expandirNome()">
+          {{perfil}}
+        </ion-label>
 
           <ion-button shape="round" slot="end" class="editar-btn">
               <ion-icon name="create"></ion-icon>

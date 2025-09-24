@@ -12,13 +12,18 @@ import { IonContent, IonCard, IonImg, IonLabel, IonItem, IonButton, IonIcon, Ion
 })
 export class UserPage implements OnInit {
   public perfil: string = 'perfil';
-  public pontos: string = '1000'
-  public amigos: string = 'amigos'
-  public descricao: string = 'descricao...'
+  public pontos: string = '1000';
+  public amigos: string = 'amigos';
+  public descricao: string = 'descricao...';
+  public nomeExpandido: boolean = false;
 
   constructor() { }
 
   ngOnInit() {
   }
 
+  public expandirNome(): void {
+    this.nomeExpandido = !this.nomeExpandido;
+  }
 }
+
