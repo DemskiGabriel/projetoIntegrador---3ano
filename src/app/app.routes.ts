@@ -1,24 +1,22 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
 import { TabsPage } from './tabs/tabs.page';
 
 export const routes: Routes = [
   // Cadastro
   {
     path: 'cadastro',
-    loadComponent: () => import('./cadastro/cadastro.page').then( m => m.CadastroPage)
+    loadComponent: () => import('./Entrar/cadastro/cadastro.page').then( m => m.CadastroPage)
   },
   {
     path: 'questionario',
-    loadComponent: () => import('./questionario/questionario.page').then( m => m.QuestionarioPage)
+    loadComponent: () => import('./Entrar/questionario/questionario.page').then( m => m.QuestionarioPage)
   },
 
-  
+
   //Login 
   {
     path: 'login',
-    loadComponent: () => import('./login/login.page').then( m => m.LoginPage)
-
+    loadComponent: () => import('./Entrar/login/login.page').then( m => m.LoginPage)
   },
   {
     path: '',
@@ -28,17 +26,16 @@ export const routes: Routes = [
   // Esqueci Minha Senha
   {
     path: 'esqueci-minha-senha',
-    loadComponent: () => import('./esqueciSenha/esqueci-minha-senha/esqueci-minha-senha.page').then( m => m.EsqueciMinhaSenhaPage)
+    loadComponent: () => import('./Entrar/esqueciSenha/esqueci-minha-senha/esqueci-minha-senha.page').then( m => m.EsqueciMinhaSenhaPage)
   },
   {
     path: 'esqueci-2',
-    loadComponent: () => import('./esqueciSenha/esqueci-2/esqueci-2.page').then( m => m.Esqueci2Page)
+    loadComponent: () => import('./Entrar/esqueciSenha/esqueci-2/esqueci-2.page').then( m => m.Esqueci2Page)
   },
   {
     path: 'esqueci-3',
-    loadComponent: () => import('./esqueciSenha/esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
+    loadComponent: () => import('./Entrar/esqueciSenha/esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
   },
-
 
   // Pagina do Projeto
   {
@@ -47,23 +44,42 @@ export const routes: Routes = [
     children: [
       {
         path: 'feed',
-        loadComponent: () => import('./feed/feed.page').then( m => m.FeedPage)
+        loadComponent: () => import('./mainPart/feed/feed.page').then( m => m.FeedPage)
       },
       {
         path: 'alarms',
-        loadComponent: () => import('./alarms/alarms.page').then( m => m.AlarmsPage)
+        loadComponent: () => import('./mainPart/alarms/alarms.page').then( m => m.AlarmsPage),
+        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
       {
         path: 'quests',
-        loadComponent: () => import('./quests/quests.page').then( m => m.QuestsPage)
+        loadComponent: () => import('./mainPart/quests/quests.page').then( m => m.QuestsPage)
         // canActivate: [authGuard]
       },
       {
-        path: 'user',
-        loadComponent: () => import('./user/user.page').then( m => m.UserPage)
+        path: 'perfil',
+        loadComponent: () => import('./mainPart/perfil/perfil.page').then( m => m.PerfilPage)
         // canActivate: [authGuard]
       },
     ]
   },
+  
+  // paginas filho
+  {
+    path: 'new-alarm',
+    loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage),
+    runGuardsAndResolvers: 'always'
+    // canActivate: [authGuard]
+  },
+  {
+    path: 'new-alarm/:idAlarme',
+    loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    // canActivate: [authGuard]
+  },
+  {
+    path: 'changeprofile',
+    loadComponent: () => import('./data/changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
+    // canActivate: [authGuard]
+  }
 ];

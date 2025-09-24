@@ -1,0 +1,88 @@
+.seletorTempo{
+    display: flex;
+    justify-content: space-around;
+
+    margin-top: 20%;
+}
+.seletorTempo p{
+    margin-top: 10.7vh;
+}
+ion-datetime {
+    --background: rgba(0);
+    --background-rgb: 237, 233, 233;
+    --wheel-highlight-background: rgb(218, 216, 255);
+  }
+.seletorTempo ion-datetime{
+    width: 40%;
+}
+.seletorTempo ion-datetime::part(wheel-item active) {
+    color: rgb(142, 104, 230);
+  }
+
+.title{
+    display: flex;
+    justify-content: space-between;
+
+    margin-left: 5vw;
+    margin-right: 3vw;
+}
+.title ion-button{
+    --background: rgba(0);
+ 
+}
+.title ion-button ion-icon{
+    color: rgb(115, 115, 115);
+}
+
+.weekdays{
+    justify-content: space-around;
+}
+.weekdays ion-button {
+    width: 40px;
+    height: 40px;
+
+    border: 2px solid transparent; /* base */
+    border-radius: 50%;
+}
+.weekdays ion-button.selected{
+    color: rgba(142, 104, 230);
+    border-color: rgb(142, 104, 230);
+}
+
+ion-card{
+    border-radius: 20px;
+}
+
+ion-modal{
+    --border-radius: 20px;
+}
+
+.toggle{
+    border: 0px;
+}
+
+ion-fab{
+    margin-bottom: 8%;
+}
+
+.saveButtons{
+    display: flex;
+    justify-content: space-around;
+
+    margin-bottom: 3%;
+}
+
+.saveButtons ion-button{
+    width: 100%;
+
+    --border-radius: 3px;
+}
+
+.descricao{
+    --border-color: black;
+
+    --padding-top: 5px;
+    --padding-bottom: 5px;
+
+    --border-radius: 10px;
+}

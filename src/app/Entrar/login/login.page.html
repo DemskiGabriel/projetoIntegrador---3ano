@@ -1,0 +1,30 @@
+<ion-content [fullscreen]="true">
+  <br><br><br><br>
+  <ion-img src="assets/imagens/pomocat.jpg"></ion-img>
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title style=" --color: #000 ">LOGIN</ion-card-title>
+    </ion-card-header>
+
+    <ion-card-content>
+      <ion-item style="--background: #a7abc8; --color: #000">
+        <ion-input label="E-mail ou Usuário" label-placement="floating" [(ngModel)]="login"></ion-input>
+      </ion-item>
+
+      <ion-item style="--background: #a7abc8; --color: #000">
+        <ion-input type="password" label="Senha" label-placement="floating" [(ngModel)]="senha"></ion-input>
+      </ion-item>
+
+  <a routerLink="/esqueci-minha-senha"  >Esqueceu a senha?</a>
+
+
+    </ion-card-content>
+
+    <ion-button expand="block" id="present-alert" (click)="logar()" >Entrar</ion-button>
+
+  </ion-card>
+
+  <a routerLink="/cadastro">Não tem uma conta? Cadastre-se!</a>
+
+
+</ion-content>

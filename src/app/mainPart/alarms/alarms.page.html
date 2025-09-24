@@ -1,0 +1,52 @@
+<!-- Exibe o conteúdo quando NÃO há alarmes -->
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="!hasAlarms()">
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Alarmes</h1>
+  </ion-text>
+
+  <ion-text class="main-text">
+    <h1>Você não tem nenhum alarme no momento</h1>
+  </ion-text>
+
+  <ion-img src="assets/imagens/estrela.png"></ion-img>
+  <ion-fab horizontal="center" vertical="center" slot="fixed" class="add-button">
+    <ion-fab-button routerLink="/new-alarm">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+<!-- Caso Tenha alarmes eles apareceram listados -->
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="hasAlarms()">
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Alarmes</h1>
+  </ion-text>
+
+  <!-- Alarmes -->
+  <ion-list class="alarms-list">
+    <div *ngFor="let alarm of dados; let i = index" class="alarm-container">
+      <ion-item class="alarm-item" [button]="true" routerLink="/new-alarm/{{alarm.id}}">
+        <ion-label>
+          <strong>{{ alarm.nomeAlarme }}</strong><br>
+          <ion-note>Próximo:</ion-note>
+        </ion-label>
+      </ion-item>
+      
+      <div class="toggle-and-time">
+        <strong class="alarm-time">{{ alarm.proximoAlarme }}</strong>
+        <ion-toggle [checked]="alarm.ativo" (ionChange)="toggleAlarm(i)"></ion-toggle>
+      </div>
+    </div>
+  </ion-list>
+  
+  <!-- Botão para Criar alarme -->
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed" class="add-button">
+    <ion-fab-button routerLink="/new-alarm">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
