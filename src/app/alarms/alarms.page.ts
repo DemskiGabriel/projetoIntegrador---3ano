@@ -81,7 +81,7 @@ export class AlarmsPage implements OnInit {
 
   ngOnInit() {
     // Para ver o design, mudar o valor abaixo pra 'true'
-    this.hasAlarms.set(true);
+    this.hasAlarms.set(false);
   }
 
   toggleContent() {

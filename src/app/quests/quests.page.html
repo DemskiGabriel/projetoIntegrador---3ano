@@ -20,6 +20,7 @@
     </ion-text>
 
     <ion-card *ngFor="let quest of mockQuests" class="quest-card">
+      <!-- Cabeçalho -->
       <div class="quest-header">
         <ion-text class="quest-name">
           <h3>{{ quest.name }}</h3>
@@ -29,6 +30,7 @@
         </ion-text>
       </div>
 
+      <!-- Corpo (descrição/desafios) -->
       <div class="quest-body">
         <p *ngFor="let challenge of quest.challenges">
           {{ challenge }}
@@ -37,3 +39,4 @@
     </ion-card>
   </div>
 </ion-content>
+  
