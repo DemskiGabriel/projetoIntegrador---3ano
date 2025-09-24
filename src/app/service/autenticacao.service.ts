@@ -31,7 +31,7 @@ export class AutenticacaoService {
   }
 
   // Faz update no usuario que esta na edição de perfil.
-  updateUsuario(id:string, nome:string, email:string, descricao:string, dataNascimento:string){
+  updateUsuario(id:string, nome:string, email:string, descricao:string, dataNascimento:string, image?: File){
     const fd = new FormData();
     fd.append('controller', 'atualizarUsuario');
     fd.append('id', id);
@@ -39,9 +39,12 @@ export class AutenticacaoService {
     fd.append('email', email);
     fd.append('descricao', descricao);
     fd.append('dataNascimento', dataNascimento);
-
-    return this.rs
-    .post(fd);
+  
+    if(image){
+      fd.append('image', image, image.name);
+    }
+  
+    return this.rs.post(fd);
   }
 
 

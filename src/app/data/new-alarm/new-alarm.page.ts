@@ -22,8 +22,8 @@ export class NewAlarmPage {
   public nomeAlarme:string = ''; 
   public vezesPorDia:number | null = null;
 
-  public vibracao:boolean = false;
-  public somAlarme:boolean = false;
+  public vibracao:boolean = true;
+  public somAlarme:boolean = true;
 
   public calendario:string[] = [];
   public dataAEnviar:string[] = [];
@@ -173,7 +173,7 @@ export class NewAlarmPage {
   // Salva o Alarme no banco de dados
   salvar() {
     if(this.verificacoes() && this.gerarVezesAFazer()){
-      this.rt.add(`/tarefa`,{
+      this.rt.add(`/alarme`,{
         // Id Do usuario.
         user: this.idUsuario,
         
@@ -288,25 +288,25 @@ export class NewAlarmPage {
   // ---------- Load / Excluir ----------
   // Carrega caso o objeto já exista.
   load(){
-    this.rt.query(`/tarefa/${this.idAlarme}`, (snapshot:any) => {
+    this.rt.query(`/alarme/${this.idAlarme}`, (snapshot:any) => {
       const dados = Object(snapshot.val()) 
-      this.idDesafio = dados.idDesafio;
-      
-      this.desafioToggle = dados.modoDesafio;
-      this.descricaoDesafio = dados.descricaoDesafio;
+      this.idDesafio = dados.idDesafio ?? this.idDesafio;
+    
+      this.desafioToggle = dados.modoDesafio ?? this.desafioToggle;
+      this.descricaoDesafio = dados.descricaoDesafio ?? this.descricaoDesafio;
 
-      this.nomeAlarme = dados.nomeAlarme;
-      this.dataSInicial = dados.horarioInicio;
-      this.dataSFinal = dados.horarioFinal
-      this.vezesPorDia = dados.vezesPorDia;
-      
+      this.nomeAlarme = dados.nomeAlarme ?? this.nomeAlarme;
+      this.dataSInicial = dados.horarioInicio ?? this.dataSInicial;
+      this.dataSFinal = dados.horarioFinal ?? this.dataSFinal;
+      this.vezesPorDia = dados.vezesPorDia ?? this.vezesPorDia;
+
       // Configura calendario ou os dias da semana dependendo de qual esta no tipo de data.
-      this.tipoData = dados.tipoData;
-      this.dataAEnviar = dados.dias;
+      this.tipoData = dados.tipoData ?? this.tipoData;
+      this.dataAEnviar = dados.dias ?? this.dataAEnviar;
 
-      this.vibracao = dados.vibracao;
-      this.somAlarme = dados.somAlarme;
-
+      this.vibracao = dados.vibracao ?? this.vibracao;
+      this.somAlarme = dados.somAlarme ?? this.somAlarme;
+      
       this.configData(dados)
     })
   }

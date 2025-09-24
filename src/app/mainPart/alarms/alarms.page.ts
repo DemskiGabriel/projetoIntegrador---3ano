@@ -56,7 +56,7 @@ export class AlarmsPage implements OnInit {
   }
 
   load() {
-    this.rt.query('/tarefa', (snapshot: any) => {
+    this.rt.query('/alarme', (snapshot: any) => {
       if (snapshot.val() !== null) {
         this.dados = Object.entries(snapshot.val()).map(([key, item]: [string, any]) => {
           item.id = key;

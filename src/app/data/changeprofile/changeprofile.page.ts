@@ -1,16 +1,17 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonInput, IonButton, IonButtons, IonAvatar, IonCard, IonTextarea, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
+import { IonContent, IonInput, IonButton, IonButtons, IonAvatar, IonCard, IonTextarea, IonIcon } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
+import { HttpParams } from '@capacitor/core';
 
 @Component({
   selector: 'app-changeprofile',
   templateUrl: './changeprofile.page.html',
   styleUrls: ['./changeprofile.page.scss'],
   standalone: true,
-  imports: [IonIcon, IonFabButton, IonFab, IonTextarea, IonCard, IonContent, CommonModule, FormsModule, IonInput, IonButton, IonButtons, IonAvatar, RouterLink]
+  imports: [IonIcon, IonTextarea, IonCard, IonContent, CommonModule, FormsModule, IonInput, IonButton, IonButtons, IonAvatar, RouterLink]
 })
 export class ChangeprofilePage implements OnInit {
   public id:string = localStorage.getItem('userId') || '';
@@ -64,19 +65,24 @@ export class ChangeprofilePage implements OnInit {
   // ---------- Troca de imagem ----------
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   
-  // foto de perfil experimental --TEMPORARIO--
-  fotoPerfil: string = "assets/icon/fotodeperfil.jpg";
+  // foto de perfil base
+  fotoPerfil: string = "assets/icon/fotodeperfil.png";
 
   selecionarImagem() {
     this.fileInput.nativeElement.click();
   }
 
+  selectedFile!: File;
+
   onFileSelected(event: any) {
     const file: File = event.target.files[0];
+
     if (file) {
+      this.selectedFile = file; // salva o File real
+
       const reader = new FileReader();
       reader.onload = () => {
-        this.fotoPerfil = reader.result as string; // atualiza o avatar
+        this.fotoPerfil = reader.result as string; // só para exibir
       };
       reader.readAsDataURL(file);
     }
@@ -90,10 +96,14 @@ export class ChangeprofilePage implements OnInit {
     .subscribe(
       (_res:any) => {
         if (_res.status == 'success'){
-          this.nome = _res.dados.username;
-          this.email = _res.dados.email;
-          this.descricao = _res.dados.descricao;
-          this.dataNascimento = _res.dados.birthday;
+          this.nome = _res.dados.username ?? this.nome;
+          this.email = _res.dados.email ?? this.email;
+          this.descricao = _res.dados.descricao ?? this.descricao;
+          this.dataNascimento = _res.dados.birthday ?? this.dataNascimento;
+
+          this.fotoPerfil = _res.dados.imgPerfil 
+                              ? 'http://localhost/projetoIntegrador/' + _res.dados.imgPerfil 
+                              : this.fotoPerfil;
 
           this.formatarDataLoad(this.dataNascimento);
         }else Error
@@ -102,18 +112,26 @@ export class ChangeprofilePage implements OnInit {
   }
 
   // ---------- Save ----------
-  save(){
-    // Formata a data para ser salva no banco.
+  
+  save() {  
+    // Formata a data para o banco
     const dataFormatada = this.converterDataParaBanco(this.dataNascimento);
 
     this.autenticacao_service
-    .updateUsuario(this.id, this.nome, this.email, this.descricao, dataFormatada)
-    .subscribe(
-      (_res:any) => {
-        if (_res.status == 'success'){
-          console.log(_res.msg);
-        }else Error
+    .updateUsuario(
+      this.id, 
+      this.nome, 
+      this.email, 
+      this.descricao, 
+      dataFormatada,
+      this.selectedFile
+    )
+    .subscribe((_res: any) => {
+      if (_res.status == 'success'){
+        console.log(_res.msg);
+      } else {
+        console.error('Erro ao atualizar usuário');
       }
-    );
+    });
   }
 }
