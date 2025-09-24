@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
@@ -13,7 +13,10 @@ import {
   IonToggle,
   IonFab,
   IonFabButton,
-  IonIcon } from '@ionic/angular/standalone';
+  IonIcon, 
+  IonText, 
+  IonImg 
+} from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { addOutline } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
@@ -25,7 +28,9 @@ import { RouterLink } from '@angular/router';
   styleUrls: ['./alarms.page.scss'],
   standalone: true,
 
-  imports: [
+  imports: [ 
+    IonImg, 
+    IonText, 
     CommonModule,
     FormsModule,
     IonContent,
@@ -51,6 +56,7 @@ export class AlarmsPage implements OnInit {
     addIcons({ addOutline });
   }
   ngOnInit() {}
+  
   ionViewWillEnter(){
     this.load();
   }
@@ -65,6 +71,7 @@ export class AlarmsPage implements OnInit {
           // faz com que a apareceça o horario mais proximo.
           item.proximoAlarme = this.getProximoAlarme(item);
 
+          this.telaVazia(item);
           return item;
         }).filter((item: any) => item != null);
       }else{
@@ -90,8 +97,20 @@ export class AlarmsPage implements OnInit {
   
     return proximo ? proximo.hora : null;
   }
-  
+
+  toggleContent() {
+    this.hasAlarms.update(value => !value);
+  }
+
   toggleAlarm(index: number) {
     this.dados[index].ativo = !this.dados[index].ativo;
+  }
+
+  public hasAlarms = signal<boolean>(false);
+  telaVazia(alarmes:any){
+    if(alarmes.length == 0){
+      // Para ver o design, mudar o valor abaixo pra 'true'
+      this.hasAlarms.set(false); 
+    }else this.hasAlarms.set(true); 
   }
 }

@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { authGuard } from './auth/auth.guard';
 import { TabsPage } from './tabs/tabs.page';
 
 export const routes: Routes = [
@@ -37,11 +36,6 @@ export const routes: Routes = [
     path: 'esqueci-3',
     loadComponent: () => import('./Entrar/esqueciSenha/esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
   },
-  {
-    path: 'changeprofile',
-    loadComponent: () => import('./data/changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
-  },
-
 
   // Pagina do Projeto
   {
@@ -54,7 +48,8 @@ export const routes: Routes = [
       },
       {
         path: 'alarms',
-        loadComponent: () => import('./mainPart/alarms/alarms.page').then( m => m.AlarmsPage)
+        loadComponent: () => import('./mainPart/alarms/alarms.page').then( m => m.AlarmsPage),
+        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
       {
@@ -69,12 +64,22 @@ export const routes: Routes = [
       },
     ]
   },
+  
+  // paginas filho
   {
     path: 'new-alarm',
-    loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage),
+    runGuardsAndResolvers: 'always'
+    // canActivate: [authGuard]
   },
   {
     path: 'new-alarm/:idAlarme',
     loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage)
+    // canActivate: [authGuard]
+  },
+  {
+    path: 'changeprofile',
+    loadComponent: () => import('./data/changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
+    // canActivate: [authGuard]
   }
 ];

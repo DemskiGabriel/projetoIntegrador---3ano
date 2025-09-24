@@ -325,7 +325,7 @@ export class NewAlarmPage {
           text: 'DELETE',
           role: 'confirm',
           handler: () => {
-            this.rt.remove(`/tarefa/${this.idAlarme}`).then();
+            this.rt.remove(`/alarme/${this.idAlarme}`).then();
             this.router.navigate(['/tabs/alarms']);
           },
         },

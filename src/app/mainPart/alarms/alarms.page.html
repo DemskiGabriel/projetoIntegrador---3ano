@@ -1,4 +1,30 @@
-<ion-content [fullscreen]="true" class="ion-padding alarms-background">
+<!-- Exibe o conteúdo quando NÃO há alarmes -->
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="!hasAlarms()">
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Alarmes</h1>
+  </ion-text>
+
+  <ion-text class="main-text">
+    <h1>Você não tem nenhum alarme no momento</h1>
+  </ion-text>
+
+  <ion-img src="assets/imagens/estrela.png"></ion-img>
+  <ion-fab horizontal="center" vertical="center" slot="fixed" class="add-button">
+    <ion-fab-button routerLink="/new-alarm">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+
+<!-- Caso Tenha alarmes eles apareceram listados -->
+<ion-content [fullscreen]="true" class="ion-padding" *ngIf="hasAlarms()">
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Alarmes</h1>
+  </ion-text>
+
   <!-- Alarmes -->
   <ion-list class="alarms-list">
     <div *ngFor="let alarm of dados; let i = index" class="alarm-container">
@@ -15,7 +41,7 @@
       </div>
     </div>
   </ion-list>
-
+  
   <!-- Botão para Criar alarme -->
   <ion-fab horizontal="end" vertical="bottom" slot="fixed" class="add-button">
     <ion-fab-button routerLink="/new-alarm">
@@ -23,3 +49,4 @@
     </ion-fab-button>
   </ion-fab>
 </ion-content>
+
