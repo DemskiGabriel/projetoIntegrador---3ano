@@ -19,19 +19,20 @@
       <h1>Desafios</h1>
     </ion-text>
 
-    <ion-card *ngFor="let quest of mockQuests" class="quest-card">
+    <ion-card *ngFor="let quest of quests" class="quest-card">
       <div class="quest-header">
         <ion-text class="quest-name">
-          <h3>{{ quest.name }}</h3>
+          <h3><b>{{ quest.challengeName }}</b></h3>
+          <h5>{{ quest.alarmName }}</h5>
         </ion-text>
         <ion-text class="quest-points">
           +{{ quest.points }} Pontos
         </ion-text>
       </div>
-
+      <hr style="border: 0; height: 1px; background: #2e1b5b7a;">
       <div class="quest-body">
-        <p *ngFor="let challenge of quest.challenges">
-          {{ challenge }}
+        <p>
+          {{ quest.challenges }}
         </p>
       </div>
     </ion-card>
