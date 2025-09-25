@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { AutenticacaoService } from '../service/autenticacao.service';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 
 @Component({
@@ -15,50 +15,25 @@ import { RouterLink } from '@angular/router';
   imports: [IonContent, IonImg, IonCard, RouterLink,  IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
-  public login:string = '';
-  public senha:string = '';
+  public login: string = '';
+  public senha: string = '';
 
-  constructor(private alertController: AlertController,
-    public autenticacao_service:AutenticacaoService
-    ) { }
+  constructor(private alertController: AlertController, private router: Router) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
- async logar(){
-    let login = this.login;
-    let senha = this.senha;
-
-    this.autenticacao_service
-    .logar(login,senha)
-    .subscribe(
-      (_res:any) => {
-
-        if (_res.status == 'sucess'){
-
-          sessionStorage.setItem('token',_res.token)
-
-        }else{
-
-          }
-
-      }
-    );
-  
-
+  async logar() {
     if (!this.login || !this.senha) {
       const alert = await this.alertController.create({
         header: 'Atenção',
         message: 'Por favor, preencha todos os campos!',
-        buttons: ['OK']
+        buttons: ['OK'],
       });
-
       await alert.present();
       return;
-  }
+    }
 
+    console.log('Tentando logar com:', this.login, 'e', this.senha);
+    this.router.navigate(['/tabs/user']);
   }
- 
-
-  
 }
