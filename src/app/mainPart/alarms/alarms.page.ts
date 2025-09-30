@@ -9,7 +9,6 @@ import {
   IonList,
   IonItem,
   IonLabel,
-  IonNote,
   IonToggle,
   IonFab,
   IonFabButton,
@@ -37,7 +36,6 @@ import { RouterLink } from '@angular/router';
     IonList,
     IonItem,
     IonLabel,
-    IonNote,
     IonToggle,
     IonFab,
     IonFabButton,
@@ -67,7 +65,7 @@ export class AlarmsPage implements OnInit {
         this.dados = Object.entries(snapshot.val()).map(([key, item]: [string, any]) => {
           item.id = key;
           item.alarmes = Array.isArray(item.alarmes) ? item.alarmes : [];
-  
+          
           // faz com que a apareceça o horario mais proximo.
           item.proximoAlarme = this.getProximoAlarme(item);
 
