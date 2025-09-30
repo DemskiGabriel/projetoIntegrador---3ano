@@ -14,7 +14,7 @@ import '@ionic/core/css/typography.css';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonList, IonFab, IonFabButton, IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule]
+  imports: [IonList, IonFab, IonFabButton, IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule, IonContent, IonButton]
 })
 export class PerfilPage implements OnInit {
 

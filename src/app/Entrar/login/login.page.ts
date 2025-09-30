@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardHeader, IonCardContent, IonInput, IonItem, IonButton, IonImg } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { AutenticacaoService } from '../../service/autenticacao.service';
 import { Router, RouterLink } from '@angular/router';
@@ -12,11 +12,11 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonImg, IonCard, RouterLink,  IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
+  imports: [IonContent, IonImg, IonCard, RouterLink,  IonCardHeader, IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
-  public login:string = '';
-  public senha:string = '';
+  public login: string = '';
+  public senha: string = '';
 
   constructor(
     private alertController: AlertController,
@@ -27,35 +27,40 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
- async logar(){
+  async logar(){
     let login = this.login;
     let senha = this.senha;
 
-    this.autenticacao_service
-    .logar(login,senha)
-    .subscribe(
-      (_res:any) => {
-        if (_res.status == 'success'){
-          sessionStorage.setItem('token', _res.token);
-          localStorage.setItem('userId', _res.id);
-          console.log("Login feito com sucesso");
+    if(await this.vericacao()){
+      this.autenticacao_service
+      .logar(login,senha)
+      .subscribe(
+        (_res:any) => {
+          if (_res.status == 'success'){
+            sessionStorage.setItem('token', _res.token);
+            localStorage.setItem('userId', _res.id);
+            console.log("Login feito com sucesso");
 
-          // homepage
-          this.router.navigate(['/tabs/feed']);
-        }else{}
-      }
-    );
-  
+            // homepage
+            this.router.navigate(['/tabs/feed']);
+          }else{}
+        }
+      );
+    }  
+  }
 
+  async vericacao() {
     if (!this.login || !this.senha) {
       const alert = await this.alertController.create({
         header: 'Atenção',
         message: 'Por favor, preencha todos os campos!',
-        buttons: ['OK'] 
+        buttons: ['OK']
       });
-
       await alert.present();
-      return;
+
+      return false;
     }
+
+    return true;
   }
 }

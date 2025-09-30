@@ -1,57 +1,43 @@
-  <ion-card> 
-    <ion-img src="assets/imagens/pessoa.png" class="pessoa"></ion-img>
-  
-    <h3>nome</h3>
 
-    <ion-fab>
-      <ion-fab-button>
-        <ion-icon name="add"></ion-icon>
-        <ion-img src="assets/imagens/caneta.png"></ion-img>
-      </ion-fab-button>
-    </ion-fab>
-    
+<ion-content color="light" class="ion-padding">
+  <ion-card class="perfil-card">
+      <ion-item lines="none" class="perfil-item">
+          <ion-img src="assets/imagens/pessoa.png" class="foto-perfil"></ion-img>
+          <ion-label class="nome-perfil">{{perfil}}</ion-label>
+          <ion-button shape="round" slot="end" class="editar-btn">
+              <ion-icon name="create"></ion-icon>
+          </ion-button>
+      </ion-item>
   </ion-card>
 
-  <div class="estrela-container">
-    <img class="estrela" src="assets/imagens/estrela.jpg" alt="Estrela de Rank">
-    <div class="texto-estrela">10000</div>
+  <div class="estrela-pontos-container">
+      <ion-img src="assets/imagens/estrela.jpg" class="estrela"></ion-img>
+      <ion-label class="pontos">{{pontos}}</ion-label>
   </div>
 
-  <ion-list>
-
-    <div class="rank-container">
-    <h2>Rank</h2>
-    <ion-img src="assets/imagens/grupo.png" class="grupo"></ion-img>
-    </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-      <ion-img src="assets/imagens/troféuOuro.png" class="ouro"></ion-img>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-      <ion-img src="assets/imagens/troféuPrata.png" class="prata"></ion-img>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-      <ion-img src="assets/imagens/troféuBronze.png" class="bronze"></ion-img>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-card inset="true" class="lista-rank" lines="none">
+      <div class="rank-header">
+          <ion-label>Rank</ion-label>
+          <ion-img src="assets/imagens/grupo.png" class="grupo-icon"></ion-img>
+      </div>
+      
+      <ion-item class="rank-item">
+          <ion-label>{{amigos}}</ion-label>
+          <ion-img src="assets/imagens/troféuOuro.png" class="trofeu"></ion-img>
+      </ion-item>
+      <ion-item class="rank-item">
+          <ion-label>{{amigos}}</ion-label>
+          <ion-img src="assets/imagens/troféuPrata.png" class="trofeu"></ion-img>
+      </ion-item>
+      <ion-item class="rank-item">
+          <ion-label>{{amigos}}</ion-label>
+          <ion-img src="assets/imagens/troféuBronze.png" class="trofeu"></ion-img>
+      </ion-item>
+      <ion-item class="rank-item">
+          <ion-label>{{amigos}}</ion-label>
+      </ion-item>
+      <ion-item class="rank-item">
+          <ion-label>{{amigos}}</ion-label>
+      </ion-item>
+  </ion-card>
+</ion-content>
