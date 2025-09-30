@@ -1,20 +1,26 @@
 
-<ion-content color="light" class="ion-padding">
+<ion-content class="ion-padding">
+<br>
   <ion-card class="perfil-card">
       <ion-item lines="none" class="perfil-item">
-          <ion-img src="assets/imagens/pessoa.png" class="foto-perfil"></ion-img>
-          <ion-label class="nome-perfil">{{perfil}}</ion-label>
-          <ion-button shape="round" slot="end" class="editar-btn">
-              <ion-icon name="create"></ion-icon>
-          </ion-button>
+          <ion-img src="{{fotoPerfil}}" class="foto-perfil"></ion-img>
+          <ion-label class="nome-perfil">{{nome}}</ion-label>
       </ion-item>
   </ion-card>
-
-  <div class="estrela-pontos-container">
-      <ion-img src="assets/imagens/estrela.jpg" class="estrela"></ion-img>
-      <ion-label class="pontos">{{pontos}}</ion-label>
-  </div>
-
+<br>
+    <ion-card class="perfil-card">
+        <ion-card-content>
+            <h3><b>SCORE</b></h3>
+            <p>{{pontos}}</p>
+            <br>
+            <h3><b>Sobre mim</b></h3>
+            <p>{{descricao}}</p>
+            <br>
+            <h3><b>Aniversario</b></h3>
+            <p>{{dataNascimento}}</p>
+        </ion-card-content>
+    </ion-card>
+<br>
   <ion-card inset="true" class="lista-rank" lines="none">
       <div class="rank-header">
           <ion-label>Rank</ion-label>
@@ -40,4 +46,10 @@
           <ion-label>{{amigos}}</ion-label>
       </ion-item>
   </ion-card>
+
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button routerLink="/changeprofile">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
