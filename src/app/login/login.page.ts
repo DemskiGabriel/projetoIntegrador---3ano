@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonItem, IonButton, IonImg, IonIcon } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { AutenticacaoService } from '../service/autenticacao.service';
 import { Router, RouterLink } from '@angular/router';
@@ -12,7 +12,7 @@ import { Router, RouterLink } from '@angular/router';
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
   standalone: true,
-  imports: [IonContent, IonImg, IonCard, RouterLink,  IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
+  imports: [IonIcon, IonContent, IonImg, IonCard, RouterLink,  IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonItem, IonButton, CommonModule, FormsModule]
 })
 export class LoginPage implements OnInit {
   public login: string = '';

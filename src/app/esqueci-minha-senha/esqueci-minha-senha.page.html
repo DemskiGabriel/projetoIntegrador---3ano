@@ -1,19 +1,35 @@
+<ion-content [fullscreen]="true" class="forgot-password-page">
 
-<ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Esqueci minha senha</ion-card-title>
-      <ion-card-subtitle>Para redefinir sua senha, precisamos do e-mail cadastrado na sua conta e lhe enviaremos um código  </ion-card-subtitle>
+  <ion-card class="reset-card">
+    <ion-card-header class="ion-no-padding">
+      <ion-card-title class="card-title">Esqueci minha senha</ion-card-title>
     </ion-card-header>
-  
-    <ion-card-content>
 
-      <ion-input label="E-mail" label-placement="floating" fill="outline"  [(ngModel)]="email"></ion-input>
+    <ion-card-content class="card-content">
+      <p class="description">
+        Para redefinir a senha, precisamos do e-mail cadastrado na sua conta e lhe enviaremos um código.
+      </p>
 
-      <ion-button (click)="proximo()" id="present-alert" expand="block">Proximo</ion-button></ion-card-content>
-      <a routerLink="/login"  > Cancelar </a>
+      <ion-item class="input-item">
+        <ion-input label="e-mail" label-placement="floating" type="email" [(ngModel)]="email"></ion-input>
+      </ion-item>
+      
+      <!-- Botão funcional que simula o envio e navega para /reset-code -->
+      <ion-button expand="block" class="next-button">Próximo</ion-button>
 
+      <div class="cancel-link">
+        <!-- Funcionalidade: Botão de cancelar que retorna para a tela de login (/login) -->
+        <a routerLink="/login" class="cancel-text">Cancelar</a>
+      </div>
+    </ion-card-content>
   </ion-card>
-  <ion-img src="assets/imagens/pomocat.jpg"></ion-img>
+
+  <div class="footer-logo">
+    <!-- Placeholder para a imagem PomoCat, seguindo o estilo escuro da referência -->
+    <ion-img src="https://placehold.co/100x100/000/fff?text=PomoCat+Logo" class="logo"></ion-img>
+    <p class="logo-text">PomoCat</p>
+  </div>
+
+</ion-content>
 
 

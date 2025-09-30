@@ -1,5 +1,6 @@
 .login-page {
-    --background: linear-gradient(to bottom, #d2d2f7, #989ae8);
+    background: linear-gradient(to top, #d2d2f7, #989ae8);
+  --background: transparent;   
     display: flex;
     flex-direction: column;
     justify-content: center;
