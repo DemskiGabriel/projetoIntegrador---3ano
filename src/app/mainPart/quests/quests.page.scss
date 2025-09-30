@@ -38,41 +38,70 @@
 
 .quests-title {
   text-align: center;
-  h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #2e1b5b;
-  }
 }
-
-/* Novo estilo para cards no formato da segunda imagem */
-.quest-card {
-  border-radius: 12px;
-  background: #e4bdbd;
-  padding: 12px;
+.quests-title h1 {
+  font-size: 1.8rem;
+  font-weight: bold;
   color: #2e1b5b;
 }
 
+/* Card de cada missão */
+.quest-card {
+  border-radius: 15px;
+  background: linear-gradient(180deg, #c97d7d 0%, #d99c9c 100%);
+  padding: 15px;
+  color: #2e1b5b;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Efeito hover */
+.quest-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+/* Cabeçalho do card (nome + pontos) */
 .quest-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   font-weight: bold;
+  padding-bottom: 6px;
+  border-bottom: 1px solid rgba(46, 27, 91, 0.3);
 }
 
+/* Nome da missão */
 .quest-name h3 {
   margin: 0;
 }
 .quest-name h5{
   margin: 0;
+  font-style: italic;
+  font-weight: 700;
+  color: #2e1b5b;
 }
 
+/* Pontuação */
 .quest-points {
   font-size: 0.9rem;
+  font-weight: 600;
+  color: #2e1b5b;
 }
 
+/* Corpo do card (descrição/desafios) */
 .quest-body {
   margin-top: 8px;
   font-size: 0.9rem;
   color: #2e1b5b;
+  padding-top: 6px;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+/* Responsividade */
+@media (max-width: 400px) {
+  .quest-card {
+    width: 90%;
+  }
 }
