@@ -47,6 +47,10 @@ export class AutenticacaoService {
     return this.rs.post(fd);
   }
 
+  rank(){
+    return this.rs.get
+  }
+
 
   proximo(email:string){
     const fd = new FormData();

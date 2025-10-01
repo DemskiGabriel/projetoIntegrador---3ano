@@ -19,8 +19,6 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
   imports: [IonCardContent, IonFabButton, IonFab,  IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule, IonContent, RouterLink]
 })
 export class PerfilPage implements OnInit {
-  public perfil: string = 'perfil';
-  
   public amigos: string = 'amigos'
 
   constructor(
@@ -28,7 +26,8 @@ export class PerfilPage implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.load();
+    this.loadUser();
+    this.loadRank();
   }
 
   // ---------- Load ----------
@@ -44,7 +43,7 @@ export class PerfilPage implements OnInit {
   // foto de perfil base
   fotoPerfil: string = "assets/icon/fotodeperfil.png";
 
-  load(){
+  loadUser(){
     this.autenticacao_service
     .edicaoUsuario(this.id)
     .subscribe(
@@ -70,5 +69,18 @@ export class PerfilPage implements OnInit {
     let [ ano, mes, dia] = data.split('-');
     ano = new Date().getFullYear().toString();
     this.dataNascimento = `${dia}/${mes}/${ano}`;
+  }
+
+  public dados: Array<any> = [];
+  loadRank(){
+    this.autenticacao_service.rank()
+      .subscribe((_res:any) => {
+        if(_res.status == 'success'){
+          this.dados = _res.dados;
+          console.log(this.dados); // agora vai listar todos os usuários
+        } else {
+          console.error(_res.msg);
+        }
+      });
   }
 }

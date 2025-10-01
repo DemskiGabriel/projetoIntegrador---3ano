@@ -7,7 +7,6 @@
           <ion-label class="nome-perfil">{{nome}}</ion-label>
       </ion-item>
   </ion-card>
-<br>
     <ion-card class="perfil-card">
         <ion-card-content>
             <h3><b>SCORE</b></h3>
@@ -21,29 +20,17 @@
         </ion-card-content>
     </ion-card>
 <br>
-  <ion-card inset="true" class="lista-rank" lines="none">
+    <ion-card inset="true" class="lista-rank" lines="none">
+
+    <!-- Titulo -->
       <div class="rank-header">
           <ion-label>Rank</ion-label>
           <ion-img src="assets/imagens/grupo.png" class="grupo-icon"></ion-img>
       </div>
-      
-      <ion-item class="rank-item">
-          <ion-label>{{amigos}}</ion-label>
+    <!-- Rank -->
+      <ion-item class="rank-item" *ngFor="let usuarios of dados; let i = index">
+          <ion-label>{{usuarios.nome}</ion-label>
           <ion-img src="assets/imagens/troféuOuro.png" class="trofeu"></ion-img>
-      </ion-item>
-      <ion-item class="rank-item">
-          <ion-label>{{amigos}}</ion-label>
-          <ion-img src="assets/imagens/troféuPrata.png" class="trofeu"></ion-img>
-      </ion-item>
-      <ion-item class="rank-item">
-          <ion-label>{{amigos}}</ion-label>
-          <ion-img src="assets/imagens/troféuBronze.png" class="trofeu"></ion-img>
-      </ion-item>
-      <ion-item class="rank-item">
-          <ion-label>{{amigos}}</ion-label>
-      </ion-item>
-      <ion-item class="rank-item">
-          <ion-label>{{amigos}}</ion-label>
       </ion-item>
   </ion-card>
 

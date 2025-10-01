@@ -82,9 +82,6 @@ export class ChangeprofilePage implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.fotoPerfil = reader.result as string; // só para exibir
-
-        console.log(this.fotoPerfil);
-        
       };
       reader.readAsDataURL(file);
     }
