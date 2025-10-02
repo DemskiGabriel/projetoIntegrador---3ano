@@ -1,0 +1,91 @@
+.forgot-password-page {
+    background: linear-gradient(to bottom, #E0E7FF, #A7B6FF);
+    --background: transparent; 
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+    padding: 20px;
+  }
+
+  .reset-card {
+    position: relative;
+    top: 10%;
+    width: 95%;
+    max-width: 400px;
+    background: #a7abc8; 
+    border-radius: 20px;
+    padding: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-title {
+    color: #3b3b3b;
+    font-size: 1.8rem;
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .description {
+    color: #555;
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 30px;
+    padding: 0 10px;
+    line-height: 1.4;
+  }
+
+  .input-item {
+    --background: #d4d7ef; 
+    --border-radius: 8px;
+    border: 1px solid #c8c8c8;
+    margin-bottom: 25px;
+    padding-left: 10px;
+  }
+  
+  .input-item ion-input {
+      --padding-start: 0;
+      --padding-bottom: 0;
+      --padding-top: 0;
+  }
+
+  .next-button {
+    --background: #7a7fe6; 
+    --border-radius: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    height: 48px;
+  }
+
+  .cancel-link {
+    text-align: center;
+    margin-top: 15px;
+  }
+
+  .cancelar {
+    color: #5b7efc;
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .footer-logo {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .logo {
+    width: 500px;
+    height: 250px;
+    position: relative;
+    top: 15%;
+    left: 3%;
+  }

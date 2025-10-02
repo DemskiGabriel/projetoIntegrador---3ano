@@ -1,0 +1,81 @@
+
+<ion-content [fullscreen]="true">
+  <br>
+  <div class="header-content">
+    <ion-img src="assets/imagens/logomassa.png" alt="Logo do PomoCat"></ion-img>
+  </div>
+
+  <ion-card>
+    <ion-card-content>
+
+
+      <div *ngIf="currentStep === 1">
+        <div class="question-group">
+          <h3>Em quais horários você costuma estar mais disponível durante o dia?</h3>
+          <ion-item lines="none" *ngFor="let option of horariosOptions">
+            <ion-checkbox justify="space-between" [checked]="horariosAnswer === option.value"
+              (ionChange)="onCheckboxChange('horarios', option.value, $event)">
+              {{ option.label }}
+            </ion-checkbox>
+          </ion-item>
+        </div>
+
+        <hr class="separator">
+
+        <div class="question-group">
+          <h3>Quanto tempo livre você costuma ter por dia para cuidar de si mesmo?</h3>
+          <ion-item lines="none" *ngFor="let option of tempoLivreOptions">
+            <ion-checkbox justify="space-between" [checked]="tempoLivreAnswer === option.value"
+              (ionChange)="onCheckboxChange('tempoLivre', option.value, $event)">
+              {{ option.label }}
+            </ion-checkbox>
+          </ion-item>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 2">
+        <div class="question-group">
+          <h3>Quanto tempo, em média, você passa no celular por dia?</h3>
+          <ion-item lines="none" *ngFor="let option of tempoCelularOptions">
+            <ion-checkbox justify="space-between" [checked]="tempoCelularAnswer === option.value"
+              (ionChange)="onCheckboxChange('tempoCelular', option.value, $event)">
+              {{ option.label }}
+            </ion-checkbox>
+          </ion-item>
+        </div>
+
+        <hr class="separator">
+
+        <div class="question-group">
+          <h3>Em quais dias da semana sua rotina é mais flexível para cumprir missões?</h3>
+          <ion-item lines="none" *ngFor="let option of diasSemanaOptions">
+            <ion-checkbox justify="space-between" [checked]="diasSemanaAnswer === option.value"
+              (ionChange)="onCheckboxChange('diasSemana', option.value, $event)">
+              {{ option.label }}
+            </ion-checkbox>
+          </ion-item>
+        </div>
+      </div>
+
+      <div *ngIf="currentStep === 3">
+        <div class="question-group">
+          <h3>Quantas pausas livres você costuma ter ao longo do dia?</h3>
+          <ion-item lines="none" *ngFor="let option of pausasLivresOptions">
+            <ion-checkbox justify="space-between" [checked]="pausasLivresAnswer === option.value"
+              (ionChange)="onCheckboxChange('pausasLivres', option.value, $event)">
+              {{ option.label }}
+            </ion-checkbox>
+          </ion-item>
+        </div>
+      </div>
+    </ion-card-content>
+
+    <ion-text color="danger" *ngIf="errorMessage">
+      <p class="ion-text-center">{{ errorMessage }}</p>
+    </ion-text>
+
+    <ion-button expand="block" class="ion-margin-top" (click)="nextStep()">
+      Próximo
+    </ion-button>
+  </ion-card>
+</ion-content>

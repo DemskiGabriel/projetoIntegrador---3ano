@@ -1,0 +1,42 @@
+<ion-content [fullscreen]="true" class="ion-padding custom-background">
+
+  <div *ngIf="!hasQuests()" class="empty-content-wrapper">
+    <ion-text class="main-text">
+      <h1>Você não tem nenhuma missão no momento</h1>
+    </ion-text>
+
+    <ion-img src="assets/imagens/estrela.png"></ion-img>
+
+    <ion-text class="secondary-text">
+      <h2>Bora criar uma?</h2>
+    </ion-text>
+  </div>
+
+  <div *ngIf="hasQuests()" class="has-quests-content">
+    <ion-text class="quests-title">
+      <h1>Desafios</h1>
+    </ion-text>
+
+    <div *ngFor="let grupo of questsGrouped | keyvalue" class="quest-group-section">
+      <h2 class="alarm-group-title">{{ grupo.key }}</h2>
+      
+      <div class="quest-card-list">
+        <ion-item *ngFor="let quest of grupo.value" lines="none" class="quest-item-content">
+          <div class="quest-content-wrapper">
+            <div class="quest-header">
+              <ion-text class="quest-name">
+                <h3><b>{{ quest.challengeName }}</b></h3> 
+              </ion-text>
+              <ion-text class="quest-points">
+                +{{ quest.points }} Pontos
+              </ion-text>
+            </div>
+            <div class="quest-body">
+              <p>{{ quest.challenges }}</p>
+            </div>
+          </div>
+        </ion-item>
+      </div>
+    </div>
+  </div>
+</ion-content>

@@ -1,0 +1,95 @@
+ion-header {
+  --background: #a7abc8;
+}
+
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+  
+  ion-title {
+    color: #000;
+  }
+}
+
+h1{
+  text-align: center;
+  color: #000;
+  margin-top: -1%;
+}
+
+ion-content {
+  --background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  ion-img {
+    max-width: 350px;
+  }
+}
+
+ion-card {
+  --background: #a7abc8;
+  margin: auto;
+  margin-top: -40px;
+  border-radius: 20px;
+  padding: 20px;
+  width: 300px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+}
+
+ion-card-content {
+  --background: black;
+  border-radius: 20px;
+  padding: 16px;
+}
+
+ion-list {
+  --ion-background-color: transparent;
+  background: transparent;
+  --border-width: 0; // Remove a borda superior e inferior da lista
+}
+
+// Estilos para os campos de input e seleção
+ion-item {
+  --background: #a7abc8;
+  --border-color: black;
+  border-bottom: 1px solid black;
+  margin-bottom: 8px;
+  --padding-start: 0; // Remove o padding padrão do item, se houver
+
+  // Corrigindo a cor do texto de todos os labels para preto
+  ion-label {
+    color: #666;
+  }
+}
+
+// Removendo as bordas de cima e de baixo dos items (exceto a borda de baixo que você quer manter)
+ion-item:first-child {
+  --border-width: 0;
+}
+
+
+ion-input, ion-select {
+  --background: transparent;
+  color: black;
+  --placeholder-color: black;
+}
+
+ion-button {
+  --background: #8e95c5;
+  --color: black;
+}
+
+a {
+  color: #666;
+}
+
+a:hover {
+  text-decoration: underline;
+}

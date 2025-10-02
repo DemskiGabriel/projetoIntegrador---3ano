@@ -1,0 +1,47 @@
+.principal{
+  --padding-top: 20%;
+}
+
+.profile-avatar {
+  margin: 0 auto 20px auto;
+  width: 100px;
+  height: 100px;
+}
+
+.saveButtons {
+  display: flex;
+  justify-content: space-around;
+}
+.saveButtons ion-button{
+  width: 100%;
+  max-width: 100%;
+}
+
+.descricao{
+  --padding-top: 8px;
+  --padding-bottom: 8px;
+
+  --border-radius: 10px;
+  --border-color: black; 
+}
+
+ion-item{
+  --border-bottom: none 
+}
+
+ion-card{
+  border-radius: 10px;
+}
+
+.color{
+  color: black;
+}
+
+.color ion-input{
+  --border-radius: 10px;
+  --border-color: black; 
+}
+
+ion-fab{
+  margin-bottom: 8%;
+}

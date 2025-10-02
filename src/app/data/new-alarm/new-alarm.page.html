@@ -1,0 +1,99 @@
+<ion-content [fullscreen]="true" class="ion-padding">
+  <div class="seletorTempo">
+    <ion-datetime 
+      presentation="time" 
+      [(ngModel)]="dataSInicial">
+    </ion-datetime>
+    <p>A</p>
+    <ion-datetime 
+      presentation="time" 
+      [(ngModel)]="dataSFinal">
+    </ion-datetime>
+  </div><br>
+
+  <ion-card>
+    <!-- Header -->
+    <br>
+    <div class="title">
+      <h5>Data</h5>
+      <ion-button shape="round" (click)="showCalendar = true">
+        <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
+      </ion-button>
+    </div>
+    
+    <ion-card-content> 
+      <!-- linha com botões dos dias da semana -->
+      <ion-buttons class="weekdays">
+        <ion-button 
+          shape="round"
+          *ngFor="let dia of dias; let i = index"
+          (click)="toggleDia(i)"
+          [class.selected]="diasSelecionados.includes(i)">
+          {{ dia }}
+        </ion-button>
+      </ion-buttons>
+    
+      <!-- Nome Do Alarme-->
+      <ion-item>
+        <ion-input placeholder="Nome do alarme" [(ngModel)]="nomeAlarme"></ion-input>
+      </ion-item>
+      <!-- Vezes Por Dia -->
+      <ion-item>
+        <ion-input placeholder="Vezes por dia" [(ngModel)]="vezesPorDia" type="number"></ion-input>
+      </ion-item>
+      <!-- Vibração -->
+      <ion-item>
+        <ion-toggle [(ngModel)]="vibracao">Vibração</ion-toggle>
+      </ion-item>
+      <!-- Som do Alarme -->
+      <ion-item>
+        <ion-toggle [(ngModel)]="somAlarme">Som do alarme</ion-toggle>
+      </ion-item>
+      <!-- Modo Desafio -->
+      <ion-item>
+        <ion-toggle [(ngModel)]="desafioToggle">Modo Desafio</ion-toggle>
+      </ion-item>
+      <ion-item *ngIf="desafioToggle">
+        <ion-textarea fill="outline" [autoGrow]="true" rows="3" maxlength="250" class="descricao" [(ngModel)]="descricaoDesafio" 
+        placeholder="De uma descrição da sua tarefa, para a criação dos desafios.">
+        Descrição
+        </ion-textarea>
+      </ion-item>
+    </ion-card-content>
+
+    <ion-buttons class="saveButtons">
+      <ion-button fill="clear" *ngIf="idAlarme;" color="danger" (click)="excluir()">Excluir</ion-button>
+      <ion-button fill="clear" color="primary" class="save" (click)="salvar()">Salvar</ion-button>
+    </ion-buttons>
+  </ion-card> 
+
+  <ion-button routerLink="/tabs/alarms" shape="round">
+    <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+  </ion-button>
+</ion-content>
+
+<ion-modal
+  [isOpen]="showCalendar"
+  (didDismiss)="showCalendar = false"
+
+  [initialBreakpoint]="0.50"
+  handleBehavior="cycle"
+  [keepContentsMounted]="true">
+  <ng-template>
+    <ion-content class="ion-padding">
+      <ion-datetime 
+        #datetime
+        presentation="date"
+        [preferWheel]="false" 
+        [min]="minDate" max="2027-12-31T23:59:59" 
+        [(ngModel)]="calendario"
+        multiple="true">
+        <ion-buttons slot="buttons">
+          <ion-button color="danger" (click)="cancelCalendario()">Cancelar</ion-button>
+          <ion-button color="primary" (click)="salvarCalendario()">Salvar</ion-button>    
+        </ion-buttons>
+      </ion-datetime>
+    </ion-content>
+  </ng-template>
+</ion-modal>
+  
