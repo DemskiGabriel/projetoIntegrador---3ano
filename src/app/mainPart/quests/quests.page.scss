@@ -132,3 +132,23 @@ ion-item {
   position: relative;
   z-index: 1;
 }
+
+.alarm-group-title {
+  transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease;
+}
+
+.alarm-group-title.hidden {
+  opacity: 0;
+  transform: translateY(-20px);
+  height: 0;
+  overflow: hidden;
+}
+
+.quest-item-content {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.quests-title{
+  display: flex;
+  justify-content: space-between;
+}

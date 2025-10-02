@@ -1,3 +1,15 @@
-<ion-content class="ion-padding">
-  
+<ion-content [fullscreen]="true">
+    <ng-container *ngFor="let task of tasks; let i = index;">
+        <ion-card *ngIf="!task.completo"
+                  #cardElem
+                  class="swipe-card">
+            <ion-card-header>
+                <ion-card-subtitle>{{ task.title }}</ion-card-subtitle>
+            </ion-card-header>
+            <ion-card-content>
+                <p>{{ task.points }} pontos</p>
+            </ion-card-content>
+        </ion-card>
+    </ng-container>
 </ion-content>
+  

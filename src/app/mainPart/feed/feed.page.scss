@@ -1,4 +1,4 @@
-.item1{
-  display: flex;
-  justify-content: space-around;
+.swipe-card {
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  margin: 10px;
 }
