@@ -1,20 +1,20 @@
 .forgot-password-page {
-    /* Degradê corrigido para funcionar no ion-content */
     background: linear-gradient(to bottom, #E0E7FF, #A7B6FF);
     --background: transparent; 
     
     display: flex;
     flex-direction: column;
-    justify-content: center; /* Centraliza verticalmente o cartão */
+    justify-content: center; 
     align-items: center;
     padding: 20px;
   }
 
   .reset-card {
-    width: 100%;
+    position: relative;
+    top: 10%;
+    width: 95%;
     max-width: 400px;
-    /* Cor do cartão sutil, similar à imagem de referência */
-    background: #d3d6f0; 
+    background: #a7abc8; 
     border-radius: 20px;
     padding: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -39,7 +39,7 @@
   }
 
   .input-item {
-    --background: #fff; /* Fundo branco para o campo de input */
+    --background: #d4d7ef; 
     --border-radius: 8px;
     border: 1px solid #c8c8c8;
     margin-bottom: 25px;
@@ -53,8 +53,7 @@
   }
 
   .next-button {
-    --background: #7a7fe6; /* Cor do botão similar à imagem */
-    --background-activated: #5b7efc;
+    --background: #7a7fe6; 
     --border-radius: 10px;
     margin-top: 10px;
     font-weight: bold;
@@ -66,7 +65,7 @@
     margin-top: 15px;
   }
 
-  .cancel-text {
+  .cancelar {
     color: #5b7efc;
     text-decoration: none;
     font-size: 1rem;
@@ -84,16 +83,9 @@
   }
 
   .logo {
-    width: 100px;
-    height: 100px;
-    /* Simula a aparência do logo PomoCat (escuro) */
-    filter: grayscale(100%) brightness(0.5); 
-  }
-  
-  .logo-text {
-      font-size: 1.8rem;
-      font-weight: 900;
-      color: #3b3b3b;
-      letter-spacing: 1px;
-      margin-top: -15px; /* Ajusta o texto para perto do logo */
+    width: 500px;
+    height: 250px;
+    position: relative;
+    top: 15%;
+    left: 3%;
   }

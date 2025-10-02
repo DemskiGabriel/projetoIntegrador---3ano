@@ -14,20 +14,19 @@
         <ion-input label="e-mail" label-placement="floating" type="email" [(ngModel)]="email"></ion-input>
       </ion-item>
       
-      <!-- Botão funcional que simula o envio e navega para /reset-code -->
+
       <ion-button expand="block" class="next-button">Próximo</ion-button>
 
       <div class="cancel-link">
-        <!-- Funcionalidade: Botão de cancelar que retorna para a tela de login (/login) -->
-        <a routerLink="/login" class="cancel-text">Cancelar</a>
+        
+        <a routerLink="/login" class="cancelar">Cancelar</a>
       </div>
     </ion-card-content>
   </ion-card>
 
   <div class="footer-logo">
-    <!-- Placeholder para a imagem PomoCat, seguindo o estilo escuro da referência -->
-    <ion-img src="https://placehold.co/100x100/000/fff?text=PomoCat+Logo" class="logo"></ion-img>
-    <p class="logo-text">PomoCat</p>
+    
+    <ion-img src="assets/imagens/pomocat.jpg" class="logo"></ion-img>
   </div>
 
 </ion-content>
