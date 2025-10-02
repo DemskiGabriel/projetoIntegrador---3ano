@@ -1,0 +1,134 @@
+.custom-background {
+  --background: #f7f7f7;
+}
+
+.empty-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}
+
+.main-text h1 {
+  font-family: 'Poppins';
+  font-size: 1.7rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #2e1b5b;
+  margin: 0;
+}
+
+/* ... Estilos não relacionados ao problema de swipe/glitch ... */
+
+.alarm-group-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #2e1b5b;
+  margin: 16px 0 8px 0; 
+  padding-bottom: 4px;
+}
+
+.quest-card-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0; 
+  
+  /* ESTILOS DE AGRUPAMENTO VISUAL */
+  background: #ffffff; 
+  border-radius: 15px; 
+  padding: 0; 
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
+  margin-bottom: 24px; 
+  overflow: hidden; 
+}
+.quest-sliding-item {
+    /* Garante que o item deslizante não tenha fundo */
+    --background: transparent;
+    /* Linha divisória move-se com o conteúdo e é parte do item deslizante */
+    border-bottom: 1px solid #f0f0f0; 
+}
+
+/* Remove a linha divisória do último item dentro do agrupamento */
+.quest-sliding-item:last-child {
+    border-bottom: none;
+}
+
+.quest-item-content {
+    /* Zera estilos do ion-item para que o layout seja definido por classes internas */
+    --background: transparent;
+    --padding-start: 15px; 
+    --inner-padding-end: 15px; 
+    --padding-top: 12px; 
+    --padding-bottom: 12px;
+}
+
+/* Container de conteúdo que substituiu o ion-card */
+.quest-content-wrapper {
+    width: 100%;
+    /* Zera quaisquer margens/paddings herdados */
+    padding: 0;
+    margin: 0;
+}
+
+/* Efeito hover aplicado ao ion-item-content */
+.quest-item-content:hover {
+    --background: #fafafa;
+}
+
+/* Cabeçalho do item */
+.quest-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 0;
+  border-bottom: none;
+}
+
+/* Nome da missão */
+.quest-name {
+  flex-grow: 1; 
+  margin-right: 15px;
+}
+.quest-name h3 {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  font-size: 1.0rem;
+  font-weight: 600; 
+  color: #2e1b5b;
+}
+
+/* Pontuação */
+.quest-points {
+  font-size: 0.9rem;
+  font-weight: 700; 
+  color: #c97d7d; 
+  margin-left: auto;
+  min-width: 60px; 
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Corpo da missão (Descrição) */
+.quest-body {
+  margin-top: 4px; 
+  padding-top: 0;
+  font-size: 0.85rem;
+  color: #6d6d6d; 
+  line-height: 1.4;
+}
+
+.quest-body p {
+    margin: 0;
+}
+
+ion-item-options {
+  z-index: 0;
+}
+
+ion-item {
+  position: relative;
+  z-index: 1;
+}

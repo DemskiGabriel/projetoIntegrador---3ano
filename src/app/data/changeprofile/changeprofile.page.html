@@ -1,0 +1,27 @@
+<ion-content class="ion-padding principal">
+  <ion-card class="ion-padding">
+    <br><br>
+    <ion-avatar class="profile-avatar" (click)="selecionarImagem()">
+      <img [src]="fotoPerfil" alt="avatar">
+    </ion-avatar>
+    <input type="file" #fileInput hidden accept="image/*" (change)="onFileSelected($event)">
+    
+    <div class="color">
+      <ion-input fill="outline" placeholder="Enter text" [(ngModel)]="nome">Nome</ion-input><br>
+      <ion-input fill="outline" placeholder="Enter text" [(ngModel)]="email">Email</ion-input><br>
+      <ion-textarea fill="outline" [autoGrow]="true" class="descricao" rows="6" maxlength="250" [(ngModel)]="descricao">Descrição</ion-textarea>
+      <br>
+      <ion-input label="Data de nascimento: " placeholder="__/__/____" [(ngModel)]="dataNascimento" maxlength="10" (ionInput)="formatarData($event)"></ion-input>
+    </div>
+    
+    <br>
+    <ion-buttons class="saveButtons">
+      <ion-button color="primary" (click)="save()">Salvar</ion-button>
+    </ion-buttons>
+  </ion-card>
+
+  
+  <ion-button routerLink="/tabs/perfil" shape="round">
+    <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+  </ion-button>
+</ion-content>

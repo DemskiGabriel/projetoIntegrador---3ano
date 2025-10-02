@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
-
+// Icons
 import { addIcons } from 'ionicons';
+import { personCircleOutline, homeOutline, alarmOutline, newspaperOutline, refresh, calendarOutline, arrowBackOutline, pencilOutline, create, person } from 'ionicons/icons';
 
-import { personCircleOutline, create, person, homeOutline, alarmOutline, newspaperOutline, refresh } from 'ionicons/icons';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,7 @@ import { personCircleOutline, create, person, homeOutline, alarmOutline, newspap
 })
 export class AppComponent {
   constructor() {
-    addIcons({ personCircleOutline, create, person, homeOutline, alarmOutline, newspaperOutline, refresh });
+//     icons
+    addIcons({ personCircleOutline, homeOutline, alarmOutline, newspaperOutline, refresh, calendarOutline, arrowBackOutline, pencilOutline, create, person});
   }
 }
