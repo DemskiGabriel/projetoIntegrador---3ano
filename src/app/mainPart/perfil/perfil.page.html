@@ -1,57 +1,44 @@
-  <ion-card> 
-    <ion-img src="assets/imagens/pessoa.png" class="pessoa"></ion-img>
-  
-    <h3>nome</h3>
 
-    <ion-fab>
-      <ion-fab-button>
-        <ion-icon name="add"></ion-icon>
-        <ion-img src="assets/imagens/caneta.png"></ion-img>
-      </ion-fab-button>
-    </ion-fab>
-    
+<ion-content class="ion-padding">
+  <ion-card class="perfil-card">
+      <ion-item lines="none" class="perfil-item">
+          <ion-img src="{{fotoPerfil}}" class="foto-perfil"></ion-img>
+          <ion-label class="nome-perfil">{{nome}}</ion-label>
+      </ion-item>
   </ion-card>
+    <ion-card class="perfil-card">
+        <ion-card-content>
+            <h3><b>SCORE</b></h3>
+            <p>{{pontos}}</p>
+            <br>
+            <h3><b>Sobre mim</b></h3>
+            <p>{{descricao}}</p>
+            <br>
+            <h3><b>Aniversario</b></h3>
+            <p>{{dataNascimento}}</p>
+        </ion-card-content>
+    </ion-card>
+    <ion-card inset="true" class="lista-rank" lines="none">
+    <!-- Titulo -->
+      <div class="rank-header">
+          <ion-label>Rank</ion-label>
+          <ion-img src="assets/imagens/grupo.png" class="grupo-icon"></ion-img>
+      </div>
+    <!-- Rank -->
+      <ion-item class="rank-item" *ngFor="let usuarios of dados; let i = index"
+        [ngClass]="{
+          'ouro': i === 0,
+          'prata': i === 1,
+          'bronze': i === 2
+      }">
+          <ion-label>{{usuarios.username}}</ion-label>
+          <ion-label slot="end">{{usuarios.pontos}}</ion-label>
+      </ion-item>
+    </ion-card>
 
-  <div class="estrela-container">
-    <img class="estrela" src="assets/imagens/estrela.jpg" alt="Estrela de Rank">
-    <div class="texto-estrela">10000</div>
-  </div>
-
-  <ion-list>
-
-    <div class="rank-container">
-    <h2>Rank</h2>
-    <ion-img src="assets/imagens/grupo.png" class="grupo"></ion-img>
-    </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-      <ion-img src="assets/imagens/troféuOuro.png" class="ouro"></ion-img>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-      <ion-img src="assets/imagens/troféuPrata.png" class="prata"></ion-img>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-      <ion-img src="assets/imagens/troféuBronze.png" class="bronze"></ion-img>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-
-  <div>‎ </div>
-
-    <ion-item style="--background: #a7abc8;">
-      <ion-label>Nome</ion-label>
-    </ion-item>
-  </ion-list>
+  <ion-fab horizontal="end" vertical="bottom" slot="fixed">
+    <ion-fab-button routerLink="/changeprofile">
+      <ion-icon name="create"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

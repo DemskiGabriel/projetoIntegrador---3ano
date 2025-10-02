@@ -44,7 +44,8 @@ export const routes: Routes = [
     children: [
       {
         path: 'feed',
-        loadComponent: () => import('./mainPart/feed/feed.page').then( m => m.FeedPage)
+        loadComponent: () => import('./mainPart/feed/feed.page').then( m => m.FeedPage),
+        runGuardsAndResolvers: 'always'
       },
       {
         path: 'alarms',
@@ -54,12 +55,14 @@ export const routes: Routes = [
       },
       {
         path: 'quests',
-        loadComponent: () => import('./mainPart/quests/quests.page').then( m => m.QuestsPage)
+        loadComponent: () => import('./mainPart/quests/quests.page').then( m => m.QuestsPage),
+        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
       {
         path: 'perfil',
-        loadComponent: () => import('./mainPart/perfil/perfil.page').then( m => m.PerfilPage)
+        loadComponent: () => import('./mainPart/perfil/perfil.page').then( m => m.PerfilPage),
+        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
     ]

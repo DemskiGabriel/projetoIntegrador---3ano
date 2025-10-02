@@ -1,16 +1,103 @@
-ion-card {
-    background-color: #a7abc8;
-}
+.login-page {
+    background: linear-gradient(to top, #d2d2f7, #989ae8);
+  --background: transparent;   
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
 
-a {
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  .logo {
+    width: 800px;
+    height: 300px;
+    position: relative;
+    bottom: 10%;
+    left: 5%;
+  }
+
+  .app-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #3b3b3b;
+  }
+
+  .login-card {
+    width: 95%;
+    max-width: 400px;
+    background: #a7abc8;
+    border-radius: 20px;
+    padding: 10px;
+  }
+
+  .card-title {
+    color: #3b3b3b;
+    font-size: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+  }
+
+  .input-item {
+    --background: transparent;
+    margin-bottom: 15px;
+  }
+
+  .input-item ion-input {
+    --color: #3b3b3b;
+    --highlight-color-focused: #5b7efc;
+    --highlight-color-valid: #5b7efc;
+  }
+
+  .links-container {
+    text-align: right;
+  }
+
+  .forgot-password {
     color: #8e68e6;
-}
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
 
-ion-button {
-    --background: #8e95c5;
-    --background-hover: #9aa0cf;
-}
+  .login-button {
+    --background: #80849c;
+    --border-radius: 10px;
+    margin-top: 20px;
+    font-weight: bold;
+  }
 
-ion-content {
-    --background: linear-gradient(to bottom,#ece8ec, #b5b6e3);;
-}
+  .footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+
+  .signup-link {
+    font-size: 0.9rem;
+    color: #3b3b3b;
+  }
+
+  .signup-text {
+    color: #8e68e6;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .social-icons {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .social-icon {
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+  }

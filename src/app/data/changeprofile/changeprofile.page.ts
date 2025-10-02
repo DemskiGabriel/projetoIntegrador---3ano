@@ -1,10 +1,9 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonInput, IonButton, IonButtons, IonAvatar, IonCard, IonTextarea, IonIcon } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
-import { HttpParams } from '@capacitor/core';
 
 @Component({
   selector: 'app-changeprofile',
@@ -89,31 +88,32 @@ export class ChangeprofilePage implements OnInit {
   }
 
   // ---------- Load ----------
-  // Pega os dados do banco de dados e os carrega na pagina.
-  load(){
+  async load() {
     this.autenticacao_service
-    .edicaoUsuario(this.id)
-    .subscribe(
-      (_res:any) => {
-        if (_res.status == 'success'){
+      .edicaoUsuario(this.id)
+      .subscribe(async (_res: any) => {
+        if (_res.status == 'success') {
           this.nome = _res.dados.username ?? this.nome;
           this.email = _res.dados.email ?? this.email;
           this.descricao = _res.dados.descricao ?? this.descricao;
           this.dataNascimento = _res.dados.birthday ?? this.dataNascimento;
 
-          this.fotoPerfil = _res.dados.imgPerfil 
-                              ? 'http://localhost/projetoIntegrador/' + _res.dados.imgPerfil 
-                              : this.fotoPerfil;
+          // monta a URL da imagem
+          this.fotoPerfil = _res.dados.imgPerfil
+            ? 'http://localhost/projetoIntegrador/' + _res.dados.imgPerfil
+            : this.fotoPerfil;
 
           this.formatarDataLoad(this.dataNascimento);
-        }else Error
-      }
-    );
+        } else {
+          console.error("Erro ao carregar usuário");
+        }
+      });
   }
 
+
+
   // ---------- Save ----------
-  
-  save() {  
+  save() {
     // Formata a data para o banco
     const dataFormatada = this.converterDataParaBanco(this.dataNascimento);
 

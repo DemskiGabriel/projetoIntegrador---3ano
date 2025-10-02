@@ -1,19 +1,34 @@
+<ion-content [fullscreen]="true" class="forgot-password-page">
 
-<ion-content [fullscreen]="true">
-  <ion-card>
-    <ion-card-header>
-      <ion-card-title>Esqueci minha senha</ion-card-title>
-      <ion-card-subtitle>Para redefinir sua senha, precisamos do e-mail cadastrado na sua conta e lhe enviaremos um código  </ion-card-subtitle>
+  <ion-card class="reset-card">
+    <ion-card-header class="ion-no-padding">
+      <ion-card-title class="card-title">Esqueci minha senha</ion-card-title>
     </ion-card-header>
-  
-    <ion-card-content>
 
-      <ion-input label="E-mail" label-placement="floating" fill="outline"  [(ngModel)]="email"></ion-input>
+    <ion-card-content class="card-content">
+      <p class="description">
+        Para redefinir a senha, precisamos do e-mail cadastrado na sua conta e lhe enviaremos um código.
+      </p>
 
-      <ion-button (click)="proximo()" id="present-alert" expand="block">Proximo</ion-button></ion-card-content>
-      <a routerLink="/login"  > Cancelar </a>
+      
+      <ion-input label="e-mail" label-placement="floating" type="email" [(ngModel)]="email" fill="outline"></ion-input>
+      
+      
 
+      <ion-button expand="block" class="next-button">Próximo</ion-button>
+
+      <div class="cancel-link">
+        
+        <a routerLink="/login" class="cancelar">Cancelar</a>
+      </div>
+    </ion-card-content>
   </ion-card>
-  <ion-img src="assets/imagens/pomocat.jpg"></ion-img>
+
+  <div class="footer-logo">
+    
+    <ion-img src="assets/imagens/pomocat.jpg" class="logo"></ion-img>
+  </div>
+
+</ion-content>
 
 
