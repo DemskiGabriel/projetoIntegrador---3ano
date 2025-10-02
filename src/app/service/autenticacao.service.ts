@@ -48,8 +48,12 @@ export class AutenticacaoService {
   }
 
   rank(){
-    return this.rs.get
+    const fd = new FormData();
+    fd.append('controller', 'rank');
+  
+    return this.rs.post(fd); // usa POST igual ao resto
   }
+  
 
 
   proximo(email:string){

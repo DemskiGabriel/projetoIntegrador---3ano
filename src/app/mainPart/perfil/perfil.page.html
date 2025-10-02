@@ -1,6 +1,5 @@
 
 <ion-content class="ion-padding">
-<br>
   <ion-card class="perfil-card">
       <ion-item lines="none" class="perfil-item">
           <ion-img src="{{fotoPerfil}}" class="foto-perfil"></ion-img>
@@ -19,20 +18,23 @@
             <p>{{dataNascimento}}</p>
         </ion-card-content>
     </ion-card>
-<br>
     <ion-card inset="true" class="lista-rank" lines="none">
-
     <!-- Titulo -->
       <div class="rank-header">
           <ion-label>Rank</ion-label>
           <ion-img src="assets/imagens/grupo.png" class="grupo-icon"></ion-img>
       </div>
     <!-- Rank -->
-      <ion-item class="rank-item" *ngFor="let usuarios of dados; let i = index">
-          <ion-label>{{usuarios.nome}</ion-label>
-          <ion-img src="assets/imagens/troféuOuro.png" class="trofeu"></ion-img>
+      <ion-item class="rank-item" *ngFor="let usuarios of dados; let i = index"
+        [ngClass]="{
+          'ouro': i === 0,
+          'prata': i === 1,
+          'bronze': i === 2
+      }">
+          <ion-label>{{usuarios.username}}</ion-label>
+          <ion-label slot="end">{{usuarios.pontos}}</ion-label>
       </ion-item>
-  </ion-card>
+    </ion-card>
 
   <ion-fab horizontal="end" vertical="bottom" slot="fixed">
     <ion-fab-button routerLink="/changeprofile">
