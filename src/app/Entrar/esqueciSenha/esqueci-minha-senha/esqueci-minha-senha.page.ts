@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonButton, IonImg, IonCardSubtitle } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonButton, IonImg } from '@ionic/angular/standalone';
 import { Router, RouterLink } from '@angular/router';
 import { AutenticacaoService } from '../../../service/autenticacao.service';
 import { AlertController } from '@ionic/angular';
@@ -12,7 +12,7 @@ import { RequisicaoService } from '../../../service/requisicao.service';
   templateUrl: './esqueci-minha-senha.page.html',
   styleUrls: ['./esqueci-minha-senha.page.scss'],
   standalone: true,
-  imports: [IonContent, RouterLink, IonImg, IonCard, IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonButton, IonCardSubtitle, CommonModule, FormsModule]
+  imports: [IonContent, RouterLink, IonImg, IonCard, IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonButton, CommonModule, FormsModule]
 })
 export class EsqueciMinhaSenhaPage implements OnInit {
   public email:string = '';
