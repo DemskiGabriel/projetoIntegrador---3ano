@@ -39,7 +39,10 @@ export class QuestsPage implements OnInit {
   }
 
   public dados: Array<any> = [];
+  public dadosOrigin: Array<any> = [];
+
   public score: number = 0;
+  
   public quests: Quest[] = [];
   public questsGrouped: { [key: string]: Quest[] } = {};
 
@@ -55,6 +58,7 @@ export class QuestsPage implements OnInit {
     // Sempre que novos cards forem renderizados
     this.cards.changes.subscribe(() => this.bindGestures());
   }
+
 
   private bindGestures() {
     this.cards.forEach((card) => {
@@ -83,14 +87,31 @@ export class QuestsPage implements OnInit {
       card.nativeElement.style.transform = `translateX(${detail.deltaX > 0 ? 1000 : -1000}px)`;
 
       // encontra a quest pelo data-quest-id e marca como completo
-      const questId = card.nativeElement.getAttribute('data-quest-id');
-      for (const grupo of Object.values(this.questsGrouped)) {
-        const quest = grupo.find(q => q.challengeName === questId);
-        if (quest) {
-          quest.completo = true
-          this.score = this.score + quest.points
-        };
+      const tituloMissao = card.nativeElement.getAttribute('data-quest-id');
+
+      // Primeiro, encontra o índice do grupo
+      const grupoIndex = this.dados.findIndex(grupo =>
+        grupo && grupo.missoes.some((m: any) => m.titulo === tituloMissao)
+      );
+
+      if (grupoIndex !== -1) {
+        const grupo = this.dados[grupoIndex];
+
+        // Agora encontra o índice da missão dentro do grupo
+        const missaoIndex = grupo.missoes.findIndex((m: any) => m.titulo === tituloMissao);
+
+        if (missaoIndex !== -1) {
+          const missao = grupo.missoes[missaoIndex];
+          
+          // Atualiza os dados
+          missao.completo = true;
+          this.score += missao.pontos;
+
+          this.salvar(grupoIndex, missaoIndex)
+        }
       }
+
+
 
       setTimeout(() => {
         this.cdRef.detectChanges(); // atualiza a tela para remover o card
@@ -122,11 +143,13 @@ export class QuestsPage implements OnInit {
               alarmName: alarmName,
               points: m.pontos,
               challenges: m.descricao,
-              completo: m.completo || false
+              completo: m.completo
             }));
 
             this.quests.push(...quests);
             this.questsGrouped[alarmName] = [...quests];
+
+            this.dadosOrigin = this.dados;
 
             return item;
           });
@@ -145,4 +168,21 @@ export class QuestsPage implements OnInit {
   telaVazia() {
     this.hasQuests.set(this.quests.some(q => !q.completo));
   }
+
+
+  salvar(i:number, ii:number){
+    this.rt.update(
+      `missoes/${i+1}/missoes/${ii}`, 
+      {
+        completo: true,
+        descricao: this.dados[i].missoes[ii].descricao,
+        pontos: this.dados[i].missoes[ii].pontos,
+        titulo: this.dados[i].missoes[ii].titulo
+      }
+    )
+    .then(() => console.log('🔥 Dados atualizados com sucesso!'))
+    .catch(err => console.error('Erro ao atualizar:', err));
+  }
+
+  // Fazer salvar a pontuação no usuario
 }

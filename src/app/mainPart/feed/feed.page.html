@@ -1,15 +1,30 @@
 <ion-content [fullscreen]="true">
-    <ng-container *ngFor="let task of tasks; let i = index;">
-        <ion-card *ngIf="!task.completo"
-                  #cardElem
-                  class="swipe-card">
-            <ion-card-header>
-                <ion-card-subtitle>{{ task.title }}</ion-card-subtitle>
-            </ion-card-header>
-            <ion-card-content>
-                <p>{{ task.points }} pontos</p>
-            </ion-card-content>
-        </ion-card>
+  <br>
+  <ion-text class="alarms-title">
+      <h1>Proximo</h1>
+  </ion-text>
+
+  <ng-container *ngFor="let task of dados; let i = index;">
+    <ng-container *ngFor="let alarmes of dados[i].alarmes; let ii = index;">
+        <div class="cardDisplay">
+          <ion-card *ngIf="alarmes.ativo"
+                #cardElem
+                class="swipe-card card"
+                [attr.data-i]="i"
+                [attr.data-ii]="ii"
+
+                [style.top.%]="getCardTop(ii)"
+                [style.zIndex]="dados.length - ii"
+                [style.width.%]="95 - (ii * 4)">
+              <ion-card-header>
+                  <ion-card-subtitle>{{ task.nomeAlarme }}</ion-card-subtitle>
+              </ion-card-header>
+              <ion-card-content>
+                  <p>HORARIO: {{alarmes.hora}}</p>
+                  <p>ATIVO: {{alarmes.ativo}}</p>
+              </ion-card-content>
+          </ion-card>
+      </div>
     </ng-container>
+  </ng-container>
 </ion-content>
-  

@@ -1,4 +1,27 @@
 .swipe-card {
-  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+  transition: top 0.3s ease-out, width 0.3s ease-out, transform 0.3s ease-out, opacity 0.3s ease-out;
   margin: 10px;
+}
+
+.cardDisplay{
+  display: flex;
+  justify-content: center;
+}
+
+.card{
+  height: 60%;
+  width: 95%;
+  position: absolute;
+  top: 15%;
+  border-radius: 12px;
+}
+
+.alarms-title {
+  text-align: center;
+  
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2e1b5b;
+  }
 }

@@ -1,57 +1,105 @@
 import { CommonModule } from "@angular/common";
-import { ChangeDetectorRef, Component, ElementRef, QueryList, ViewChildren } from "@angular/core";
+import { ChangeDetectorRef, Component, ElementRef, OnInit, QueryList, ViewChildren } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { GestureController, GestureDetail } from "@ionic/angular";
-import { IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardContent, IonButton } from "@ionic/angular/standalone";
+import { IonContent, IonCard, IonCardHeader, IonCardSubtitle, IonCardContent, IonText } from "@ionic/angular/standalone";
+import { RealtimeDatabaseService } from "src/app/firebase/realtime-database";
 
 @Component({
   selector: "app-feed",
   templateUrl: "./feed.page.html",
   styleUrls: ["./feed.page.scss"],
   standalone: true,
-  imports: [IonButton, IonCardContent, IonCardSubtitle, IonCardHeader, IonCard, IonContent, CommonModule, FormsModule]
+  imports: [IonText, IonCardContent, IonCardSubtitle, IonCardHeader, IonCard, IonContent, CommonModule, FormsModule]
 })
-export class FeedPage {
+export class FeedPage{
+  public dados: Array<any> = [];
+
   constructor(
     private gestureCtrl: GestureController,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    public rt: RealtimeDatabaseService,
   ) {}
 
+  ionViewWillEnter(){
+    this.load();
+  }
   
 
-  tasks = [
-    { id: 1, title: "Missão 1", points: 10, completo: false },
-    { id: 2, title: "Missão 2", points: 20, completo: false },
-    { id: 3, title: "Missão 3", points: 30, completo: false },
-    { id: 4, title: "Missão 4", points: 40, completo: false }
-  ];
+  // ---------- Load ----------
+  load() {
+    this.rt.query('/alarme', (snapshot: any) => {
+      if (snapshot.val() !== null) {
+        this.dados = Object.entries(snapshot.val()).map(([key, item]: [string, any]) => {
+          item.id = key;
+          item.alarmes = Array.isArray(item.alarmes) ? item.alarmes : [];
+          
+          // faz com que a apareceça o horario mais proximo.
+          item.proximoAlarme = this.getProximoAlarme(item);
 
+          return item;
+        }).filter((item: any) => item != null);
+        // Carrega as animações.
+        this.cdRef.detectChanges();
+        setTimeout(() => this.initGestures(), 100);
+      }else{
+        this.dados = [];
+      }
+    })
+  }
+
+  getProximoAlarme(item: any): string | null {
+    if (!item.alarmes || item.alarmes.length === 0) return null;
+  
+    const agora = new Date();
+  
+    const proximo = item.alarmes.find((a: any) => {
+      if (!a.ativo) return false;
+  
+      const [h, m] = a.hora.split(':').map(Number);
+      const horaAlarme = new Date();
+      horaAlarme.setHours(h, m, 0, 0);
+  
+      return horaAlarme.getTime() > agora.getTime();
+    });
+  
+    return proximo ? proximo.hora : null;
+  }
+
+
+  // ---------- Animação dos cards ----------
   @ViewChildren('cardElem', { read: ElementRef }) cards!: QueryList<ElementRef>;
-  ngAfterViewInit() {
-    this.cards.forEach((card, index) => {
+  private initGestures() {
+    if (!this.cards) return;
+
+    this.cards.forEach((card) => {
+      const i = Number(card.nativeElement.getAttribute('data-i'));
+      const ii = Number(card.nativeElement.getAttribute('data-ii'));
+
       const gesture = this.gestureCtrl.create({
         el: card.nativeElement,
-        gestureName: "swipe",
+        gestureName: 'swipe',
         onMove: (detail) => this.onMove(detail, card),
-        onEnd: (detail) => this.onEnd(detail, card, index)
+        onEnd: (detail) => this.onEnd(detail, card, i, ii),
       });
       gesture.enable();
     });
   }
 
   private onMove(detail: GestureDetail, card: ElementRef) {
-    card.nativeElement.style.transform = `translateX(${detail.deltaX}px)`;
+    card.nativeElement.style.transform = `translate(${detail.deltaX}px, ${detail.deltaY}px)`;
   }
 
-  private onEnd(detail: GestureDetail, card: ElementRef, index: number) {
+  private onEnd(detail: GestureDetail, card: ElementRef, i: number, ii:number) {
     if (Math.abs(detail.deltaX) > 100) {
       // desliza para fora
       card.nativeElement.style.transition = "0.3s";
       card.nativeElement.style.transform = `translateX(${detail.deltaX > 0 ? 1000 : -1000}px)`;
 
-      // marca como completo após animação
       setTimeout(() => {
-        this.tasks[index].completo = true; // ✅ agora só marca como completo
+        this.dados[i].alarmes[ii].ativo = false;
+        this.atualizarDados(i, ii);
+
         this.cdRef.detectChanges();
       }, 300);
     } else {
@@ -61,7 +109,15 @@ export class FeedPage {
     }
   }
 
-  trackByFn(index: number, item: any) {
-    return item.id;
+  getCardTop(i: number): number {
+    return 15 + Math.log(i + 1) * 3; // mesma lógica do Math.log
+  }
+
+  // ---------- Salvar ----------
+  atualizarDados(i: number, ii: number){
+    // atualiza no banco
+    this.rt.update(`/alarme/${this.dados[i].id}/alarmes/${ii}`, { ativo: false, hora: this.dados[i].alarmes[ii].hora })
+      .then(() => console.log('✅ Alarme desativado'))
+      .catch(err => console.error('Erro ao atualizar alarme:', err));
   }
 }
