@@ -24,9 +24,10 @@ export class FeedPage{
   ionViewWillEnter(){
     this.load();
   }
-  
 
   // ---------- Load ----------
+  // Id do usuario logado.
+  public userId:string = localStorage.getItem('userId') || '';
   load() {
     this.rt.query('/alarme', (snapshot: any) => {
       if (snapshot.val() !== null) {
@@ -38,7 +39,7 @@ export class FeedPage{
           item.proximoAlarme = this.getProximoAlarme(item);
 
           return item;
-        }).filter((item: any) => item != null);
+        }).filter((item: any) => item.user === this.userId);
         // Carrega as animações.
         this.cdRef.detectChanges();
         setTimeout(() => this.initGestures(), 100);
@@ -47,12 +48,12 @@ export class FeedPage{
       }
     })
   }
-
   getProximoAlarme(item: any): string | null {
     if (!item.alarmes || item.alarmes.length === 0) return null;
   
     const agora = new Date();
   
+    // Tenta encontrar o próximo alarme ativo
     const proximo = item.alarmes.find((a: any) => {
       if (!a.ativo) return false;
   
@@ -63,7 +64,13 @@ export class FeedPage{
       return horaAlarme.getTime() > agora.getTime();
     });
   
-    return proximo ? proximo.hora : null;
+    if (proximo) {
+      return proximo.hora;
+    }
+  
+    // Se nenhum alarme está no futuro, retorna o primeiro alarme ativo da lista
+    const primeiroAtivo = item.alarmes.find((a: any) => a.ativo);
+    return primeiroAtivo ? primeiroAtivo.hora : null;
   }
 
 

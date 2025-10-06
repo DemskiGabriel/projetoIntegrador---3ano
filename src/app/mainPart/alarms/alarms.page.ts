@@ -44,21 +44,23 @@ import { RouterLink } from '@angular/router';
   ]
 })
 
-
-export class AlarmsPage implements OnInit {
+export class AlarmsPage{
   public dados: Array<any> = [];
+  
 
   constructor(
     public rt: RealtimeDatabaseService,
   ) {
     addIcons({ addOutline });
   }
-  ngOnInit() {}
   
   ionViewWillEnter(){
     this.load();
   }
+  
 
+  // Id do usuario logado.
+  public userId:string = localStorage.getItem('userId') || '';
   load() {
     this.rt.query('/alarme', (snapshot: any) => {
       if (snapshot.val() !== null) {
@@ -71,7 +73,7 @@ export class AlarmsPage implements OnInit {
 
           this.telaVazia(item);
           return item;
-        }).filter((item: any) => item != null);
+        }).filter((item: any) => item.user === this.userId);
       }else{
         this.dados = [];
       }
@@ -83,6 +85,7 @@ export class AlarmsPage implements OnInit {
   
     const agora = new Date();
   
+    // Tenta encontrar o próximo alarme ativo
     const proximo = item.alarmes.find((a: any) => {
       if (!a.ativo) return false;
   
@@ -93,8 +96,15 @@ export class AlarmsPage implements OnInit {
       return horaAlarme.getTime() > agora.getTime();
     });
   
-    return proximo ? proximo.hora : null;
+    if (proximo) {
+      return proximo.hora;
+    }
+  
+    // Se nenhum alarme está no futuro, retorna o primeiro alarme ativo da lista
+    const primeiroAtivo = item.alarmes.find((a: any) => a.ativo);
+    return primeiroAtivo ? primeiroAtivo.hora : null;
   }
+  
 
   toggleContent() {
     this.hasAlarms.update(value => !value);
@@ -107,7 +117,6 @@ export class AlarmsPage implements OnInit {
   public hasAlarms = signal<boolean>(false);
   telaVazia(alarmes:any){
     if(alarmes.length == 0){
-      // Para ver o design, mudar o valor abaixo pra 'true'
       this.hasAlarms.set(false); 
     }else this.hasAlarms.set(true); 
   }

@@ -14,13 +14,13 @@
                 [attr.data-ii]="ii"
 
                 [style.top.%]="getCardTop(ii)"
-                [style.zIndex]="dados.length - ii"
+                [style.zIndex]="dados.length - ii - i"
                 [style.width.%]="95 - (ii * 4)">
               <ion-card-header>
                   <ion-card-subtitle>{{ task.nomeAlarme }}</ion-card-subtitle>
               </ion-card-header>
               <ion-card-content>
-                  <p>HORARIO: {{alarmes.hora}}</p>
+                  <p>HORARIO: {{task.proximoAlarme}}</p>
                   <p>ATIVO: {{alarmes.ativo}}</p>
               </ion-card-content>
           </ion-card>

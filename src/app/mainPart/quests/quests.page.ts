@@ -12,6 +12,7 @@ import { addIcons } from 'ionicons';
 import { timeOutline } from 'ionicons/icons'; 
 import { RealtimeDatabaseService } from 'src/app/firebase/realtime-database';
 import { GestureController } from '@ionic/angular';
+import { AutenticacaoService } from 'src/app/service/autenticacao.service';
 
 interface Quest {
   challengeName: string;
@@ -28,12 +29,13 @@ interface Quest {
   standalone: true,
   imports: [IonImg, IonText, IonContent, IonItem, CommonModule, FormsModule]
 })
-export class QuestsPage implements OnInit {
+export class QuestsPage{
 
   constructor(
     public rt: RealtimeDatabaseService,
     private gestureCtrl: GestureController,
-    private cdRef: ChangeDetectorRef
+    private cdRef: ChangeDetectorRef,
+    public autenticacao_service:AutenticacaoService
   ) {
     addIcons({ timeOutline });
   }
@@ -50,13 +52,10 @@ export class QuestsPage implements OnInit {
 
   @ViewChildren('cardElem', { read: ElementRef }) cards!: QueryList<ElementRef>;
 
-  ngOnInit() {
-    this.load();
-  }
-
-  ngAfterViewInit() {
+  ionViewWillEnter(){
     // Sempre que novos cards forem renderizados
     this.cards.changes.subscribe(() => this.bindGestures());
+    this.load();
   }
 
 
@@ -96,22 +95,17 @@ export class QuestsPage implements OnInit {
 
       if (grupoIndex !== -1) {
         const grupo = this.dados[grupoIndex];
-
-        // Agora encontra o índice da missão dentro do grupo
-        const missaoIndex = grupo.missoes.findIndex((m: any) => m.titulo === tituloMissao);
-
+        const missaoIndex = grupo.missoes.findIndex((m:any) => m.titulo === tituloMissao);
+      
         if (missaoIndex !== -1) {
           const missao = grupo.missoes[missaoIndex];
-          
-          // Atualiza os dados
           missao.completo = true;
           this.score += missao.pontos;
-
-          this.salvar(grupoIndex, missaoIndex)
+      
+          // Usa o ID original do Firebase
+          this.salvar(grupo.firebaseId, missaoIndex);
         }
       }
-
-
 
       setTimeout(() => {
         this.cdRef.detectChanges(); // atualiza a tela para remover o card
@@ -124,65 +118,88 @@ export class QuestsPage implements OnInit {
     }
   }
 
+  // Id do usuario logado.
+  public userId:string = localStorage.getItem('userId') || '';
   load() {
     this.dados = [];
     this.quests = [];
     this.questsGrouped = {};
-
+  
     this.rt.query('/alarme', (snapshotAlarme: any) => {
-      const alarmes = snapshotAlarme.val() || {};
-
+      const todosAlarmes = snapshotAlarme.val() || [];
+  
+      // 🔹 Remove valores nulos e filtra os alarmes do usuário logado
+      const alarmesUsuario = todosAlarmes
+        .map((a: any, index: number) => ({ ...a, id: index }))
+        .filter((a: any) => a && a.user === this.userId);
+  
+      // Cria um mapa id → alarme
+      const mapaAlarmes: Record<number, any> = {};
+      alarmesUsuario.forEach((a:any) => (mapaAlarmes[a.id] = a));
+  
       this.rt.query('/missoes', (snapshot: any) => {
-        if (snapshot.val() !== null) {
-          this.dados = Object.entries(snapshot.val()).map(([key, item]: [string, any]) => {
-            const missoesArr = Array.isArray(item.missoes) ? item.missoes : [];
-            const alarmName = alarmes[item.idAlarme]?.nomeAlarme || `Alarme ${item.idAlarme}`;
+        const todasMissoes = snapshot.val() || [];
+  
+        this.dados = Object.entries(todasMissoes)
+        .filter(([_, missao]: [string, any]) => mapaAlarmes[missao.idAlarme])
+        .map(([key, missao]: [string, any]) => {
+          const missoesArr = Array.isArray(missao.missoes) ? missao.missoes : [];
+          const alarmName =
+            mapaAlarmes[missao.idAlarme]?.nomeAlarme || `Alarme ${missao.idAlarme}`;
 
-            const quests: Quest[] = missoesArr.map((m: any) => ({
-              challengeName: m.titulo,
-              alarmName: alarmName,
-              points: m.pontos,
-              challenges: m.descricao,
-              completo: m.completo
-            }));
+          const quests: Quest[] = missoesArr.map((m: any) => ({
+            challengeName: m.titulo,
+            alarmName: alarmName,
+            points: m.pontos,
+            challenges: m.descricao,
+            completo: m.completo
+          }));
 
-            this.quests.push(...quests);
-            this.questsGrouped[alarmName] = [...quests];
+          this.quests.push(...quests);
+          this.questsGrouped[alarmName] = [...quests];
 
-            this.dadosOrigin = this.dados;
+          // 🔹 Adiciona o ID real do Firebase para referência futura
+          return { ...missao, firebaseId: Number(key) };
+        });
 
-            return item;
-          });
 
-          this.telaVazia();
-        } else {
-          this.dados = [];
-          this.quests = [];
-          this.questsGrouped = {};
-          this.telaVazia();
-        }
+        this.dadosOrigin = this.dados;
+        this.telaVazia();
       });
     });
   }
-
+  
+  
   telaVazia() {
     this.hasQuests.set(this.quests.some(q => !q.completo));
   }
 
 
-  salvar(i:number, ii:number){
+  salvar(firebaseId: number, ii: number){
     this.rt.update(
-      `missoes/${i+1}/missoes/${ii}`, 
+      `missoes/${firebaseId}/missoes/${ii}`, 
       {
         completo: true,
-        descricao: this.dados[i].missoes[ii].descricao,
-        pontos: this.dados[i].missoes[ii].pontos,
-        titulo: this.dados[i].missoes[ii].titulo
+        descricao: this.dados.find(d => d.firebaseId === firebaseId)!.missoes[ii].descricao,
+        pontos: this.dados.find(d => d.firebaseId === firebaseId)!.missoes[ii].pontos,
+        titulo: this.dados.find(d => d.firebaseId === firebaseId)!.missoes[ii].titulo
       }
     )
     .then(() => console.log('🔥 Dados atualizados com sucesso!'))
     .catch(err => console.error('Erro ao atualizar:', err));
-  }
 
-  // Fazer salvar a pontuação no usuario
+  
+    this.autenticacao_service
+      .atualizarPontuacao(
+        this.userId,
+        this.dados.find(d => d.firebaseId === firebaseId)!.missoes[ii].pontos
+      )
+      .subscribe((_res: any) => {
+        if (_res.status == 'success'){
+          console.log(_res.msg);
+        } else {
+          console.error('Erro ao atualizar usuário');
+        }
+      });
+  }
 }

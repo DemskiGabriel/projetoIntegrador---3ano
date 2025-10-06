@@ -12,7 +12,7 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
   standalone: true,
   imports: [IonIcon, IonTextarea, IonCard, IonContent, CommonModule, FormsModule, IonInput, IonButton, IonButtons, IonAvatar, RouterLink]
 })
-export class ChangeprofilePage implements OnInit {
+export class ChangeprofilePage{
   public id:string = localStorage.getItem('userId') || '';
 
   public nome:string = '';
@@ -25,7 +25,7 @@ export class ChangeprofilePage implements OnInit {
     public autenticacao_service:AutenticacaoService,
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.load();
   }
 
