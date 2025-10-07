@@ -1,0 +1,76 @@
+.alarme { 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    align-items: center;
+    height: 100%;
+    padding: 30px 20px;
+  }
+
+  
+  ion-content::part(background){
+    background: #a7abc8;
+}
+  
+  .principal {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      
+      margin-top: 10vh; 
+  }
+
+  
+  .desafio {
+    font-family: sans-serif; 
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    margin: 0;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.7), 0 0 10px rgba(255, 255, 255, 0.5);
+    letter-spacing: 2px;
+  }
+
+  
+  .horario {
+    font-family: sans-serif;
+    font-size: 4.5rem;
+    font-weight: bold;
+    color: #3f477e; 
+    text-align: center;
+    margin: 30px 0 0;
+    line-height: 1;
+  }
+
+  
+  .dia {
+    font-family: sans-serif;
+    font-size: 1rem;
+    color: #3f477e;
+    text-align: center;
+    opacity: 0.7;
+    margin-top: 5px;
+  }
+
+  
+  ion-fab {
+   
+    position: absolute;
+    top: 20%;
+  }
+  
+  .fab {
+    --background: #3f477e; 
+    --background-activated: #3a3737; 
+    --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    width: 80px;
+    height: 80px;
+  }
+
+  .fab ion-icon {
+    color: #ffffff; 
+    font-size: 2.5rem;
+    font-weight: bold;
+  }
