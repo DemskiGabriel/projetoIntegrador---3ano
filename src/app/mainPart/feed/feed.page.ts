@@ -99,7 +99,7 @@ export class FeedPage {
           horaTimestamp: ts,
           indexPai: idx,
           rawAlarme: alarme,
-          itemOriginal: item
+          itemOriginal: item,
         });
       });
     });
