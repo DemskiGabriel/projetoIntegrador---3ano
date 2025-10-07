@@ -36,13 +36,21 @@
 
 <!-- Caso não tenha tarefas -->
 <ion-content *ngIf="!hasQuests()" class="empty-content-wrapper">
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Desafios</h1>
+  </ion-text>
+
   <ion-text class="main-text">
-    <h1>Você não tem nenhuma missão no momento</h1>
+    <h1>Você não tem nenhum desafio no momento</h1>
   </ion-text>
 
   <ion-img src="assets/imagens/estrela.png"></ion-img>
 
-  <ion-text class="secondary-text">
-    <h2>Bora criar uma?</h2>
-  </ion-text>
+  <!-- Botão para Criar alarme -->
+  <ion-fab horizontal="center" vertical="center" slot="fixed" >
+    <ion-fab-button routerLink="/new-alarm" class="add-button">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content> 

@@ -16,8 +16,6 @@ import {
   IonText, 
   IonImg 
 } from '@ionic/angular/standalone';
-import { addIcons } from 'ionicons';
-import { addOutline } from 'ionicons/icons';
 import { RouterLink } from '@angular/router';
 
 
@@ -50,9 +48,7 @@ export class AlarmsPage{
 
   constructor(
     public rt: RealtimeDatabaseService,
-  ) {
-    addIcons({ addOutline });
-  }
+  ) {}
   
   ionViewWillEnter(){
     this.load();
@@ -71,9 +67,9 @@ export class AlarmsPage{
           // faz com que a apareceça o horario mais proximo.
           item.proximoAlarme = this.getProximoAlarme(item);
 
-          this.telaVazia(item);
           return item;
         }).filter((item: any) => item.user === this.userId);
+        this.telaVazia(this.dados);
       }else{
         this.dados = [];
       }

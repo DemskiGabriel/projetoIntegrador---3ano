@@ -87,3 +87,21 @@ ion-toggle {
     color: #2e1b5b;
   }
 }
+
+.main-text h1 {
+  font-family: 'Poppins';
+  font-size: 1.7rem;
+  font-style: italic;
+  font-weight: 700;
+  color: #2e1b5b;
+  margin: 0;
+}
+
+.empty-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  text-align: center;
+}

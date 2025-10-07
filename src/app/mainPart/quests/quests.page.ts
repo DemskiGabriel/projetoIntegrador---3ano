@@ -6,13 +6,13 @@ import {
   IonText, 
   IonImg, 
   IonItem,
-  GestureDetail
-} from '@ionic/angular/standalone';
+  GestureDetail, IonFab, IonFabButton, IonIcon } from '@ionic/angular/standalone';
 import { addIcons } from 'ionicons';
 import { timeOutline } from 'ionicons/icons'; 
 import { RealtimeDatabaseService } from 'src/app/firebase/realtime-database';
 import { GestureController } from '@ionic/angular';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
+import { RouterLink } from '@angular/router';
 
 interface Quest {
   challengeName: string;
@@ -27,7 +27,7 @@ interface Quest {
   templateUrl: './quests.page.html',
   styleUrls: ['./quests.page.scss'],
   standalone: true,
-  imports: [IonImg, IonText, IonContent, IonItem, CommonModule, FormsModule]
+  imports: [IonIcon, IonFabButton, IonFab, IonImg, IonText, IonContent, IonItem, CommonModule, FormsModule, RouterLink]
 })
 export class QuestsPage{
 

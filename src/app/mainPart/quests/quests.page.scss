@@ -20,6 +20,19 @@
   margin: 0;
 }
 
+.alarms-title {
+  font-weight: bold;
+  color: #333;
+}
+.alarms-title {
+  text-align: center;
+  h1 {
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #2e1b5b;
+  }
+}
+
 /* ... Estilos não relacionados ao problema de swipe/glitch ... */
 
 .alarm-group-title {
@@ -151,4 +164,10 @@ ion-item {
 .quests-title{
   display: flex;
   justify-content: space-between;
+}
+
+.add-button {
+  --background: #5d6790;
+  --color: #fff;
+  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
