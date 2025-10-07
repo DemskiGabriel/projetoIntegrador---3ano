@@ -81,5 +81,9 @@ export const routes: Routes = [
     path: 'changeprofile',
     loadComponent: () => import('./data/changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
     // canActivate: [authGuard]
+  },  {
+    path: 'alarme-tocando',
+    loadComponent: () => import('./alarme-tocando/alarme-tocando.page').then( m => m.AlarmeTocandoPage)
   }
+
 ];
