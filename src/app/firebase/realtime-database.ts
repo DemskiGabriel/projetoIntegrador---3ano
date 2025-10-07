@@ -49,7 +49,19 @@ export class RealtimeDatabaseService {
   }
 
   update(path: string, data: any): Promise<void> {
-    const dbRef = this.ref(path);
-    return update(dbRef, data);
+  const updates: any = {};
+
+  // se for array, monta um objeto com os ids como chave
+  if (Array.isArray(data)) {
+    data.forEach((item) => {
+      if (!item.id) return;
+      updates[`${path}/${item.id}`] = item;
+    });
+  } else if (typeof data === 'object') {
+    // se for um único objeto
+    updates[path] = data;
   }
+
+  return update(ref(this.db), updates);
+}
 }

@@ -43,7 +43,7 @@ export class NewAlarmPage {
     })   
   }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.load();
   }
 

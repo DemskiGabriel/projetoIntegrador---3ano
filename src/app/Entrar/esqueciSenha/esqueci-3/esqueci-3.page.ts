@@ -1,63 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardHeader, IonCardTitle, IonCardContent, IonInput, IonButton, IonImg, IonCardSubtitle } from '@ionic/angular/standalone';
 import { RouterLink } from '@angular/router';
-import { AutenticacaoService } from '../../../service/autenticacao.service';
-import { AlertController } from '@ionic/angular';
+import { IonContent, IonInput, IonButton } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-esqueci-3',
   templateUrl: './esqueci-3.page.html',
   styleUrls: ['./esqueci-3.page.scss'],
   standalone: true,
-  imports: [IonContent, RouterLink, IonImg, IonCard, IonCardHeader, IonCardTitle,  IonCardContent, IonInput, IonButton, IonCardSubtitle, CommonModule, FormsModule]
+  imports: [IonButton, IonInput, IonContent, FormsModule, RouterLink ]
 })
-export class Esqueci3Page implements OnInit {
+export class Esqueci3Page{
+  public idToken:number = 0;
 
-  public confirmar:string = '';
-  public NovaSenha:string = '';
+  criar(){
+    if(this.idToken >= 0){
+      let id = this.idToken.toString();
 
-  constructor(private alertController: AlertController,
-    public autenticacao_service:AutenticacaoService) { }
+      localStorage.setItem('userId', id);
 
-  ngOnInit() {
+      console.log("Usuario temporario logado com sucesso. ID: " + id);
+    }else console.log("Digite um valor de 0 a cima");
   }
-
-  async proximo(){
-    let confirmar = this.confirmar;
-    let NovaSenha = this.NovaSenha;
-
-    this.autenticacao_service
-    .logar(confirmar,NovaSenha)
-    .subscribe(
-      (_res:any) => {
-
-        if (_res.status == 'sucess'){
-
-          sessionStorage.setItem('token',_res.token)
-
-        }else{
-
-          }
-
-      }
-    );
-  
-
-    if (!this.confirmar || !this.NovaSenha) {
-      const alert = await this.alertController.create({
-        header: 'Atenção',
-        message: 'Por favor, preencha todos os campos!',
-        buttons: ['OK']
-      });
-
-      await alert.present();
-      return;
-  }
-
-  }
- 
-
 }
 

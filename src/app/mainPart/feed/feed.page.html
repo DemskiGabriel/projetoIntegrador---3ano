@@ -1,3 +1,23 @@
-<ion-content class="ion-padding">
-  
+<ion-content [fullscreen]="true">
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Próximos</h1>
+  </ion-text>
+
+  <div class="cardDisplay" *ngFor="let alarme of visibleAlarms; let i = index">
+    <ion-card
+      #cardElem
+      class="swipe-card card"
+      [attr.data-i]="i"
+      [style.top.%]="getCardTop(i)"
+      [style.zIndex]="visibleAlarms.length - i"
+      [style.width.%]="95 - (i * 4)">
+      <ion-card-header>
+        <ion-card-subtitle>{{ alarme.nomeAlarme }}</ion-card-subtitle>
+      </ion-card-header>
+      <ion-card-content>
+        <p>HORÁRIO: {{ alarme.maisProximo }}</p>
+      </ion-card-content>
+    </ion-card>
+  </div>
 </ion-content>
