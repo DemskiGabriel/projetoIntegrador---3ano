@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonModal, IonToggle, IonFab, IonFabButton, IonTextarea } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonModal, IonToggle, IonFab, IonFabButton, IonTextarea, IonList, IonHeader, IonToolbar, IonTitle, IonFooter } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { RealtimeDatabaseService } from 'src/app/firebase/realtime-database';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
@@ -13,7 +13,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './new-alarm.page.html',
   styleUrls: ['./new-alarm.page.scss'],
   standalone: true,
-  imports: [IonTextarea, IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent, RouterLink ]
+  imports: [IonFooter, IonTitle, IonToolbar, IonHeader, IonList, IonTextarea, IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent, RouterLink ]
 })
 export class NewAlarmPage {
   public idAlarme:number = 0;
@@ -136,7 +136,6 @@ export class NewAlarmPage {
     // Se o fim for igual ou antes do início, assumimos que é no dia seguinte
     let fimAdj = new Date(fim.getTime());
     if (fimAdj.getTime() <= inicio.getTime()) {
-      // opcional: comentar essa linha se você quiser forçar erro em vez de assumir próximo dia
       fimAdj = new Date(fimAdj.getTime() + 24 * 60 * 60 * 1000);
       console.warn("Horário final <= início — assumindo horário final no dia seguinte.");
     }
@@ -153,7 +152,7 @@ export class NewAlarmPage {
       console.warn("Intervalo menor que 1 minutos.");
       return false;
     }
-  
+    
     for (let i = 0; i < divisoes; i++) {
       const novoHorario = new Date(inicio.getTime() + intervalo * i);
   
@@ -189,7 +188,7 @@ export class NewAlarmPage {
         // Tipo Data referesse a se o tipo de dias é uma data do calendario ou são dias da semana.
         tipoData: this.tipoData,
         // Alarmes referesse a lista de vezes que o alarme dispertara em um dia.
-        alarmes: this.horariosAoDia,
+        alarmes: this.horariosMudadosManualmente ? this.alarmes : this.horariosAoDia,
         // Ativo referesse se o alarme esta ativo ou não.
         ativo: true, 
 
@@ -306,6 +305,9 @@ export class NewAlarmPage {
 
       this.vibracao = dados.vibracao ?? this.vibracao;
       this.somAlarme = dados.somAlarme ?? this.somAlarme;
+
+      this.alarmes = dados.alarmes ?? this.alarmes;
+      this.originAlarmes = this.alarmes;
       
       this.configData(dados)
     })
@@ -403,14 +405,14 @@ export class NewAlarmPage {
       }      
     };
 
+    // Monta o objeto que sera salvo
     this.http.post(this.apiUrl, body, { headers: headers })
     .subscribe({
       next: (response:any) => {
-        // Processa a resposta e atualiza as vendas projetadas
         if (response && response.candidates && response.candidates.length > 0) {
           const parts = response.candidates[0].content.parts;
           if (parts && parts.length > 0 && parts[0].text) {
-            // Atualiza as vendas projetadas com os dados retornados pela IA
+            // Atualiza os Desafios com os dados retornados pela IA
             console.log(JSON.parse(parts[0].text));
             this.salvarMissao(JSON.parse(parts[0].text));
           }
@@ -418,29 +420,109 @@ export class NewAlarmPage {
       }
     });
   }
-
   salvarMissao(missao:any){
-    // Adiciona o campo "completo": false em cada missão
-    const missoesAjustadas = missao.map((m:any) => ({
-      ...m,
-      completo: false
-    }));
-    
+    if (this.desafioToggle) {
+      // Buscar todas as missões
+      this.rt.list(`/missoes`).subscribe((snapshot):any => {
+        const dados = snapshot;
   
-    if(this.desafioToggle == true){
-      this.rt.add(`/missoes`, {
-        idUsuario: this.idUsuario,
-        idAlarme: this.idAlarme,
-        missoes: missoesAjustadas, 
-      }, this.idDesafio)
-      .subscribe({
-        next: (res:any) => {
-          console.log('Missões salvas com sucesso:', res);
-        },
-        error: (err) => {
-          console.log('Falhou ', err);
+        if (dados) {
+          // Procurar missão com idAlarme igual
+          Object.entries(dados).forEach(([key, value]: [string, any]) => {
+              this.idDesafio = Number(key);
+          });
         }
       });
+
+      // Adiciona o campo "completo": false em cada missão
+      const missoesAjustadas = missao.map((m:any) => ({
+        ...m,
+        completo: false
+      }));
+      
+      if(this.idDesafio !== 0){
+        // Atualiza caso já exista
+        this.rt.add(`/missoes/`, {
+          idUsuario: this.idUsuario,
+          idAlarme: this.idAlarme,
+          missoes: missoesAjustadas, 
+        }, this.idDesafio)
+        .subscribe({
+          next: (res:any) => {
+            console.log('Missões atualizadas com sucesso:', res);
+          },
+          error: (err) => {
+            console.log('Falhou ', err);
+          }
+        });
+      }else if(this.idDesafio == 0){
+        // Cria uma nova caso não exista
+        this.rt.add(`/missoes/`, {
+          idUsuario: this.idUsuario,
+          idAlarme: this.idAlarme,
+          missoes: missoesAjustadas, 
+        }, this.idDesafio)
+        .subscribe({
+          next: (res:any) => {
+            console.log('Missões criadas com sucesso:', res);
+          },
+          error: (err) => {
+            console.log('Falhou ', err);
+          }
+        });
+      }
+    }
+  }
+
+  // ---------- Modal De Horarios ----------
+  // Disponivel apenas no modo de edição.
+  horariosMudadosManualmente = false;
+
+  public alarmes: Array<any> = [];
+  public originAlarmes: Array<any> = [];
+  showHorarios = false;
+
+  // Botões de Salvar/Cancelar
+  salvarHorarios(){
+    this.showHorarios = false;
+    // Diz para o resto do codigo se os horarios foram mudados manualmente ou não
+    this.horariosMudadosManualmente = true;
+
+    console.log("Horarios salvos");
+  }
+  gerarHorarios(){
+    this.showHorarios = true;
+
+    if(this.gerarVezesAFazer()){
+      this.horariosMudadosManualmente = false;
+      this.alarmes = this.horariosAoDia;
+
+      console.log("Horarios Gerados altomaticamente");
+    }
+  }
+  cancelarHorarios(){
+    this.showHorarios = true;
+    this.alarmes = this.originAlarmes;
+
+    console.log("Horairos cancelados"); 
+  }
+  // Verifica se chegou no final da tela para esconder a sombra
+  public chegouAoFinal: boolean = false;
+  async detectarFimDoScroll(event: any) {
+    // 1. Acessa o elemento de scroll nativo
+    const scrollElement = await event.target.getScrollElement();
+
+    const scrollTop = scrollElement.scrollTop; 
+    const scrollHeight = scrollElement.scrollHeight;
+    const clientHeight = scrollElement.clientHeight;
+
+    const isBottom = scrollTop + clientHeight >= scrollHeight-10;
+    
+    if (isBottom && !this.chegouAoFinal) {
+      this.chegouAoFinal = true;
+    } 
+    else if (!isBottom && this.chegouAoFinal) {
+      this.chegouAoFinal = false;
     }
   }
 }
