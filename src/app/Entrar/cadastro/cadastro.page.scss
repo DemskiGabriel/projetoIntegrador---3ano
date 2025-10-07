@@ -1,93 +1,89 @@
-/* Fundo geral */
-ion-content {
-  --background: #e9e5f8; /* roxinho claro */
-  font-family: 'Poppins', sans-serif;
+ion-header {
+  --background: #a7abc8;
 }
 
-/* Card estilizado */
+ion-toolbar {
+  --background: transparent;
+  --border-color: transparent;
+  
+  ion-title {
+    color: #000;
+  }
+}
+
+ion-content {
+  --background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
+}
+
+.header-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+
+  ion-img {
+    max-width: 350px;
+  }
+}
+
 ion-card {
+  --background: #a7abc8;
+  margin: auto;
+  margin-top: -40px;
   border-radius: 20px;
   padding: 20px;
-  background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  width: 300px;
+  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
 }
 
-/* Avatar */
-.profile-avatar {
-  margin: 20px auto;
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  background: #f4f4f9;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+ion-card-content {
+  --background: black;
+  border-radius: 20px;
+  padding: 16px;
 }
 
-/* Labels */
-ion-label {
-  font-weight: 500;
-  font-size: 14px;
-  color: #4a4a4a;
+ion-list {
+  --ion-background-color: transparent;
+  background: transparent;
+  --border-width: 0; // Remove a borda superior e inferior da lista
 }
 
-/* Inputs */
-ion-input, ion-textarea {
-  --background: #ffffff;
-  --padding-start: 12px;
-  --padding-end: 12px;
-  --border-radius: 10px;
-  --border: 3px solid rgba(0, 0, 0, 0.2); /* contorno mais suave */
-  font-size: 14px;
-  margin-bottom: 15px;
-  transition: border 0.2s, box-shadow 0.2s; 
+// Estilos para os campos de input e seleção
+ion-item {
+  --background: #a7abc8;
+  --border-color: black;
+  border-bottom: 1px solid black;
+  margin-bottom: 8px;
+  --padding-start: 0; // Remove o padding padrão do item, se houver
+
+  // Corrigindo a cor do texto de todos os labels para preto
+  ion-label {
+    color: #666;
+  }
 }
 
-ion-input:focus, ion-textarea:focus {
-  border-color: rgba(0, 0, 0, 0.4); /* contorno ao focar */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-}
-
-/* Campo descrição */
-.descricao {
-  --padding-top: 10px;
-  --padding-bottom: 10px;
-  border-radius: 10px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  font-size: 14px;
-  margin-bottom: 15px;
-  transition: border 0.2s, box-shadow 0.2s;
-}
-
-.descricao:focus {
-  border-color: rgba(0, 0, 0, 3);
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+// Removendo as bordas de cima e de baixo dos items (exceto a borda de baixo que você quer manter)
+ion-item:first-child {
+  --border-width: 0;
 }
 
 
-/* Botão salvar */
+ion-input, ion-select {
+  --background: transparent;
+  color: black;
+  --placeholder-color: black;
+}
+
 ion-button {
-  --border-radius: 12px;
-  --background: linear-gradient(to right, #7a6ded, #5c4dc5);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.5px;
-  color: #fff;
-  margin-top: 10px;
-  transition: transform 0.2s ease-in-out;
+  --background: #ece8ec;
+  --color: black;
 }
 
-ion-button:hover {
-  transform: scale(1.05);
+a {
+  color: #666;
 }
 
-/* FAB de voltar */
-ion-fab {
-  margin-bottom: 8%;
-}
-
-ion-fab-button {
-  --background: #5c4dc5;
-  --border-radius: 50%;
-  box-shadow: 0 4px 12px rgba(92, 77, 197, 0.4);
+a:hover {
+  text-decoration: underline;
 }
