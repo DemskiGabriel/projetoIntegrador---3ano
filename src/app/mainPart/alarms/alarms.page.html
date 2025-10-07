@@ -1,5 +1,5 @@
 <!-- Exibe o conteúdo quando NÃO há alarmes -->
-<ion-content [fullscreen]="true" class="ion-padding" *ngIf="!hasAlarms()">
+<ion-content [fullscreen]="true" class="empty-content-wrapper" *ngIf="!hasAlarms()">
   <br>
   <ion-text class="alarms-title">
     <h1>Alarmes</h1>
@@ -10,8 +10,8 @@
   </ion-text>
 
   <ion-img src="assets/imagens/estrela.png"></ion-img>
-  <ion-fab horizontal="center" vertical="center" slot="fixed" class="add-button">
-    <ion-fab-button routerLink="/new-alarm">
+  <ion-fab horizontal="center" vertical="center" slot="fixed">
+    <ion-fab-button routerLink="/new-alarm" class="add-button">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>

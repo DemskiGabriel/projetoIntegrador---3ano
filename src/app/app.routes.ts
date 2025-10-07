@@ -37,7 +37,7 @@ export const routes: Routes = [
     loadComponent: () => import('./Entrar/esqueciSenha/esqueci-3/esqueci-3.page').then( m => m.Esqueci3Page)
   },
 
-  // Pagina do Projeto
+  // Area principal do projeto
   {
     path: 'tabs',
     component: TabsPage,
@@ -45,30 +45,27 @@ export const routes: Routes = [
       {
         path: 'feed',
         loadComponent: () => import('./mainPart/feed/feed.page').then( m => m.FeedPage),
-        runGuardsAndResolvers: 'always'
+        // canActivate: [authGuard]
       },
       {
         path: 'alarms',
         loadComponent: () => import('./mainPart/alarms/alarms.page').then( m => m.AlarmsPage),
-        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
       {
         path: 'quests',
         loadComponent: () => import('./mainPart/quests/quests.page').then( m => m.QuestsPage),
-        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
       {
         path: 'perfil',
         loadComponent: () => import('./mainPart/perfil/perfil.page').then( m => m.PerfilPage),
-        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
     ]
   },
   
-  // paginas filho
+  // paginas "filho"
   {
     path: 'new-alarm',
     loadComponent: () => import('./data/new-alarm/new-alarm.page').then( m => m.NewAlarmPage),

@@ -18,14 +18,14 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
   standalone: true,
   imports: [IonCardContent, IonFabButton, IonFab,  IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule, IonContent, RouterLink]
 })
-export class PerfilPage implements OnInit {
+export class PerfilPage{
   public amigos: string = 'amigos'
 
   constructor(
     public autenticacao_service:AutenticacaoService,
   ) { }
 
-  ngOnInit() {
+  ionViewWillEnter(){
     this.loadUser();
     this.loadRank();
   }

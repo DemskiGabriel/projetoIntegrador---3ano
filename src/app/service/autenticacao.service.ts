@@ -10,6 +10,7 @@ export class AutenticacaoService {
     public rs:RequisicaoService
   ) { }
   
+  // ---------- Login ----------
   logar(email:string, password:string){
     const fd = new FormData();
     fd.append('controller', 'logar');
@@ -19,7 +20,24 @@ export class AutenticacaoService {
     return this.rs
     .post(fd);
   }
+  validarToken(_token:string){
+    const fd = new FormData();
+    fd.append('controller', 'validar-token');
+    fd.append('token', _token);
 
+    return this.rs.post(fd);
+  }
+  proximo(email:string){
+    const fd = new FormData();
+    fd.append('controller', 'proximo');
+    fd.append('email', email);
+
+    return this.rs
+    .post(fd);
+  }
+
+
+  // ---------- Perfil ----------
   //Chama as informações do usuario para a edição de perfil.
   edicaoUsuario(id:string){
     const fd = new FormData();
@@ -29,7 +47,6 @@ export class AutenticacaoService {
     return this.rs
     .post(fd);
   }
-
   // Faz update no usuario que esta na edição de perfil.
   updateUsuario(id:string, nome:string, email:string, descricao:string, dataNascimento:string, image?: File){
     const fd = new FormData();
@@ -46,7 +63,6 @@ export class AutenticacaoService {
   
     return this.rs.post(fd);
   }
-
   rank(){
     const fd = new FormData();
     fd.append('controller', 'rank');
@@ -54,21 +70,12 @@ export class AutenticacaoService {
     return this.rs.post(fd); // usa POST igual ao resto
   }
   
-
-
-  proximo(email:string){
+  // ---------- Atualizar Pontuação ----------
+  atualizarPontuacao(id:string, pontos:string){
     const fd = new FormData();
-    fd.append('controller', 'proximo');
-    fd.append('email', email);
-
-    return this.rs
-    .post(fd);
-  }
-
-  validarToken(_token:string){
-    const fd = new FormData();
-    fd.append('controller', 'validar-token');
-    fd.append('token', _token);
+    fd.append('controller', 'atualizarPontuacao');
+    fd.append('id', id);
+    fd.append('pontos', pontos);
 
     return this.rs.post(fd);
   }
