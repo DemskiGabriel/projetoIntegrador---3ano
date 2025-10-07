@@ -3,7 +3,20 @@ import { IonApp, IonRouterOutlet } from '@ionic/angular/standalone';
 
 // Icons
 import { addIcons } from 'ionicons';
-import { personCircleOutline, homeOutline, alarmOutline, newspaperOutline, refresh, calendarOutline, arrowBackOutline, pencilOutline, create, person, addOutline } from 'ionicons/icons';
+import { 
+  personCircleOutline, 
+  homeOutline, 
+  alarmOutline, 
+  newspaperOutline, 
+  refresh, 
+  calendarOutline, 
+  arrowBackOutline, 
+  pencilOutline, 
+  create, 
+  person, 
+  addOutline, 
+  timeOutline 
+} from 'ionicons/icons';
 
 
 @Component({
@@ -14,6 +27,18 @@ import { personCircleOutline, homeOutline, alarmOutline, newspaperOutline, refre
 export class AppComponent {
   constructor() {
 //     icons
-    addIcons({ personCircleOutline, homeOutline, alarmOutline, newspaperOutline, refresh, calendarOutline, arrowBackOutline, pencilOutline, create, person, addOutline});
+    addIcons({ 
+      personCircleOutline, 
+      homeOutline, 
+      alarmOutline, 
+      newspaperOutline, 
+      refresh, 
+      calendarOutline, 
+      arrowBackOutline, 
+      pencilOutline, 
+      create, 
+      person, 
+      addOutline, 
+      timeOutline});
   }
 }
