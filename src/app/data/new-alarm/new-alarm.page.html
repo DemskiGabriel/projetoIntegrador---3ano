@@ -43,11 +43,11 @@
     
       <!-- Nome Do Alarme-->
       <ion-item>
-        <ion-input placeholder="Nome do alarme" [(ngModel)]="nomeAlarme"></ion-input>
+        <ion-input placeholder="Nome do alarme" [(ngModel)]="nomeAlarme" color="primary"></ion-input>
       </ion-item>
       <!-- Vezes Por Dia -->
       <ion-item>
-        <ion-input placeholder="Vezes por dia" [(ngModel)]="vezesPorDia" type="number"></ion-input>
+        <ion-input placeholder="Vezes por dia" [(ngModel)]="vezesPorDia" type="number" color="primary"></ion-input>
       </ion-item>
       <!-- Vibração -->
       <ion-item>
@@ -63,7 +63,7 @@
       </ion-item>
       <ion-item *ngIf="desafioToggle" lines="none">
         <ion-textarea fill="outline" [autoGrow]="true" rows="3" maxlength="250" class="descricao" [(ngModel)]="descricaoDesafio" 
-        placeholder="De uma descrição da sua tarefa, para a criação dos desafios.">
+        placeholder="De uma descrição da sua tarefa, para a criação dos desafios." color="primary">
         Descrição
         </ion-textarea>
       </ion-item>
@@ -126,7 +126,7 @@
     <ion-content class="ion-padding" scrollEvents="true" (ionScroll)="detectarFimDoScroll($event)">
       <h1>Horarios</h1>
       <div *ngFor="let alarmes of alarmes; let i = index" class="ion-padding">
-          <ion-input fill="outline" [(ngModel)]="alarmes.hora">{{i+1}}°</ion-input>
+          <ion-input fill="outline" [(ngModel)]="alarmes.hora" color="primary">{{i+1}}°</ion-input>
       </div>
     </ion-content>
 

@@ -9,13 +9,13 @@
     <br><br>
 
     <div class="color">
-      <ion-input fill="outline" placeholder="Novo nome" [(ngModel)]="nome" helperText=" "></ion-input><br>
-      <ion-input fill="outline" placeholder="Novo email" [(ngModel)]="email"  helperText="  "></ion-input><br>
+      <ion-input fill="outline" placeholder="Novo nome" [(ngModel)]="nome" helperText=" " color="primary"></ion-input><br>
+      <ion-input fill="outline" placeholder="Novo email" [(ngModel)]="email"  helperText="  " color="primary"></ion-input><br>
       <ion-textarea fill="outline" [autoGrow]="true" class="descricao" rows="6" maxlength="250" [(ngModel)]="descricao"
-        placeholder="Descrição"></ion-textarea>
+        placeholder="Descrição" color="primary"></ion-textarea>
       <br>
       <ion-input label="Data de nascimento: " placeholder="__/__/____" [(ngModel)]="dataNascimento" maxlength="10"
-        (ionInput)="formatarData($event)"></ion-input>
+        (ionInput)="formatarData($event)" color="primary"></ion-input>
     </div>
 
     <br>
