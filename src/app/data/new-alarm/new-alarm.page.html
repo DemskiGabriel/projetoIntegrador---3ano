@@ -61,7 +61,7 @@
       <ion-item>
         <ion-toggle [(ngModel)]="desafioToggle">Modo Desafio</ion-toggle>
       </ion-item>
-      <ion-item *ngIf="desafioToggle">
+      <ion-item *ngIf="desafioToggle" lines="none">
         <ion-textarea fill="outline" [autoGrow]="true" rows="3" maxlength="250" class="descricao" [(ngModel)]="descricaoDesafio" 
         placeholder="De uma descrição da sua tarefa, para a criação dos desafios.">
         Descrição
@@ -75,9 +75,11 @@
     </ion-buttons>
   </ion-card> 
 
-  <ion-button routerLink="/tabs/alarms" shape="round">
-    <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
-  </ion-button>
+  <div class="back-btn">
+    <ion-button routerLink="/tabs/perfil" shape="round">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>
 
 <!-- Calendario -->

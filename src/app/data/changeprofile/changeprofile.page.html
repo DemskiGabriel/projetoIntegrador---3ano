@@ -1,14 +1,15 @@
-<ion-content class="ion-padding principal">
+<ion-content class="ion-padding">
+  <br><br>
   <ion-card class="ion-padding">
-    <br><br>
+    <br>
     <ion-avatar class="profile-avatar" (click)="selecionarImagem()">
       <img [src]="fotoPerfil" alt="avatar">
     </ion-avatar>
     <input type="file" #fileInput hidden accept="image/*" (change)="onFileSelected($event)">
+    <br><br>
 
     <div class="color">
-      <ion-input fill="outline" placeholder="Novo nome" [(ngModel)]="nome"
-        helperText="  "></ion-input><br>
+      <ion-input fill="outline" placeholder="Novo nome" [(ngModel)]="nome" helperText=" "></ion-input><br>
       <ion-input fill="outline" placeholder="Novo email" [(ngModel)]="email"  helperText="  "></ion-input><br>
       <ion-textarea fill="outline" [autoGrow]="true" class="descricao" rows="6" maxlength="250" [(ngModel)]="descricao"
         placeholder="Descrição"></ion-textarea>
@@ -18,14 +19,13 @@
     </div>
 
     <br>
-    <ion-buttons class="save-box">
-      <ion-button expand="block">Salvar</ion-button>
-    </ion-buttons>
+    <ion-button expand="block" (click)="save()" class="salvarButton">Salvar</ion-button>
   </ion-card>
 
 
   <div class="back-btn">
-    <ion-button routerLink="/tabs/perfil">
+    <ion-button routerLink="/tabs/perfil" shape="round">
       <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
     </ion-button>
   </div>
+</ion-content>
