@@ -15,7 +15,8 @@ import {
   create, 
   person, 
   addOutline, 
-  timeOutline 
+  timeOutline,
+  checkmark
 } from 'ionicons/icons';
 
 
@@ -39,6 +40,8 @@ export class AppComponent {
       create, 
       person, 
       addOutline, 
-      timeOutline});
+      timeOutline,
+      checkmark
+});
   }
 }

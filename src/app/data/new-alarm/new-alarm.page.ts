@@ -1,11 +1,12 @@
 import { Component, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonModal, IonToggle, IonFab, IonFabButton, IonTextarea, IonList, IonHeader, IonToolbar, IonTitle, IonFooter } from '@ionic/angular/standalone';
+import { IonContent, IonCard, IonCardContent, IonDatetime, IonButton, IonInput, IonItem, IonIcon, IonButtons, IonModal, IonToggle, IonTextarea, IonToolbar, IonFooter } from '@ionic/angular/standalone';
 import { AlertController } from '@ionic/angular';
 import { RealtimeDatabaseService } from 'src/app/firebase/realtime-database';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { firstValueFrom } from 'rxjs';
 
 
 @Component({
@@ -13,7 +14,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   templateUrl: './new-alarm.page.html',
   styleUrls: ['./new-alarm.page.scss'],
   standalone: true,
-  imports: [IonFooter, IonTitle, IonToolbar, IonHeader, IonList, IonTextarea, IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent, RouterLink ]
+  imports: [IonFooter, IonToolbar, IonTextarea, IonToggle, IonModal, IonButtons, IonIcon, IonItem, IonInput, IonButton, CommonModule, FormsModule, IonDatetime, IonCardContent, IonCard, IonContent, RouterLink ]
 })
 export class NewAlarmPage {
   public idAlarme:number = 0;
@@ -420,57 +421,41 @@ export class NewAlarmPage {
       }
     });
   }
-  salvarMissao(missao:any){
-    if (this.desafioToggle) {
-      // Buscar todas as missões
-      this.rt.list(`/missoes`).subscribe((snapshot):any => {
-        const dados = snapshot;
+  async salvarMissao(missao: any) {
+    if (!this.desafioToggle) return;
   
-        if (dados) {
-          // Procurar missão com idAlarme igual
-          Object.entries(dados).forEach(([key, value]: [string, any]) => {
-              this.idDesafio = Number(key);
-          });
-        }
-      });
-
-      // Adiciona o campo "completo": false em cada missão
-      const missoesAjustadas = missao.map((m:any) => ({
-        ...m,
-        completo: false
-      }));
-      
-      if(this.idDesafio !== 0){
-        // Atualiza caso já exista
-        this.rt.add(`/missoes/`, {
-          idUsuario: this.idUsuario,
-          idAlarme: this.idAlarme,
-          missoes: missoesAjustadas, 
-        }, this.idDesafio)
-        .subscribe({
-          next: (res:any) => {
-            console.log('Missões atualizadas com sucesso:', res);
-          },
-          error: (err) => {
-            console.log('Falhou ', err);
-          }
-        });
-      }else if(this.idDesafio == 0){
-        // Cria uma nova caso não exista
-        this.rt.add(`/missoes/`, {
-          idUsuario: this.idUsuario,
-          idAlarme: this.idAlarme,
-          missoes: missoesAjustadas, 
-        }, this.idDesafio)
-        .subscribe({
-          next: (res:any) => {
-            console.log('Missões criadas com sucesso:', res);
-          },
-          error: (err) => {
-            console.log('Falhou ', err);
-          }
+    // Adiciona o campo "completo": false em cada missão
+    const missoesAjustadas = missao.map((m: any) => ({
+      ...m,
+      completo: false
+    }));
+  
+    try {
+      // Converte o Observable em Promise para poder usar await
+      const snapshot: any = await firstValueFrom(this.rt.list(`/missoes`));
+      let idDesafioLocal = 0;
+  
+      if (snapshot) {
+        Object.entries(snapshot).forEach(([key, value]: [string, any]) => {
+          idDesafioLocal = Number(key);
         });
       }
+  
+      // Atualiza ou cria missão
+      await firstValueFrom(this.rt.add(`/missoes/`, {
+        idUsuario: this.idUsuario,
+        idAlarme: this.idAlarme,
+        missoes: missoesAjustadas
+      }, idDesafioLocal));
+  
+      if (idDesafioLocal !== 0) {
+        console.log('Missão atualizada com sucesso');
+      } else {
+        console.log('Missão criada com sucesso');
+      }
+  
+    } catch (err) {
+      console.error('Erro ao salvar missão:', err);
     }
   }
 
