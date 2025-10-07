@@ -100,3 +100,23 @@ ion-toolbar{
 ion-footer.scroll-finalizado {
     box-shadow: none;
 }
+
+.back-btn {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .back-btn ion-button {
+    width: 65px;   /* quadradinho estilo iPhone */
+    height: 65px;
+    
+    --background: linear-gradient(to right, #7a6ded, #5c4dc5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .back-btn ion-icon {
+    font-size: 28px;
+    color: #fff;
+  }

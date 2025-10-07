@@ -1,13 +1,6 @@
-ion-content {
-  --background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
-  font-family: 'Poppins', sans-serif;
-}
-
 ion-card {
-  border-radius: 25px;
-  padding: 20px;
-  background: #a7abc8;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 15px;
+  background-color: #b5b6e3;
 }
 
 .profile-avatar {
@@ -20,23 +13,13 @@ ion-card {
   align-items: center;
   justify-content: center;
   position: relative;
+
+  box-shadow: 0.2px 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .profile-avatar ion-icon {
   font-size: 50px;
   color: #666;
-}
-
-.edit-icon {
-  position: absolute;
-  bottom: 5px;
-  right: 5px;
-  background: #5c4dc5;
-  color: #fff;
-  border-radius: 50%;
-  padding: 5px;
-  font-size: 14px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
 ion-label {
@@ -46,13 +29,11 @@ ion-label {
   font-family: 'Poppins', sans-serif;
 }
 
-iion-input, 
+ion-input, 
 ion-textarea {
-  --background: transparent;   /* fundo transparente */
   --padding-start: 12px;
   --padding-end: 12px;
-  --border-radius: 10px;
-  border: 1px solid #c7c7c7;
+  
   font-size: 14px;
   margin-bottom: 15px;
   font-family: 'Poppins', sans-serif;
@@ -60,35 +41,23 @@ ion-textarea {
 }
 
 .descricao {
-  --background: transparent;  /* fundo transparente */
   --padding-top: 10px;
   --padding-bottom: 10px;
   border-radius: 10px;
-  border: 1px solid #c7c7c7;
   font-size: 14px;
   margin-bottom: 15px;
   font-family: 'Poppins', sans-serif;
   color: #3b3b3b;
 }
 
-ion-button {
+.salvarButton {
   --border-radius: 12px;
   --background: linear-gradient(to right, #7a6ded, #5c4dc5);
   font-weight: 600;
   font-size: 16px;
-  letter-spacing: 0.5px;
-  color: #fff;
-  width: 100%;
-  font-family: 'Poppins', sans-serif;
-  transition: transform 0.2s ease-in-out;
-}
-
-ion-button:hover {
-  transform: scale(1.05);
 }
 
 .back-btn {
-  margin: 25px auto 0 auto;
   display: flex;
   justify-content: center;
 }
@@ -96,7 +65,7 @@ ion-button:hover {
 .back-btn ion-button {
   width: 65px;   /* quadradinho estilo iPhone */
   height: 65px;
-  --border-radius: 15px;
+  
   --background: linear-gradient(to right, #7a6ded, #5c4dc5);
   display: flex;
   align-items: center;

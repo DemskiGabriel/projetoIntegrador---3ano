@@ -202,4 +202,9 @@ export class QuestsPage{
         }
       });
   }
+
+  public hasIncompleteQuests(quests: Quest[]): boolean {
+    // Verifica se o array existe e se pelo menos um item tem completo: false
+    return quests && quests.some(quest => !quest.completo);
+  }
 }
