@@ -26,10 +26,6 @@ ion-datetime {
     margin-left: 5vw;
     margin-right: 3vw;
 }
-.title ion-button{
-    --background: rgba(0);
- 
-}
 .title ion-button ion-icon{
     color: rgb(115, 115, 115);
 }
@@ -86,3 +82,41 @@ ion-fab{
 
     --border-radius: 10px;
 }
+
+.shadow{
+    --box-shadow: 0.2px 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.title ion-buttons {
+    display: flex;
+    gap: 8px; /* define o espaçamento entre os botões */
+  }
+
+ion-toolbar{
+    --background: rgba(237, 233, 233);   
+}
+
+
+ion-footer.scroll-finalizado {
+    box-shadow: none;
+}
+
+.back-btn {
+    display: flex;
+    justify-content: center;
+  }
+  
+  .back-btn ion-button {
+    width: 65px;   /* quadradinho estilo iPhone */
+    height: 65px;
+    
+    --background: linear-gradient(to right, #7a6ded, #5c4dc5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .back-btn ion-icon {
+    font-size: 28px;
+    color: #fff;
+  }

@@ -16,9 +16,17 @@
     <br>
     <div class="title">
       <h5>Data</h5>
-      <ion-button shape="round" (click)="showCalendar = true">
-        <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
-      </ion-button>
+
+      <ion-buttons shape="round">
+        <!-- Editar os Horarios individualmente -->
+        <ion-button *ngIf="idAlarme;" class="shadow" (click)="showHorarios = true">
+          <ion-icon name="time-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+  
+        <ion-button class="shadow" (click)="showCalendar = true">
+          <ion-icon name="calendar-outline" slot="icon-only"></ion-icon>
+        </ion-button>
+      </ion-buttons>
     </div>
     
     <ion-card-content> 
@@ -35,11 +43,11 @@
     
       <!-- Nome Do Alarme-->
       <ion-item>
-        <ion-input placeholder="Nome do alarme" [(ngModel)]="nomeAlarme"></ion-input>
+        <ion-input placeholder="Nome do alarme" [(ngModel)]="nomeAlarme" color="primary"></ion-input>
       </ion-item>
       <!-- Vezes Por Dia -->
       <ion-item>
-        <ion-input placeholder="Vezes por dia" [(ngModel)]="vezesPorDia" type="number"></ion-input>
+        <ion-input placeholder="Vezes por dia" [(ngModel)]="vezesPorDia" type="number" color="primary"></ion-input>
       </ion-item>
       <!-- Vibração -->
       <ion-item>
@@ -53,9 +61,9 @@
       <ion-item>
         <ion-toggle [(ngModel)]="desafioToggle">Modo Desafio</ion-toggle>
       </ion-item>
-      <ion-item *ngIf="desafioToggle">
+      <ion-item *ngIf="desafioToggle" lines="none">
         <ion-textarea fill="outline" [autoGrow]="true" rows="3" maxlength="250" class="descricao" [(ngModel)]="descricaoDesafio" 
-        placeholder="De uma descrição da sua tarefa, para a criação dos desafios.">
+        placeholder="De uma descrição da sua tarefa, para a criação dos desafios." color="primary">
         Descrição
         </ion-textarea>
       </ion-item>
@@ -67,18 +75,23 @@
     </ion-buttons>
   </ion-card> 
 
-  <ion-button routerLink="/tabs/alarms" shape="round">
-    <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
-  </ion-button>
+  <div class="back-btn">
+    <ion-button routerLink="/tabs/alarms" shape="round">
+      <ion-icon name="arrow-back-outline" slot="icon-only"></ion-icon>
+    </ion-button>
+  </div>
 </ion-content>
 
+<!-- Calendario -->
 <ion-modal
   [isOpen]="showCalendar"
   (didDismiss)="showCalendar = false"
 
   [initialBreakpoint]="0.50"
   handleBehavior="cycle"
-  [keepContentsMounted]="true">
+  [keepContentsMounted]="true"
+  class="calendario"
+  >
   <ng-template>
     <ion-content class="ion-padding">
       <ion-datetime 
@@ -96,4 +109,35 @@
     </ion-content>
   </ng-template>
 </ion-modal>
-  
+
+<!-- Horarios -->
+<!-- Disponivel Apenas na edição -->
+<ion-modal
+  [isOpen]="showHorarios"
+  (didDismiss)="showHorarios = false"
+
+  [initialBreakpoint]="0.95"
+  [breakpoints]="[0, 0.28, 0.65, 0.95]"
+  handleBehavior="cycle"
+  [keepContentsMounted]="true"
+  [expandToScroll]="false"
+  >
+  <ng-template>
+    <ion-content class="ion-padding" scrollEvents="true" (ionScroll)="detectarFimDoScroll($event)">
+      <h1>Horarios</h1>
+      <div *ngFor="let alarmes of alarmes; let i = index" class="ion-padding">
+          <ion-input fill="outline" [(ngModel)]="alarmes.hora" color="primary">{{i+1}}°</ion-input>
+      </div>
+    </ion-content>
+
+    <ion-footer [ngClass]="{'scroll-finalizado': chegouAoFinal}">
+      <ion-toolbar>
+        <ion-buttons class="saveButtons">
+          <ion-button color="danger" (click)="cancelarHorarios()">Reiniciar</ion-button>
+          <ion-button color="warning" (click)="gerarHorarios()">Gerar</ion-button>
+          <ion-button color="primary" (click)="salvarHorarios()">Salvar</ion-button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-footer>
+  </ng-template>
+</ion-modal>

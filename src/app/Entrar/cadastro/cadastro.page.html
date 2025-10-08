@@ -8,19 +8,19 @@
       <ion-list>
         <h1>Cadastro</h1>
         <ion-item>
-          <ion-input type="text" label="Digite seu nome" label-placement="floating" [(ngModel)]="nome" name="nome"></ion-input>
+          <ion-input type="text" label="Digite seu nome" label-placement="floating" [(ngModel)]="nome" name="nome" color="primary"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="email" label="Digite seu e-mail" label-placement="floating" [(ngModel)]="email" name="email"></ion-input>
+          <ion-input type="email" label="Digite seu e-mail" label-placement="floating" [(ngModel)]="email" name="email" color="primary"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="password" label="Digite sua senha" label-placement="floating" [(ngModel)]="senha" name="senha"></ion-input>
+          <ion-input type="password" label="Digite sua senha" label-placement="floating" [(ngModel)]="senha" name="senha" color="primary"></ion-input>
         </ion-item>
 
         <ion-item>
-          <ion-input type="password" label="Confirme sua senha" label-placement="floating" [(ngModel)]="confirmarSenha" name="confirmarSenha"></ion-input>
+          <ion-input type="password" label="Confirme sua senha" label-placement="floating" [(ngModel)]="confirmarSenha" name="confirmarSenha" color="primary"></ion-input>
         </ion-item>
 
         <ion-text color="danger" *ngIf="erroSenhasNaoCoincidem">
@@ -30,7 +30,7 @@
         <ion-item>
           <ion-label position="fixed">Data de nascimento</ion-label>
           <ion-input type="text" placeholder="__/__/____" [(ngModel)]="dataNascimento" name="dataNascimento"
-            maxlength="10" (ionInput)="formatarData($event)">
+            maxlength="10" (ionInput)="formatarData($event)" color="primary">
           </ion-input>
         </ion-item>
         

@@ -1,12 +1,15 @@
 <!-- Caso tenha tarefas -->
 <ion-content [fullscreen]="true" class="ion-padding custom-background" *ngIf="hasQuests()" class="has-quests-content">
-    <ion-text class="quests-title">
-      <h1>Desafios</h1>
-      <h2>{{score}}</h2>
-    </ion-text>
+  <br>
+  <ion-text class="alarms-title">
+    <h1>Desafios</h1>
+  </ion-text>
 
     <div *ngFor="let grupo of questsGrouped | keyvalue" class="quest-group-section">
-      <h2 class="alarm-group-title">{{ grupo.key }}</h2>
+      <h2 
+        class="alarm-group-title"
+        *ngIf="hasIncompleteQuests(grupo.value)"
+      >{{ grupo.key }}</h2>
   
       <div class="quest-card-list">
         <ng-container *ngFor="let quest of grupo.value">

@@ -1,9 +1,10 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonContent, IonInput, IonButton, IonButtons, IonAvatar, IonCard, IonTextarea, IonIcon } from '@ionic/angular/standalone';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AutenticacaoService } from 'src/app/service/autenticacao.service';
+import { AlertController } from '@ionic/angular';
 
 @Component({
   selector: 'app-changeprofile',
@@ -23,6 +24,8 @@ export class ChangeprofilePage{
 
   constructor(
     public autenticacao_service:AutenticacaoService,
+    private router: Router,
+    private alertController: AlertController
   ) { }
 
   ionViewWillEnter(){
@@ -128,10 +131,29 @@ export class ChangeprofilePage{
     )
     .subscribe((_res: any) => {
       if (_res.status == 'success'){
+        this.presentAlertSucesso();
+
         console.log(_res.msg);
       } else {
         console.error('Erro ao atualizar usuário');
       }
     });
+  }
+
+  // ---------- Alertas ----------
+  // Alerta quando o projeto é salvo
+  async presentAlertSucesso() {
+    const alert = await this.alertController.create({
+      header: 'SALVO COM SUCESSO',
+      message: 'Precione "OK" para continuar.',
+      buttons: [{
+          text: 'OK',
+          role: 'confirm',
+          handler: () => {
+            this.router.navigate(['/tabs/perfil']);
+          } 
+        }],
+    });
+    await alert.present();
   }
 }

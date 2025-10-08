@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { IonCard, IonIcon, IonItem, IonImg, IonLabel, IonContent, IonFab, IonFabButton, IonCardContent } from '@ionic/angular/standalone';
+import { IonCard, IonIcon, IonItem, IonImg, IonLabel, IonContent, IonFab, IonFabButton, IonCardContent, IonCardHeader, IonAvatar } from '@ionic/angular/standalone';
 
 import '@ionic/core/css/core.css';
 
@@ -16,7 +16,7 @@ import { AutenticacaoService } from 'src/app/service/autenticacao.service';
   templateUrl: './perfil.page.html',
   styleUrls: ['./perfil.page.scss'],
   standalone: true,
-  imports: [IonCardContent, IonFabButton, IonFab,  IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule, IonContent, RouterLink]
+  imports: [IonAvatar, IonCardContent, IonFabButton, IonFab, IonIcon, IonCard, IonItem, IonLabel, IonImg, CommonModule, FormsModule, IonContent, RouterLink, IonCardHeader]
 })
 export class PerfilPage{
   public amigos: string = 'amigos'
