@@ -14,10 +14,14 @@
     top: 10%;
     width: 95%;
     max-width: 400px;
-    background: #a7abc8; 
+    background: #b5b6e3; 
     border-radius: 20px;
     padding: 10px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  }
+
+  .email{
+    --border-color: #756ad8;
   }
 
   .card-title {
@@ -53,7 +57,7 @@
   }
 
   .next-button {
-    --background: #7a7fe6; 
+    --background: #7a6ded; 
     --border-radius: 10px;
     margin-top: 10px;
     font-weight: bold;
@@ -66,7 +70,7 @@
   }
 
   .cancelar {
-    color: #5b7efc;
+    color: #7a6ded;
     text-decoration: none;
     font-size: 1rem;
     font-weight: 500;

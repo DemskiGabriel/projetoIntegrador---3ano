@@ -6,6 +6,7 @@ ion-card {
 .borda{
 
 --border-color: #756ad8;
+--border-radius: 10px ;
 
 }
 
@@ -44,7 +45,6 @@ ion-textarea {
   margin-bottom: 15px;
   font-family: 'Poppins', sans-serif;
   color: #3b3b3b; /* cor do texto */
-  --border-color: #756ad8;
 }
 
 .descricao {
