@@ -1,5 +1,5 @@
 ion-header {
-  --background: #a7abc8;
+  --background: #9c93d4; /* tom roxo médio, mais forte que o anterior */
 }
 
 ion-toolbar {
@@ -12,7 +12,7 @@ ion-toolbar {
 }
 
 ion-content {
-  --background: linear-gradient(to bottom, #ece8ec, #b5b6e3);
+  --background: linear-gradient(to bottom, #e8e4f3, #a9a2d7); /* gradiente suave roxo/lilás */
 }
 
 .header-content {
@@ -28,17 +28,17 @@ ion-content {
 }
 
 ion-card {
-  --background: #a7abc8;
+  --background: #9f96d6; /* roxo mais vivo, porém não escuro */
   margin: auto;
   margin-top: -40px;
   border-radius: 20px;
   padding: 20px;
   width: 300px;
-  box-shadow: 0px 4px 10px rgba(0,0,0,0.2);
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 ion-card-content {
-  --background: black;
+  --background: #ece8f7; /* leve contraste dentro do card */
   border-radius: 20px;
   padding: 16px;
 }
@@ -46,42 +46,42 @@ ion-card-content {
 ion-list {
   --ion-background-color: transparent;
   background: transparent;
-  --border-width: 0; // Remove a borda superior e inferior da lista
+  --border-width: 0; /* Remove bordas da lista */
 }
 
-// Estilos para os campos de input e seleção
+/* Campos e seletores */
 ion-item {
-  --background: #a7abc8;
-  --border-color: black;
-  border-bottom: 1px solid black;
+  --background: #9f96d6; /* lilás suave que combina com o card */
+  --border-color: #4b3a7a;
+  border-bottom: 1px solid #4b3a7a;
   margin-bottom: 8px;
-  --padding-start: 0; // Remove o padding padrão do item, se houver
+  --padding-start: 0;
 
-  // Corrigindo a cor do texto de todos os labels para preto
   ion-label {
-    color: #666;
+    color: #4b3a7a; /* tom roxo escuro para contraste */
   }
 }
 
-// Removendo as bordas de cima e de baixo dos items (exceto a borda de baixo que você quer manter)
 ion-item:first-child {
   --border-width: 0;
 }
 
-
 ion-input, ion-select {
   --background: transparent;
-  color: black;
-  --placeholder-color: black;
+  color: #2d235f;
+  --placeholder-color: #5a4b8f;
 }
 
 ion-button {
-  --background: #ece8ec;
-  --color: black;
+  --background: linear-gradient(135deg, #a58af2, #8b74d9);
+  --color: #fff;
+  font-weight: 600;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
 a {
-  color: #666;
+  color: #6d5dbb;
 }
 
 a:hover {
