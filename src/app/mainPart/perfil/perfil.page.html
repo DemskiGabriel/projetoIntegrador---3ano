@@ -2,7 +2,9 @@
 <ion-content>
   <ion-card class="perfil-card">
       <ion-item lines="none" class="perfil-item">
-          <ion-img src="{{fotoPerfil}}" class="foto-perfil"></ion-img>
+          <ion-avatar class="foto-perfil">
+            <img [src]="fotoPerfil" alt="avatar">
+          </ion-avatar>
           <ion-label class="nome-perfil">{{nome}}</ion-label>
       </ion-item>
   </ion-card>

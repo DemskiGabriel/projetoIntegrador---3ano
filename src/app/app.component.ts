@@ -18,6 +18,8 @@ import {
   timeOutline,
   checkmark
 } from 'ionicons/icons';
+import { TimeCheckerService } from './services/time-checker';
+
 
 
 @Component({
@@ -26,8 +28,10 @@ import {
   imports: [IonApp, IonRouterOutlet],
 })
 export class AppComponent {
-  constructor() {
-//     icons
+  constructor(
+    private timeCheckerService: TimeCheckerService
+  ) {
+//  icons
     addIcons({ 
       personCircleOutline, 
       homeOutline, 
@@ -42,6 +46,9 @@ export class AppComponent {
       addOutline, 
       timeOutline,
       checkmark
-});
+    });
+
+    // Isso garante que o serviço seja instanciado assim que o app iniciar
+    console.log('TimeCheckerService iniciado globalmente.');
   }
 }

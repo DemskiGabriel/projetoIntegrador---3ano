@@ -45,7 +45,22 @@ export class NewAlarmPage {
   }
 
   ionViewWillEnter(){
-    this.load();
+    if(this.idAlarme != 0){
+      this.load();
+    }else{
+      this.idAlarme = 0;
+      this.idUsuario = localStorage.getItem('userId') || '';
+
+      this.nomeAlarme = ''; 
+      this.vezesPorDia = null;
+
+      this.vibracao = true;
+      this.somAlarme = true;
+
+      this.calendario = [];
+      this.dataAEnviar = [];
+      this.tipoData = '';
+    }
   }
 
   // ---------- Datetime ----------

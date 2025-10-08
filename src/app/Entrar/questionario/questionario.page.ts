@@ -189,7 +189,7 @@ export class QuestionarioPage implements OnInit {
         this.rs.post(fd).subscribe(
           (response: any) => {
             console.log('Cadastro de Questionario bem-sucedido!', response);
-            this.router.navigate(['/tabs/feed']);
+            this.router.navigate(['/new-alarm']);
           },
           (error: any) => {
              console.error('Erro ao cadastrar:', error);
