@@ -3,6 +3,12 @@ ion-card {
   background-color: #b5b6e3;
 }
 
+.borda{
+
+--border-color: #756ad8;
+
+}
+
 .profile-avatar {
   margin: 20px auto 10px auto;
   width: 100px;
@@ -38,6 +44,7 @@ ion-textarea {
   margin-bottom: 15px;
   font-family: 'Poppins', sans-serif;
   color: #3b3b3b; /* cor do texto */
+  --border-color: #756ad8;
 }
 
 .descricao {
