@@ -101,13 +101,9 @@ export class AlarmsPage{
   }
   
 
-  toggleContent() {
-    this.hasAlarms.update(value => !value);
-  }
+  
 
-  toggleAlarm(index: number) {
-    this.dados[index].ativo = !this.dados[index].ativo;
-    
+  toggleAlarm(index: number) {    
     this.rt.add(`/alarme`, {
       // Id Do usuario.
       user: this.dados[index].user,
@@ -126,7 +122,7 @@ export class AlarmsPage{
       // Alarmes referesse a lista de vezes que o alarme dispertara em um dia.
       alarmes: this.dados[index].alarmes,
       // Ativo referesse se o alarme esta ativo ou não.
-      ativo: this.dados[index].ativo = !this.dados[index].ativo, 
+      ativo:  this.dados[index].ativo,
 
       // Modo desafio(Caso ativo)
       modoDesafio: this.dados[index].modoDesafio,
@@ -134,13 +130,16 @@ export class AlarmsPage{
     }, index+1)
       .subscribe({
         next: (idDoAlarme) => {
-          console.log("Alarme definido como " + (this.dados[index].ativo = !this.dados[index].ativo))
+          console.log("Alarme definido como " + this.dados[index].ativo)
           console.log("Id Do Alarme: " + idDoAlarme);
         },
         error: (err) => console.log('Falhou ', err)
       });
   }
 
+  toggleContent() {
+    this.hasAlarms.update(value => !value);
+  }
   public hasAlarms = signal<boolean>(false);
   telaVazia(alarmes:any){
     if(alarmes.length == 0){

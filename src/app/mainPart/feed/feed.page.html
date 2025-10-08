@@ -5,10 +5,15 @@
   </ion-text>
 
   <div class="cardDisplay">
-    <ion-card *ngFor="let alarme of visibleAlarms; let i = index" #cardElem class="swipe-card card" [attr.data-i]="i"
-      [style.backgroundColor]="alarme.cardColor" [style.top.%]="getCardTop(i)" [style.zIndex]="visibleAlarms.length - i"
+    <ng-container *ngFor="let alarme of visibleAlarms; let i = index">
+      <ion-card 
+      *ngIf="alarme?.ativo"
+      #cardElem 
+      class="swipe-card card" 
+      [attr.data-i]="i"
+      [style.backgroundColor]="alarme.cardColor" 
+      [style.top.%]="getCardTop(i)" [style.zIndex]="visibleAlarms.length - i"
       [style.width.%]="95 - (i * 4)">
-
       <!-- Título do Alarme -->
       <ion-card-header class="card-header-styled">
         <ion-card-subtitle>{{ alarme.nomeAlarme }}</ion-card-subtitle>
@@ -23,12 +28,12 @@
       <!-- Placeholder para ícone/imagem, se necessário -->
       <!-- <div class="card-icon-placeholder"></div> -->
     </ion-card>
-
+    </ng-container>
+      
     <!-- Mensagem de fim de lista -->
     <div *ngIf="visibleAlarms.length === 0" class="no-more-alarms">
       <p>🎉 Você está em dia com seus alarmes!</p>
       <p>Aproveite o tempo livre.</p>
     </div>
-
   </div>
 </ion-content>

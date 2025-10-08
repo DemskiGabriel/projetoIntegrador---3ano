@@ -156,4 +156,9 @@ export class ChangeprofilePage{
     });
     await alert.present();
   }
+
+  logout(){
+    localStorage.setItem('userId', '');
+    this.router.navigate(['/tabs/perfil']);
+  }
 }

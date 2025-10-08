@@ -15,7 +15,8 @@ interface VisibleAlarm {
   indexPai: number;
   rawAlarme: any;
   itemOriginal: any;
-  cardColor: string; // Cor fixada para o card
+  cardColor: string;
+  ativo: boolean;
 }
 
 @Component({
@@ -113,13 +114,10 @@ export class FeedPage {
           item.alarmes = Array.isArray(item.alarmes) ? item.alarmes : [];
           item.proximoAlarme = this.getProximoAlarme(item);
           item.cor = this.getStableColorHash(item.nomeAlarme || 'default');
+          item.ativo = item.ativo;          
 
           return item;
         }).filter((item: any) => item.user === this.userId);
-
-        console.log(this.dados);
-        
-
         // Monta array de proximosAlarmes (com a cor já atribuída)
         this.montarProximosAlarmes();
 
@@ -183,7 +181,8 @@ export class FeedPage {
           indexPai: idx,
           rawAlarme: alarme,
           itemOriginal: item,
-          cardColor: item.cor // Cor agora é fixa pelo nome do alarme pai
+          cardColor: item.cor,
+          ativo: item.ativo
         });
       });
     });
