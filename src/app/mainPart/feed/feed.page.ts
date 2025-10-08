@@ -93,7 +93,7 @@ export class FeedPage {
 
     for (let i = 0; i < inputString.length; i++) {
       const char = inputString.charCodeAt(i);
-      hash = ((hash << 5) - hash) + char;
+      hash = ((hash << 40) - hash) + char;
       hash |= 0; // Converte para um inteiro de 32 bits
     }
 
