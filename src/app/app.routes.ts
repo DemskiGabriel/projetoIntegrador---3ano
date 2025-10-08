@@ -60,6 +60,7 @@ export const routes: Routes = [
       {
         path: 'perfil',
         loadComponent: () => import('./mainPart/perfil/perfil.page').then( m => m.PerfilPage),
+        runGuardsAndResolvers: 'always'
         // canActivate: [authGuard]
       },
     ]
@@ -81,7 +82,8 @@ export const routes: Routes = [
     path: 'changeprofile',
     loadComponent: () => import('./data/changeprofile/changeprofile.page').then( m => m.ChangeprofilePage)
     // canActivate: [authGuard]
-  },  {
+  },
+  {
     path: 'alarme-tocando',
     loadComponent: () => import('./alarme-tocando/alarme-tocando.page').then( m => m.AlarmeTocandoPage)
   }
