@@ -1,175 +1,135 @@
+/* ======== DESAFIOS ======== */
+
+/* Fundo e estrutura geral */
 .custom-background {
-  --background: #f7f7f7;
+  --background: linear-gradient(180deg, rgb(218, 216, 255) 0%, rgb(255, 255, 255) 100%);
 }
 
-.empty-content-wrapper {
+/* ======== QUANDO HÁ DESAFIOS ======== */
+.has-quests-content {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  text-align: center;
+  gap: 12px;
 }
 
-.main-text h1 {
-  font-family: 'Poppins';
-  font-size: 1.7rem;
-  font-style: italic;
-  font-weight: 700;
-  color: #2e1b5b;
-  margin: 0;
+.quest-group-section {
+  margin-top: 10px;
 }
-
-.alarms-title {
-  font-weight: bold;
-  color: #333;
-}
-.alarms-title {
-  text-align: center;
-  h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #2e1b5b;
-  }
-}
-
-/* ... Estilos não relacionados ao problema de swipe/glitch ... */
 
 .alarm-group-title {
   font-family: 'Poppins', sans-serif;
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: #2e1b5b;
-  margin: 16px 0 8px 0; 
-  padding-bottom: 4px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: rgb(96, 48, 255);
+  margin-bottom: 6px;
+  margin-left: 8px;
 }
 
 .quest-card-list {
   display: flex;
   flex-direction: column;
-  gap: 0; 
-  
-  /* ESTILOS DE AGRUPAMENTO VISUAL */
-  background: #ffffff; 
-  border-radius: 15px; 
-  padding: 0; 
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); 
-  margin-bottom: 24px; 
-  overflow: hidden; 
-}
-.quest-sliding-item {
-    /* Garante que o item deslizante não tenha fundo */
-    --background: transparent;
-    /* Linha divisória move-se com o conteúdo e é parte do item deslizante */
-    border-bottom: 1px solid #f0f0f0; 
+  gap: 10px;
 }
 
-/* Remove a linha divisória do último item dentro do agrupamento */
-.quest-sliding-item:last-child {
-    border-bottom: none;
-}
-
+/* Cartões de desafios */
 .quest-item-content {
-    /* Zera estilos do ion-item para que o layout seja definido por classes internas */
-    --background: transparent;
-    --padding-start: 15px; 
-    --inner-padding-end: 15px; 
-    --padding-top: 12px; 
-    --padding-bottom: 12px;
+  border-radius: 14px;
+  padding: 12px;
+  background: rgba(142, 104, 230, 0.12);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-/* Container de conteúdo que substituiu o ion-card */
-.quest-content-wrapper {
-    width: 100%;
-    /* Zera quaisquer margens/paddings herdados */
-    padding: 0;
-    margin: 0;
+.quest-item-content:nth-child(3n+1) {
+  background: rgba(142, 104, 230, 0.12);
 }
 
-/* Efeito hover aplicado ao ion-item-content */
+.quest-item-content:nth-child(3n+2) {
+  background: rgba(218, 216, 255, 0.25);
+}
+
+.quest-item-content:nth-child(3n+3) {
+  background: rgba(96, 48, 255, 0.15);
+}
+
 .quest-item-content:hover {
-    --background: #fafafa;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
-/* Cabeçalho do item */
+/* Título e pontos */
 .quest-header {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding: 0;
-  border-bottom: none;
+  align-items: center;
 }
 
-/* Nome da missão */
-.quest-name {
-  flex-grow: 1; 
-  margin-right: 15px;
-}
 .quest-name h3 {
   font-family: 'Poppins', sans-serif;
-  margin: 0;
-  font-size: 1.0rem;
-  font-weight: 600; 
+  font-size: 1rem;
   color: #2e1b5b;
+  margin: 0;
 }
 
-/* Pontuação */
 .quest-points {
+  font-family: 'Inter', sans-serif;
+  font-weight: 600;
   font-size: 0.9rem;
-  font-weight: 700; 
-  color: #c97d7d; 
-  margin-left: auto;
-  min-width: 60px; 
-  text-align: right;
-  flex-shrink: 0;
-}
-
-/* Corpo da missão (Descrição) */
-.quest-body {
-  margin-top: 4px; 
-  padding-top: 0;
-  font-size: 0.85rem;
-  color: #6d6d6d; 
-  line-height: 1.4;
+  color: rgb(96, 48, 255);
 }
 
 .quest-body p {
-    margin: 0;
+  font-size: 0.85rem;
+  font-family: 'Inter', sans-serif;
+  color: #333;
+  margin-top: 4px;
 }
 
-ion-item-options {
-  z-index: 0;
-}
-
-ion-item {
-  position: relative;
-  z-index: 1;
-}
-
-.alarm-group-title {
-  transition: opacity 0.4s ease, transform 0.4s ease, height 0.4s ease;
-}
-
-.alarm-group-title.hidden {
-  opacity: 0;
-  transform: translateY(-20px);
-  height: 0;
-  overflow: hidden;
-}
-
-.quest-item-content {
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.quests-title{
+/* ======== QUANDO NÃO HÁ DESAFIOS ======== */
+.empty-content-wrapper {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  gap: 20px;
+  padding: 0 16px;
 }
 
-.add-button {
-  --background: #5d6790;
-  --color: #fff;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+.alarms-title h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #2e1b5b;
+  margin-top: 16px;
+}
 
-  --background: linear-gradient(#7a6ded, #8d83cf);
+.main-text h1 {
+  font-family: 'Poppins';
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #4a3b85;
+  margin: 0;
+}
+
+/* Estrela decorativa */
+ion-img {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  image-rendering: pixelated;
+  position: relative;
+  left: 22%;
+}
+
+/* Botão + */
+.add-button {
+  --background: linear-gradient(145deg, rgb(142, 104, 230), rgb(96, 48, 255));
+  --color: #fff;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }

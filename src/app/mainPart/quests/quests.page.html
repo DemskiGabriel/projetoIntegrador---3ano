@@ -1,59 +1,68 @@
 <!-- Caso tenha tarefas -->
-<ion-content [fullscreen]="true" class="ion-padding custom-background" *ngIf="hasQuests()" class="has-quests-content">
+<ion-content [fullscreen]="true" class="ion-padding custom-background has-quests-content" *ngIf="hasQuests()">
   <br>
   <ion-text class="alarms-title">
     <h1>Desafios</h1>
   </ion-text>
 
-    <div *ngFor="let grupo of questsGrouped | keyvalue" class="quest-group-section">
-      <h2 
-        class="alarm-group-title"
-        *ngIf="hasIncompleteQuests(grupo.value)"
-      >{{ grupo.key }}</h2>
-  
-      <div class="quest-card-list">
-        <ng-container *ngFor="let quest of grupo.value">
-          <ion-item *ngIf="!quest.completo"
-                    lines="none"
-                    class="quest-item-content swipe-card"
-                    #cardElem
-                    [attr.data-quest-id]="quest.challengeName">
-            <div class="quest-content-wrapper">
-              <div class="quest-header">
-                <ion-text class="quest-name">
-                  <h3><b>{{ quest.challengeName }}</b></h3>
-                </ion-text>
-                <ion-text class="quest-points">
-                  +{{ quest.points }} Pontos
-                </ion-text>
-              </div>
-              <div class="quest-body">
-                <p>{{ quest.challenges }}</p>
-              </div>
+  <!-- Agrupamento dos desafios -->
+  <div *ngFor="let grupo of questsGrouped | keyvalue" class="quest-group-section">
+    <!-- Título do grupo -->
+    <h2 
+      class="alarm-group-title"
+      *ngIf="hasIncompleteQuests(grupo.value)"
+    >
+      {{ grupo.key }}
+    </h2>
+
+    <!-- Lista de cards -->
+    <div class="quest-card-list">
+      <ng-container *ngFor="let quest of grupo.value">
+        <!-- Cada card de desafio -->
+        <ion-item 
+          *ngIf="!quest.completo"
+          lines="none"
+          class="quest-item-content swipe-card"
+          #cardElem
+          [attr.data-quest-id]="quest.challengeName"
+        >
+          <div class="quest-content-wrapper">
+            <div class="quest-header">
+              <ion-text class="quest-name">
+                <h3><b>{{ quest.challengeName }}</b></h3>
+              </ion-text>
+              <ion-text class="quest-points">
+                +{{ quest.points }} Pontos
+              </ion-text>
             </div>
-          </ion-item>
-        </ng-container>
-      </div>
+
+            <div class="quest-body">
+              <p>{{ quest.challenges }}</p>
+            </div>
+          </div>
+        </ion-item>
+      </ng-container>
     </div>
+  </div>
 </ion-content>
 
 <!-- Caso não tenha tarefas -->
-<ion-content *ngIf="!hasQuests()" class="empty-content-wrapper">
+<ion-content *ngIf="!hasQuests()" class="empty-content-wrapper custom-background">
   <br>
   <ion-text class="alarms-title">
     <h1>Desafios</h1>
   </ion-text>
 
   <ion-text class="main-text">
-    <h1>Você não tem nenhum desafio no momento</h1>
+    <h1>Não há nenhum desafio no momento!</h1>
   </ion-text>
 
-  <ion-img src="assets/imagens/estrela.png"></ion-img>
+  <ion-img src="assets/imagens/estrela.png" alt="Estrela decorativa"></ion-img>
 
   <!-- Botão para Criar alarme -->
-  <ion-fab horizontal="center" vertical="center" slot="fixed" >
+  <ion-fab horizontal="center" vertical="center" slot="fixed">
     <ion-fab-button routerLink="/new-alarm" class="add-button">
       <ion-icon name="add-outline"></ion-icon>
     </ion-fab-button>
   </ion-fab>
-</ion-content> 
+</ion-content>

@@ -1,109 +1,122 @@
-.alarms-title {
-  font-weight: bold;
-  color: #333;
+/* ======== ALARMES ======== */
+
+/* Fundo com gradiente igual ao dos desafios */
+.custom-background {
+  --background: linear-gradient(180deg, rgb(218, 216, 255) 0%, rgb(255, 255, 255) 100%);
 }
 
-.transparent-toolbar {
-  --background: transparent;
-  --border-width: 0;
+/* ======== QUANDO HÁ ALARMES ======== */
+
+.alarms-title {
+  text-align: center;
+}
+
+.alarms-title h1 {
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 1.6rem;
+  color: #2e1b5b;
+  margin-top: 16px;
 }
 
 .alarms-list {
   background: transparent;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .alarm-container {
   display: flex;
   align-items: center;
-  justify-content: space-between; // Espaça os elementos
-  background: #fff;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
-  margin-bottom: 12px;
-  padding: 0 16px; // Adiciona padding horizontal
-  cursor: pointer;
-  
-  &:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
-  }
+  justify-content: space-between;
+  background: rgba(142, 104, 230, 0.1);
+  border-radius: 14px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 12px 16px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.alarm-container:nth-child(3n+1) {
+  background: rgba(142, 104, 230, 0.12);
+}
+
+.alarm-container:nth-child(3n+2) {
+  background: rgba(218, 216, 255, 0.25);
+}
+
+.alarm-container:nth-child(3n+3) {
+  background: rgba(96, 48, 255, 0.15);
+}
+
+.alarm-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
 }
 
 .alarm-item {
-  // Resetando estilos de padding e background para que o container
-  // possa controlar a aparência completa do item.
   --background: transparent;
   --padding-start: 0;
   --inner-padding-end: 0;
-  width: auto; // Permite que ele se ajuste ao conteúdo
-  flex-grow: 1; // Ocupa o espaço restante
+  flex-grow: 1;
 }
 
-.alarm-avatar {
-  background: #f0f4ff;
-  padding: 8px;
-  border-radius: 50%;
-  width: 48px;
-  height: 48px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  img {
-    width: 32px;
-    height: 32px;
-  }
-}
-
-.add-button {
-  --background: #5d6790;
-  --color: #fff;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-}
-
-ion-fab-button {
-  --background: #5d6790;
-  --background-activated: #4a5477;
-  --box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-
-  --background: linear-gradient(#7a6ded, #8d83cf);
+.alarm-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #2e1b5b;
 }
 
 .toggle-and-time {
   display: flex;
   align-items: center;
+  gap: 12px;
 }
 
 .alarm-time {
-  margin-right: 12px; // Espaço entre o horário e o toggle
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgb(96, 48, 255);
 }
 
-ion-toggle {
-  z-index: 10; // Garante que o toggle seja clicável
-}
-
-.alarms-title {
-  text-align: center;
-  h1 {
-    font-size: 1.8rem;
-    font-weight: bold;
-    color: #2e1b5b;
-  }
-}
-
-.main-text h1 {
-  font-family: 'Poppins';
-  font-size: 1.7rem;
-  font-style: italic;
-  font-weight: 700;
-  color: #2e1b5b;
-  margin: 0;
-}
-
+/* ======== QUANDO NÃO HÁ ALARMES ======== */
 .empty-content-wrapper {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100%;
   text-align: center;
+  height: 100%;
+  gap: 20px;
+  padding: 0 16px;
+}
+
+.main-text h1 {
+  font-family: 'Poppins';
+  font-size: 1.5rem;
+  font-style: italic;
+  font-weight: 600;
+  color: #4a3b85;
+  margin: 0;
+}
+
+/* ======== IMAGEM ======== */
+ion-img {
+  width: 200px;
+  height: 200px;
+  margin-top: 20px;
+  image-rendering: pixelated;
+  position: relative;
+  left: 22%;
+}
+
+/* ======== BOTÃO "+" ======== */
+.add-button {
+  --background: linear-gradient(145deg, rgb(142, 104, 230), rgb(96, 48, 255));
+  --color: #fff;
+  border-radius: 50%;
+  width: 56px;
+  height: 56px;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }

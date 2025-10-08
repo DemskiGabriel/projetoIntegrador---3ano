@@ -169,7 +169,6 @@ export class QuestionarioPage implements OnInit {
     } else if (this.currentStep === 3) {
       if (this.pausasLivresAnswer) {
         // Todas as perguntas foram respondidas
-        this.errorMessage = 'Questionário finalizado! Obrigado.';
         console.log('Respostas:', {
           horarios: this.horariosAnswer,
           tempoLivre: this.tempoLivreAnswer,
