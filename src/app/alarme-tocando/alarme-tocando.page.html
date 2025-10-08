@@ -1,18 +1,13 @@
 <ion-content [fullscreen]="true" class="alarme">
-      
- 
   <div class="principal">
-    <h1 class="desafio">{{desafio}}</h1>
+    <h1 class="desafio">{{titulo}}</h1>
     <h1 class="horario">{{horario}}</h1>
-    <p class="dia">{{dia}}</p>
   </div>
 
   
-  <ion-fab vertical="center" horizontal="center">
-    <ion-fab-button class="fab">
-      
+  <ion-fab vertical="center" horizontal="center" (click)="alarmeCompleto()">
+    <ion-fab-button class="fab" >
       <ion-icon name="checkmark"></ion-icon> 
     </ion-fab-button>
   </ion-fab>
-
 </ion-content>

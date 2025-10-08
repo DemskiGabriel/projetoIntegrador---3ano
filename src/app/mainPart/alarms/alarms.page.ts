@@ -44,7 +44,6 @@ import { RouterLink } from '@angular/router';
 
 export class AlarmsPage{
   public dados: Array<any> = [];
-  
 
   constructor(
     public rt: RealtimeDatabaseService,
@@ -108,6 +107,38 @@ export class AlarmsPage{
 
   toggleAlarm(index: number) {
     this.dados[index].ativo = !this.dados[index].ativo;
+    
+    this.rt.add(`/alarme`, {
+      // Id Do usuario.
+      user: this.dados[index].user,
+        
+      nomeAlarme: this.dados[index].nomeAlarme,
+      horarioInicio: this.dados[index].horarioInicio,
+      horarioFinal: this.dados[index].horarioFinal,
+      vezesPorDia: this.dados[index].vezesPorDia,
+      vibracao: this.dados[index].vibracao,
+      somAlarme: this.dados[index].somAlarme,
+
+      // Dias se refere aos dias que o alarme sera desparado.
+      dias: this.dados[index].dias,
+      // Tipo Data referesse a se o tipo de dias é uma data do calendario ou são dias da semana.
+      tipoData: this.dados[index].tipoData,
+      // Alarmes referesse a lista de vezes que o alarme dispertara em um dia.
+      alarmes: this.dados[index].alarmes,
+      // Ativo referesse se o alarme esta ativo ou não.
+      ativo: this.dados[index].ativo = !this.dados[index].ativo, 
+
+      // Modo desafio(Caso ativo)
+      modoDesafio: this.dados[index].modoDesafio,
+      descricaoDesafio: this.dados[index].descricaoDesafio,
+    }, index+1)
+      .subscribe({
+        next: (idDoAlarme) => {
+          console.log("Alarme definido como " + (this.dados[index].ativo = !this.dados[index].ativo))
+          console.log("Id Do Alarme: " + idDoAlarme);
+        },
+        error: (err) => console.log('Falhou ', err)
+      });
   }
 
   public hasAlarms = signal<boolean>(false);

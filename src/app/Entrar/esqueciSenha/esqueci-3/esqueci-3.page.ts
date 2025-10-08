@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { IonContent, IonInput, IonButton } from "@ionic/angular/standalone";
+import { IonContent, IonInput, IonButton, IonNavLink } from "@ionic/angular/standalone";
 
 @Component({
   selector: 'app-esqueci-3',
   templateUrl: './esqueci-3.page.html',
   styleUrls: ['./esqueci-3.page.scss'],
   standalone: true,
-  imports: [IonButton, IonInput, IonContent, FormsModule, RouterLink ]
+  imports: [IonNavLink, IonButton, IonInput, IonContent, FormsModule, RouterLink ]
 })
 export class Esqueci3Page{
   public idToken:number = 0;
